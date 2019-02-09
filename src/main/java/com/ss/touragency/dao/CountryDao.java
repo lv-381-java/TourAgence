@@ -14,7 +14,17 @@ public class CountryDao implements ICrudDao<Country> {
 
     @Override
     public void create(Country country) {
+        PreparedStatement pstm = null;
+        String sql="INSERT INTO COUNTRY (idCountry,countryName)  VALUES (?,?)";
+        try{
+            pstm=DBConnection.getDbConnection().prepareStatement(sql);
+            pstm.setInt(1,country.getIdCountry());
+            pstm.setString(2,country.getCountryName());
+            pstm.executeUpdate();
 
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
