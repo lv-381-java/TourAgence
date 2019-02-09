@@ -12,8 +12,11 @@ public class App {
     public static void main( String[] args ) throws SQLException {
 
         CountryDao c = new CountryDao();
+        Country country = new Country("Ukraine2");
 
-        System.out.println(c.getById(1));
-
+//        System.out.println(c.getById(5));
+//        c.deleteById((long) 8);
+//        c.updateById(country, (long)6);
+//        c.insert(country);
     }
 }
