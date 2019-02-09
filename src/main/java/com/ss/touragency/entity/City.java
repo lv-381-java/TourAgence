@@ -2,24 +2,24 @@ package com.ss.touragency.entity;
 
 public class City {
 
-    private int cityId;
+    private Long cityId;
     private String cityName;
     private Country country;
 
     public City() {
     }
 
-    public City(int cityId, String cityName, Country country) {
+    public City(Long cityId, String cityName, Country country) {
         this.cityId = cityId;
         this.cityName = cityName;
         this.country = country;
     }
 
-    public int getCityId() {
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
 
@@ -38,7 +38,6 @@ public class City {
     public void setCountry(Country country) {
         this.country = country;
     }
-
 
     @Override
     public String toString() {

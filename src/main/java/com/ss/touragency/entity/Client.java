@@ -1,25 +1,25 @@
 package com.ss.touragency.entity;
 
 public class Client {
-    private int idClient;
+    private Long idClient;
     private String clientName;
     private String clientSurname;
     private String phoneNumber;
 
     public Client() {}
 
-    public Client(int idClient, String clientName, String clientSurname, String phoneNumber) {
+    public Client(Long idClient, String clientName, String clientSurname, String phoneNumber) {
         this.idClient = idClient;
         this.clientName = clientName;
         this.clientSurname = clientSurname;
         this.phoneNumber = phoneNumber;
     }
 
-    public int getIdClient() {
+    public Long getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(int idClient) {
+    public void setIdClient(Long idClient) {
         this.idClient = idClient;
     }
 
@@ -45,5 +45,15 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "idClient=" + idClient +
+                ", clientName='" + clientName + '\'' +
+                ", clientSurname='" + clientSurname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

@@ -2,12 +2,12 @@ package com.ss.touragency.entity;
 
 public class Hotel {
 
-    private int hotelId;
+    private Long hotelId;
     private String hotelName;
     private City city;
     private int availableCount;
 
-    public Hotel(int hotelId, String hotelName, City city, int availableCount) {
+    public Hotel(Long hotelId, String hotelName, City city, int availableCount) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;
         this.city = city;
@@ -17,11 +17,11 @@ public class Hotel {
     public Hotel() {
     }
 
-    public int getHotelId() {
+    public Long getHotelId() {
         return hotelId;
     }
 
-    public void setHotelId(int hotelId) {
+    public void setHotelId(Long hotelId) {
         this.hotelId = hotelId;
     }
 

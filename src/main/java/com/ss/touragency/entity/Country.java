@@ -2,10 +2,10 @@ package com.ss.touragency.entity;
 
 public class Country {
 
-    private int idCountry;
+    private Long idCountry;
     private String countryName;
 
-    public Country(int idCountry, String countryName) {
+    public Country(Long idCountry, String countryName) {
         this.idCountry = idCountry;
         this.countryName = countryName;
     }
@@ -17,11 +17,11 @@ public class Country {
     public Country() {
     }
 
-    public int getIdCountry() {
+    public Long getIdCountry() {
         return idCountry;
     }
 
-    public void setIdCountry(int idCountry) {
+    public void setIdCountry(Long idCountry) {
         this.idCountry = idCountry;
     }
 

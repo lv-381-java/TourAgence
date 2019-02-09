@@ -2,13 +2,13 @@ package com.ss.touragency.entity;
 
 public class OrderDetails {
 
-    private int id;
+    private Long id;
     private Client client;
     private Hotel hotel;
     private String beginDate;
     private String endDate;
 
-    public OrderDetails(int id, Client client, Hotel hotel, String beginDate, String endDate) {
+    public OrderDetails(Long id, Client client, Hotel hotel, String beginDate, String endDate) {
         this.id = id;
         this.client = client;
         this.hotel = hotel;
@@ -18,11 +18,11 @@ public class OrderDetails {
 
     public OrderDetails() {}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
