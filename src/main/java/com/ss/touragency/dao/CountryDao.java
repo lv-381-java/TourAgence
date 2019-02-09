@@ -15,7 +15,7 @@ public class CountryDao implements ICrudDao<Country> {
         String insertCountry = "INSERT INTO country(countryName) VALUES(?)";
         Connection connection = DBConnection.getDbConnection();
 
-        if(connection != null){
+        if (connection != null) {
 
             PreparedStatement preparedStatement = null;
 
@@ -27,7 +27,7 @@ public class CountryDao implements ICrudDao<Country> {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 try {
                     connection.close();
                 } catch (SQLException e) {
@@ -36,9 +36,7 @@ public class CountryDao implements ICrudDao<Country> {
             }
 
         }
-
     }
-
     @Override
     public List<Country> selectAll() throws SQLException {
             List<Country> countryList = new ArrayList<>();
