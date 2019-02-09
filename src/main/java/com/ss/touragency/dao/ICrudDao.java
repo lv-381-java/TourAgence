@@ -6,20 +6,16 @@ import java.util.List;
 public interface ICrudDao<SomeEntity> {
 
     //create
-    void create(SomeEntity entity);
+    void insert(SomeEntity entity);
 
 
     //read
-    List<SomeEntity> getAll() throws SQLException;
+    List<SomeEntity> selectAll() throws SQLException;
 
-    SomeEntity getById(int id) throws SQLException;
-
+    SomeEntity selectById(int id) throws SQLException;
 
     // update
-    void updateById(SomeEntity entity);
-
-    void updateByName(SomeEntity entity);
-
+    void updateById(SomeEntity entity, Long id);
 
     // delete
     void deleteById(Long id);
