@@ -14,6 +14,11 @@ public class City {
         this.country = country;
     }
 
+    public City(Long cityId, String cityName) {
+        this.cityId = cityId;
+        this.cityName = cityName;
+    }
+
     public City(Long cityId, String cityName, Country country) {
         this.cityId = cityId;
         this.cityName = cityName;
@@ -49,7 +54,6 @@ public class City {
         return "City{" +
                 "cityId=" + cityId +
                 ", cityName='" + cityName + '\'' +
-                ", country=" + country +
                 '}';
     }
 }
