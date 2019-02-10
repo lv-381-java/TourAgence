@@ -8,6 +8,11 @@ public class Visa {
 
     public Visa() {}
 
+    public Visa(Client client, Country country) {
+        this.client = client;
+        this.country = country;
+    }
+
     public Visa(Long id, Client client, Country country) {
         this.id = id;
         this.client = client;

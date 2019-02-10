@@ -8,6 +8,12 @@ public class Client {
 
     public Client() {}
 
+    public Client(String clientName, String clientSurname, String phoneNumber) {
+        this.clientName = clientName;
+        this.clientSurname = clientSurname;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Client(Long idClient, String clientName, String clientSurname, String phoneNumber) {
         this.idClient = idClient;
         this.clientName = clientName;

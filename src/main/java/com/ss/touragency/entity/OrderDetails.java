@@ -8,6 +8,13 @@ public class OrderDetails {
     private String beginDate;
     private String endDate;
 
+    public OrderDetails(Client client, Hotel hotel, String beginDate, String endDate) {
+        this.client = client;
+        this.hotel = hotel;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+    }
+
     public OrderDetails(Long id, Client client, Hotel hotel, String beginDate, String endDate) {
         this.id = id;
         this.client = client;

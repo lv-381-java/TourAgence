@@ -7,6 +7,12 @@ public class Hotel {
     private City city;
     private int availableCount;
 
+    public Hotel(String hotelName, City city, int availableCount) {
+        this.hotelName = hotelName;
+        this.city = city;
+        this.availableCount = availableCount;
+    }
+
     public Hotel(Long hotelId, String hotelName, City city, int availableCount) {
         this.hotelId = hotelId;
         this.hotelName = hotelName;

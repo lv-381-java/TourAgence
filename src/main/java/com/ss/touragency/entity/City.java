@@ -9,6 +9,11 @@ public class City {
     public City() {
     }
 
+    public City(String cityName, Country country) {
+        this.cityName = cityName;
+        this.country = country;
+    }
+
     public City(Long cityId, String cityName, Country country) {
         this.cityId = cityId;
         this.cityName = cityName;
