@@ -37,15 +37,21 @@ public class CountryDao implements ICrudDao<Country> {
 
         }
     }
+
     @Override
-    public List<Country> selectAll() throws SQLException {
-            List<Country> countryList = new ArrayList<>();
+    public List<Country> selectAll() {
+        List<Country> countryList = new ArrayList<>();
 
-            String sql = "SELECT * FROM COUNTRY";
-            Statement statement = DBConnection.getDbConnection().createStatement();
-
-            ResultSet resultSet = statement.executeQuery(sql);
-
+        String sql = "SELECT * FROM COUNTRY";
+        Statement statement = null;
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ResultSet resultSet = null;
+        try {
+            resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Country country = new Country();
                 country.setIdCountry(resultSet.getLong("idCountry"));
@@ -53,8 +59,11 @@ public class CountryDao implements ICrudDao<Country> {
 
                 countryList.add(country);
             }
+        } catch (SQLException e) {
+            System.err.println("Cant select countries from DB");
+        }
 
-            return countryList;
+        return countryList;
     }
 
     @Override
@@ -67,7 +76,7 @@ public class CountryDao implements ICrudDao<Country> {
 
         Country country = null;
 
-        while(resultSet.next()){
+        while (resultSet.next()) {
             country = new Country();
 
             country.setIdCountry(resultSet.getLong("idCountry"));
@@ -94,10 +103,20 @@ public class CountryDao implements ICrudDao<Country> {
 
                 preparedStatement.executeUpdate();
 
-                connection.close();
-
             } catch (SQLException e) {
                 e.printStackTrace();
+            }finally {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
