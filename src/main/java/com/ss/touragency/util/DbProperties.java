@@ -5,5 +5,4 @@ public class DbProperties {
     public static String user = "root";
     public static String password = "admin";
 
-
 }

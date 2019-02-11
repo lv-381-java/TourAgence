@@ -17,7 +17,7 @@ public class DBConnection {
 
     public static Connection getDbConnection() {
 
-        if(connection == null){
+        if (connection == null) {
             connection = initConnection();
         }
 
@@ -26,7 +26,7 @@ public class DBConnection {
 
     public void closeConnection() {
 
-        if(connection == null){
+        if (connection == null) {
             return;
         }
         try {

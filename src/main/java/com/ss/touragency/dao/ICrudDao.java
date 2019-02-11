@@ -21,7 +21,7 @@ public interface ICrudDao<SomeEntity> {
      * @throws SQLException
      */
     //read
-    List<SomeEntity> selectAll() throws SQLException;
+    List<SomeEntity> selectAll();
 
     /**
      * Search entity by Id from database
@@ -30,7 +30,7 @@ public interface ICrudDao<SomeEntity> {
      * @return some entity found by Id
      * @throws SQLException
      */
-    SomeEntity selectById(Long id) throws SQLException;
+    SomeEntity selectById(Long id);
 
     // update
     void updateById(SomeEntity entity, Long id);

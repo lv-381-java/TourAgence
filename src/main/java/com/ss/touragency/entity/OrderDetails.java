@@ -1,21 +1,16 @@
 package com.ss.touragency.entity;
 
+import java.sql.Date;
+
 public class OrderDetails {
 
     private Long id;
     private Client client;
     private Hotel hotel;
-    private String beginDate;
-    private String endDate;
+    private Date beginDate;
+    private Date endDate;
 
-    public OrderDetails(Client client, Hotel hotel, String beginDate, String endDate) {
-        this.client = client;
-        this.hotel = hotel;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
-    }
-
-    public OrderDetails(Long id, Client client, Hotel hotel, String beginDate, String endDate) {
+    public OrderDetails(Long id, Client client, Hotel hotel, Date beginDate, Date endDate) {
         this.id = id;
         this.client = client;
         this.hotel = hotel;
@@ -23,7 +18,8 @@ public class OrderDetails {
         this.endDate = endDate;
     }
 
-    public OrderDetails() {}
+    public OrderDetails() {
+    }
 
     public Long getId() {
         return id;
@@ -49,19 +45,19 @@ public class OrderDetails {
         this.hotel = hotel;
     }
 
-    public String getBeginDate() {
+    public Date getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(String beginDate) {
+    public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -71,8 +67,8 @@ public class OrderDetails {
                 "id=" + id +
                 ", client=" + client +
                 ", hotel=" + hotel +
-                ", beginDate='" + beginDate + '\'' +
-                ", endDate='" + endDate + '\'' +
+                ", beginDate=" + beginDate +
+                ", endDate=" + endDate +
                 '}';
     }
 }
