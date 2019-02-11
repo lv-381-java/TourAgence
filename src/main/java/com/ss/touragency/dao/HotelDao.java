@@ -34,43 +34,54 @@ public class HotelDao implements ICrudDao<Hotel> {
     }
 
     @Override
-    public List<Hotel> selectAll() throws SQLException {
+    public List<Hotel> selectAll() {
         List<Hotel> hotelList = new ArrayList<>();
 
         String sql = "SELECT * FROM HOTEL";
-        Statement statement = DBConnection.getDbConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-
-        while (resultSet.next()) {
-            Hotel hotel = new Hotel();
-            hotel.setHotelId(resultSet.getLong("idHotel"));
-            hotel.setHotelName(resultSet.getString("hotelName"));
-            CityDao city = new CityDao();
-            hotel.setCity(city.selectById(resultSet.getLong(3)));
-            hotel.setAvailableCount(resultSet.getInt("availableCount"));
-            hotelList.add(hotel);
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Hotel hotel = new Hotel();
+                hotel.setHotelId(resultSet.getLong("idHotel"));
+                hotel.setHotelName(resultSet.getString("hotelName"));
+                CityDao city = new CityDao();
+                hotel.setCity(city.selectById(resultSet.getLong(3)));
+                hotel.setAvailableCount(resultSet.getInt("availableCount"));
+                hotelList.add(hotel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return hotelList;
     }
 
     @Override
-    public Hotel selectById(Long id) throws SQLException {
+    public Hotel selectById(Long id){
         String sql = "SELECT * FROM HOTEL WHERE idHotel=" + "'" + id + "'";
-        Statement statement = DBConnection.getDbConnection().createStatement();
-
-        ResultSet resultSet = statement.executeQuery(sql);
-
+        Statement statement = null;
+        ResultSet resultSet = null;
         Hotel hotel = null;
 
-        while (resultSet.next()) {
-            hotel = new Hotel();
-            hotel.setHotelId(resultSet.getLong("idHotel"));
-            hotel.setHotelName(resultSet.getString("hotelName"));
-            CityDao city = new CityDao();
-            hotel.setCity(city.selectById(resultSet.getLong(3)));
-            hotel.setAvailableCount(resultSet.getInt("availableCount"));
+        try {
+            resultSet = statement.executeQuery(sql);
+            statement = DBConnection.getDbConnection().createStatement();
+
+            while (resultSet.next()) {
+                hotel = new Hotel();
+                hotel.setHotelId(resultSet.getLong("idHotel"));
+                hotel.setHotelName(resultSet.getString("hotelName"));
+                CityDao city = new CityDao();
+                hotel.setCity(city.selectById(resultSet.getLong(3)));
+                hotel.setAvailableCount(resultSet.getInt("availableCount"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
 
         return hotel;
     }

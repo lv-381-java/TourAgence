@@ -40,39 +40,51 @@ public class CityDao implements ICrudDao<City> {
     }
 
     @Override
-    public List<City> selectAll() throws SQLException {
+    public List<City> selectAll(){
 
         List<City> cityList = new ArrayList<>();
 
         String sql = "SELECT * FROM CITY";
-        Statement statement = DBConnection.getDbConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        Statement statement = null;
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
 
-        while (resultSet.next()) {
-            City city = new City();
-            city.setCityId( resultSet.getLong("idCity"));
-            city.setCityName(resultSet.getString("cityName"));
-            cityList.add(city);
+            while (resultSet.next()) {
+                City city = new City();
+                city.setCityId( resultSet.getLong("idCity"));
+                city.setCityName(resultSet.getString("cityName"));
+                cityList.add(city);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return cityList;
     }
 
     @Override
-    public City selectById(Long id) throws SQLException {
+    public City selectById(Long id){
         String sql = "SELECT * FROM CITY WHERE idCity=" + "'" + id + "'";
-        Statement statement = DBConnection.getDbConnection().createStatement();
+        Statement statement = null;
 
-        ResultSet resultSet = statement.executeQuery(sql);
-
+        ResultSet resultSet = null;
         City city = null;
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
 
-        while(resultSet.next()){
-            city = new City();
-            city.setCityId(resultSet.getLong("idCity"));
-            city.setCityName(resultSet.getString("cityName"));
+            while(resultSet.next()){
+                city = new City();
+                city.setCityId(resultSet.getLong("idCity"));
+                city.setCityName(resultSet.getString("cityName"));
 // ??       city.setCountry
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+
 
         return city;
 
