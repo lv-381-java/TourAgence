@@ -1,16 +1,16 @@
 package com.ss.touragency.entity;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class OrderDetails {
 
     private Long id;
     private Client client;
     private Hotel hotel;
-    private LocalDate beginDate;
-    private LocalDate endDate;
+    private Date beginDate;
+    private Date endDate;
 
-    public OrderDetails(Long id, Client client, Hotel hotel, LocalDate beginDate, LocalDate endDate) {
+    public OrderDetails(Long id, Client client, Hotel hotel, Date beginDate, Date endDate) {
         this.id = id;
         this.client = client;
         this.hotel = hotel;
@@ -18,7 +18,8 @@ public class OrderDetails {
         this.endDate = endDate;
     }
 
-    public OrderDetails() {}
+    public OrderDetails() {
+    }
 
     public Long getId() {
         return id;
@@ -44,19 +45,19 @@ public class OrderDetails {
         this.hotel = hotel;
     }
 
-    public LocalDate getBeginDate() {
+    public Date getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(LocalDate beginDate) {
+    public void setBeginDate(Date beginDate) {
         this.beginDate = beginDate;
     }
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
