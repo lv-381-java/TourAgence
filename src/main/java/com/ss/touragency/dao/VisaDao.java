@@ -38,20 +38,21 @@ public class VisaDao implements ICrudDao<Visa> {
     public List<Visa> selectAll() {
         List<Visa> visaList = new ArrayList<>();
 
-        String sql = "SELECT * FROM VISA";
+        String sql = "SELECT Client_idClient, Country_idCountry FROM VISA";
         Statement statement = null;
         ResultSet resultSet = null;
 
         try {
             statement = DBConnection.getDbConnection().createStatement();
             resultSet = statement.executeQuery(sql);
+
             while (resultSet.next()) {
 
                 Visa visa = new Visa();
                 ClientDao clientDao = new ClientDao();
-                visa.setClient(clientDao.selectById(resultSet.getLong(2)));
+                visa.setClient(clientDao.selectById(resultSet.getLong("Client_idClient")));
                 CountryDao countryDao = new CountryDao();
-                visa.setCountry(countryDao.selectById(resultSet.getLong(3)));
+                visa.setCountry(countryDao.selectById(resultSet.getLong("Country_idCountry")));
                 visaList.add(visa);
             }
         } catch (SQLException e) {
@@ -65,7 +66,7 @@ public class VisaDao implements ICrudDao<Visa> {
     @Override
     public Visa selectById(Long id) {
         Connection connection = DBConnection.getDbConnection();
-        String sql = "SELECT * FROM VISA WHERE idVisa=" + "'" + id + "'";
+        String sql = "SELECT Client_idClient, Country_idCountry FROM VISA WHERE idVisa=" + "'" + id + "'";
         Statement statement;
         ResultSet resultSet;
         Visa visa = null;
