@@ -44,7 +44,29 @@ public class HotelService {
         return result;
     }
 
+    public Hotel getCountry(HttpServletRequest request) {
+        HotelDao hotelDao = new HotelDao();
 
+        if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
+                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.COUNTRY_ID)))) {
+            Long countryId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.COUNTRY_ID));
+
+            return hotelDao.selectById(countryId);
+        }
+        return null;
+    }
+
+    private boolean isExistItem(Long id) {
+        boolean result = false;
+        try {
+            HotelDao hotelDao = new HotelDao();
+            hotelDao.selectById(id);
+            result = true;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 
 }
