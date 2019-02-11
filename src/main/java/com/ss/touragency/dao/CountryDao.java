@@ -63,21 +63,27 @@ public class CountryDao implements ICrudDao<Country> {
     }
 
     @Override
-    public Country selectById(Long id) throws SQLException {
+    public Country selectById(Long id){
 
         String sql = "SELECT * FROM COUNTRY WHERE idCountry=" + "'" + id + "'";
-        Statement statement = DBConnection.getDbConnection().createStatement();
-
-        ResultSet resultSet = statement.executeQuery(sql);
-
+        Statement statement = null;
+        ResultSet resultSet = null;
         Country country = null;
 
-        while (resultSet.next()) {
-            country = new Country();
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
 
-            country.setIdCountry(resultSet.getLong("idCountry"));
-            country.setCountryName(resultSet.getString("countryName"));
+            while (resultSet.next()) {
+                country = new Country();
+
+                country.setIdCountry(resultSet.getLong("idCountry"));
+                country.setCountryName(resultSet.getString("countryName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
 
         return country;
 
