@@ -21,4 +21,18 @@ public class CountryService {
 
         return result;
     }
+
+    public boolean updateCountry(HttpServletRequest request){
+        boolean result = false;
+        CountryDao countryDao = new CountryDao();
+
+        if(request.getParameter(Attribute.COUNTRY_NAME) != null){
+            Long countryId = Long.parseLong(request.getParameter(Attribute.COUNTRY_ID));
+            Country country = countryDao.selectById(countryId);
+            country.setCountryName(request.getParameter(Attribute.COUNTRY_NAME));
+            countryDao.updateById(country, countryId);
+            result = true;
+        }
+        return result;
+    }
 }
