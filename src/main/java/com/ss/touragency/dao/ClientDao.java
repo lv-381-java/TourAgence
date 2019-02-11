@@ -10,11 +10,10 @@ public class ClientDao implements ICrudDao<Client>{
 
     @Override
     public void insert(Client client) {
-
+        String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
         Connection connection = DBConnection.getDbConnection();
         if(connection != null){
 
-            String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
             PreparedStatement preparedStatement = null;
 
             try {
