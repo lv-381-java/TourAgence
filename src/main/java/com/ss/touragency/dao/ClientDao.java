@@ -2,10 +2,8 @@ package com.ss.touragency.dao;
 
 import com.ss.touragency.dbConnection.DBConnection;
 import com.ss.touragency.entity.Client;
-
-import java.awt.image.DataBuffer;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDao implements ICrudDao<Client>{
@@ -14,26 +12,150 @@ public class ClientDao implements ICrudDao<Client>{
     public void insert(Client client) {
 
         Connection connection = DBConnection.getDbConnection();
+        if(connection != null){
+
+            String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
+            PreparedStatement preparedStatement = null;
+
+            try {
+                preparedStatement = connection.prepareStatement(insertClient);
+
+                preparedStatement.setString(1, client.getClientName());
+                preparedStatement.setString(2, client.getClientSurname());
+                preparedStatement.setString(3, client.getPhoneNumber());
+
+                preparedStatement.execute();
+
+            } catch (SQLException e) {
+                System.out.println("Some error while inserting client");
+            }
+        }
 
     }
 
     @Override
-    public List<Client> selectAll() throws SQLException {
-        return null;
+    public List<Client> selectAll() {
+
+        Connection connection = DBConnection.getDbConnection();
+        List<Client> clientList = new ArrayList<>();
+
+        if(connection != null){
+
+            Statement statement = null;
+            ResultSet resultSet = null;
+            String selectClient = "select clientName, clientSurname, phoneNumber from client";
+
+            try {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(selectClient);
+
+                while(resultSet.next()){
+
+                    Client client = new Client();
+                    client.setClientName(resultSet.getString("clientName"));
+                    client.setClientSurname(resultSet.getString("clientSurname"));
+                    client.setPhoneNumber(resultSet.getString("phoneNumber"));
+
+                    clientList.add(client);
+                }
+            } catch (SQLException e) {
+                System.out.println("Cant read list of clients from DB");
+            }
+        }
+
+        return clientList;
     }
 
     @Override
-    public Client selectById(Long id) throws SQLException {
-        return null;
+    public Client selectById(Long id) {
+
+        String selectClientById = "select clientName, clientSurname, phoneNumber from client where id=?";
+        Connection connection = DBConnection.getDbConnection();
+        ResultSet resultSet = null;
+        Client client = null;
+        if(connection != null){
+
+            PreparedStatement preparedStatement  = null;
+            try {
+                preparedStatement = connection.prepareStatement(selectClientById);
+                preparedStatement.setLong(1, id);
+
+                resultSet = preparedStatement.executeQuery();
+
+                while(resultSet.next()){
+
+                    client = new Client();
+                    client.setClientName(resultSet.getString("clientName"));
+                    client.setClientSurname(resultSet.getString("clientSurname"));
+                    client.setPhoneNumber(resultSet.getString("phoneNumber"));
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+        return client;
     }
 
     @Override
     public void updateById(Client client, Long id) {
 
+        String updateClientById = "update client set clientName=?, clientSurname=?, phoneNumber=? where id=?";
+        Connection connection = DBConnection.getDbConnection();
+
+        if(connection != null){
+
+            PreparedStatement preparedStatement = null;
+            ResultSet resultSet = null;
+
+            try {
+                preparedStatement = connection.prepareStatement(updateClientById);
+
+                preparedStatement.setString(1, client.getClientName());
+                preparedStatement.setString(2, client.getClientSurname());
+                preparedStatement.setString(3, client.getPhoneNumber());
+                preparedStatement.setLong(4, id);
+
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     @Override
     public void deleteById(Long id) {
+
+        Connection connection = DBConnection.getDbConnection();
+        String deleteClientById = "delete from client where id=?";
+
+        if(connection != null){
+
+            PreparedStatement preparedStatement = null;
+
+            try {
+                preparedStatement = connection.prepareStatement(deleteClientById);
+
+                preparedStatement.setLong(1, id);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+        }
 
     }
 }
