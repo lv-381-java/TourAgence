@@ -80,7 +80,7 @@ public class CityDao implements ICrudDao<City> {
 
     @Override
     public void updateById(City city, Long id) {
-        String sqlUpdate = "UPDATE city SET cityName=?" + " WHERE idCity=" + id + "";
+        String sqlUpdate = "UPDATE city SET cityName=?,Country_idCountry=?" + " WHERE idCity=" + id + "";
         PreparedStatement preparedStatement = null;
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
@@ -90,6 +90,7 @@ public class CityDao implements ICrudDao<City> {
                 preparedStatement = connection.prepareStatement(sqlUpdate);
 
                 preparedStatement.setString(1, city.getCityName());
+                preparedStatement.setLong(2, city.getCountry().getIdCountry());
 
                 preparedStatement.executeUpdate();
 

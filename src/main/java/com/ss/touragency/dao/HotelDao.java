@@ -77,7 +77,7 @@ public class HotelDao implements ICrudDao<Hotel> {
 
     @Override
     public void updateById(Hotel hotel, Long id) {
-        String sqlUpdate = "UPDATE hotel SET hotelName=?" + " WHERE idHotel=" + id + "";
+        String sqlUpdate = "UPDATE hotel SET hotelName=?,City_idCity=?,availableCount=?" + " WHERE idHotel=" + id + "";
         PreparedStatement preparedStatement = null;
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
@@ -87,6 +87,8 @@ public class HotelDao implements ICrudDao<Hotel> {
                 preparedStatement = connection.prepareStatement(sqlUpdate);
 
                 preparedStatement.setString(1, hotel.getHotelName());
+                preparedStatement.setLong(2, hotel.getCity().getCityId());
+                preparedStatement.setInt(3, hotel.getAvailableCount());
 
                 preparedStatement.executeUpdate();
 

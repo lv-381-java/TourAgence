@@ -2,19 +2,19 @@ package com.ss.touragency.dao;
 
 import com.ss.touragency.dbConnection.DBConnection;
 import com.ss.touragency.entity.Client;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDao implements ICrudDao<Client>{
+public class ClientDao implements ICrudDao<Client> {
 
     @Override
     public void insert(Client client) {
-
+        String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
         Connection connection = DBConnection.getDbConnection();
-        if(connection != null){
+        if (connection != null) {
 
-            String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
             PreparedStatement preparedStatement = null;
 
             try {
@@ -39,7 +39,7 @@ public class ClientDao implements ICrudDao<Client>{
         Connection connection = DBConnection.getDbConnection();
         List<Client> clientList = new ArrayList<>();
 
-        if(connection != null){
+        if (connection != null) {
 
             Statement statement = null;
             ResultSet resultSet = null;
@@ -49,7 +49,7 @@ public class ClientDao implements ICrudDao<Client>{
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(selectClient);
 
-                while(resultSet.next()){
+                while (resultSet.next()) {
 
                     Client client = new Client();
                     client.setClientName(resultSet.getString("clientName"));
@@ -73,16 +73,16 @@ public class ClientDao implements ICrudDao<Client>{
         Connection connection = DBConnection.getDbConnection();
         ResultSet resultSet = null;
         Client client = null;
-        if(connection != null){
+        if (connection != null) {
 
-            PreparedStatement preparedStatement  = null;
+            PreparedStatement preparedStatement = null;
             try {
                 preparedStatement = connection.prepareStatement(selectClientById);
                 preparedStatement.setLong(1, id);
 
                 resultSet = preparedStatement.executeQuery();
 
-                while(resultSet.next()){
+                while (resultSet.next()) {
 
                     client = new Client();
                     client.setClientName(resultSet.getString("clientName"));
@@ -93,7 +93,7 @@ public class ClientDao implements ICrudDao<Client>{
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 try {
                     connection.close();
                 } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class ClientDao implements ICrudDao<Client>{
         String updateClientById = "update client set clientName=?, clientSurname=?, phoneNumber=? where id=?";
         Connection connection = DBConnection.getDbConnection();
 
-        if(connection != null){
+        if (connection != null) {
 
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
@@ -140,7 +140,7 @@ public class ClientDao implements ICrudDao<Client>{
         Connection connection = DBConnection.getDbConnection();
         String deleteClientById = "delete from client where id=?";
 
-        if(connection != null){
+        if (connection != null) {
 
             PreparedStatement preparedStatement = null;
 

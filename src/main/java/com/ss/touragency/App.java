@@ -1,12 +1,8 @@
 package com.ss.touragency;
 
-import com.ss.touragency.dao.CityDao;
-import com.ss.touragency.dao.CountryDao;
-import com.ss.touragency.dao.HotelDao;
+import com.ss.touragency.dao.*;
 import com.ss.touragency.dbConnection.DBConnection;
-import com.ss.touragency.entity.City;
-import com.ss.touragency.entity.Country;
-import com.ss.touragency.entity.Hotel;
+import com.ss.touragency.entity.*;
 import com.ss.touragency.service.CityService;
 
 import java.sql.SQLException;
@@ -46,7 +42,7 @@ public class App {
 
 //        City city5= new City("Rivne",c.selectById(1L));
 //        city.insert(city5);
-        System.out.println(city.selectAll());
+//        System.out.println(city.selectAll());
 
 
 //        CityService cityService = new CityService();
@@ -60,12 +56,29 @@ public class App {
 //
 //        }
         HotelDao hd = new HotelDao();
-        hd.insert(new Hotel("Tourist",city.selectById(1l),300));
-        System.out.println(hd.selectAll());
+//        hd.insert(new Hotel("Tourist",city.selectById(1l),300));
+//        System.out.println(hd.selectAll());
 //        System.out.println(hd.selectAll());
 //        System.out.println(hd.selectById(4L));
 //        Hotel h3= new Hotel("Edem",city.selectById(1l),150);
 //        hd.updateById(h3,12l);
 //        System.out.println(hd.selectAll());
+        ClientDao clientdao = new ClientDao();
+        Visa visa = new Visa(clientdao.selectById(3L),c.selectById(2L));
+        VisaDao visadao = new VisaDao();
+        visadao.insert(visa);
+//        System.out.println(visadao.selectAll());
+
+
+
+
+//        System.out.println(clientdao.selectById(3l));
+//        Client cl = new Client("Pavlo","guk","0508962356");
+//        clientdao.insert(cl);
+//        System.out.println(clientdao.selectAll());
+
+//        System.out.println(clientdao.selectAll());
+//        System.out.println(clientdao.selectAll());
+
     }
 }
