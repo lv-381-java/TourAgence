@@ -41,7 +41,7 @@ public class OrderDetailsService {
         return status;
     }
 
-    public boolean updateOrderDetails (HttpServletRequest request){
+    public boolean updateOrderDetails (HttpServletRequest request) throws ParseException {
         boolean result = false;
         OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,7 +51,8 @@ public class OrderDetailsService {
             OrderDetails orderDetails = orderDetailsDao.selectById(orderId);
 //            orderDetails.setHotel(request.getParameter(Attribute.HOTEL));
 //            orderDetails.setCity(request.getParameter(Attribute.CITY));
-            orderDetails.setBeginDate(SimpleDateFormat.parse(request.getParameter(Attribute.AVAILABLE_COUNT)));
+            orderDetails.setBeginDate(formatter.parse(request.getParameter(Attribute.BEGIN_DATE)));
+            orderDetails.setEndDate(formatter.parse(request.getParameter(Attribute.END_DATE)));
             orderDetailsDao.updateById(orderDetails, orderId);
             result = true;
         }
