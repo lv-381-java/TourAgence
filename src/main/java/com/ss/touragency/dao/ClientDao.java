@@ -70,7 +70,7 @@ public class ClientDao implements ICrudDao<Client> {
     @Override
     public Client selectById(Long id) {
 
-        String selectClientById = "select clientName, clientSurname, phoneNumber from client where id=?";
+        String selectClientById = "select clientName, clientSurname, phoneNumber from client where idClient=?";
         Connection connection = DBConnection.getDbConnection();
         ResultSet resultSet;
         Client client = null;
@@ -110,7 +110,7 @@ public class ClientDao implements ICrudDao<Client> {
     @Override
     public void updateById(Client client, Long id) {
 
-        String updateClientById = "UPDATE client set clientName=?, clientSurname=?, phoneNumber=? where id=?";
+        String updateClientById = "UPDATE client set clientName=?, clientSurname=?, phoneNumber=? where idClient=?";
         Connection connection = DBConnection.getDbConnection();
 
         if (connection != null) {
@@ -139,7 +139,7 @@ public class ClientDao implements ICrudDao<Client> {
     public void deleteById(Long id) {
 
         Connection connection = DBConnection.getDbConnection();
-        String deleteClientById = "delete from client where id=?";
+        String deleteClientById = "delete from client where idClient=?";
 
         if (connection != null) {
 
