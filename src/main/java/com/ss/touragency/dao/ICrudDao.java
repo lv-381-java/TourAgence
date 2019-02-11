@@ -32,9 +32,23 @@ public interface ICrudDao<SomeEntity> {
      */
     SomeEntity selectById(Long id) throws SQLException;
 
+    /**
+     *
+     * Update entity by Id
+     *
+     * @param entity Entity to update
+     * @param id entity id in database
+     */
     // update
     void updateById(SomeEntity entity, Long id);
 
+    /**
+     *
+     * Delete entity by id
+     *
+     *
+     * @param id entity id in database
+     */
     // delete
     void deleteById(Long id);
 
