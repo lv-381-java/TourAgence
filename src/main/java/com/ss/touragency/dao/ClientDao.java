@@ -16,7 +16,7 @@ public class ClientDao implements ICrudDao<Client> {
         if (connection != null) {
 
             String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
 
             try {
                 preparedStatement = connection.prepareStatement(insertClient);
@@ -42,8 +42,8 @@ public class ClientDao implements ICrudDao<Client> {
 
         if (connection != null) {
 
-            Statement statement = null;
-            ResultSet resultSet = null;
+            Statement statement;
+            ResultSet resultSet;
             String selectClient = "select clientName, clientSurname, phoneNumber from client";
 
             try {
@@ -72,11 +72,11 @@ public class ClientDao implements ICrudDao<Client> {
 
         String selectClientById = "select clientName, clientSurname, phoneNumber from client where id=?";
         Connection connection = DBConnection.getDbConnection();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         Client client = null;
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
             try {
                 preparedStatement = connection.prepareStatement(selectClientById);
                 preparedStatement.setLong(1, id);
@@ -110,7 +110,7 @@ public class ClientDao implements ICrudDao<Client> {
     @Override
     public void updateById(Client client, Long id) {
 
-        String updateClientById = "update client set clientName=?, clientSurname=?, phoneNumber=? where id=?";
+        String updateClientById = "UPDATE client set clientName=?, clientSurname=?, phoneNumber=? where id=?";
         Connection connection = DBConnection.getDbConnection();
 
         if (connection != null) {

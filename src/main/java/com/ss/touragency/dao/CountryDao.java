@@ -17,7 +17,7 @@ public class CountryDao implements ICrudDao<Country> {
 
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
 
             try {
                 preparedStatement = connection.prepareStatement(insertCountry);
@@ -45,7 +45,9 @@ public class CountryDao implements ICrudDao<Country> {
         }
         ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(sql);
+            if (statement != null) {
+                resultSet = statement.executeQuery(sql);
+            }
             while (resultSet.next()) {
                 Country country = new Country();
                 country.setIdCountry(resultSet.getLong("idCountry"));
@@ -85,7 +87,8 @@ public class CountryDao implements ICrudDao<Country> {
     public void updateById(Country country, Long id) {
 
         String sqlUpdate = "UPDATE country SET countryName=?" + " WHERE idCountry=" + id + "";
-        PreparedStatement preparedStatement = null;
+
+        PreparedStatement preparedStatement;
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
 
