@@ -28,5 +28,23 @@ public class HotelService {
         return result;
     }
 
+    public boolean updateHotel(HttpServletRequest request){
+        boolean result = false;
+        HotelDao hotelDao = new HotelDao();
+
+        if (request.getParameter(Attribute.HOTEL_NAME) != null){
+            Long hotelId = Long.parseLong(request.getSession().getAttribute(Attribute.HOTEL_ID).toString());
+            Hotel hotel = hotelDao.selectById(hotelId);
+            hotel.setHotelName(request.getParameter(Attribute.HOTEL_NAME));
+//            hotel.setCity(request.getParameter(Attribute.CITY));
+            hotel.setAvailableCount(Integer.parseInt(request.getParameter(Attribute.AVAILABLE_COUNT)));
+            hotelDao.updateById(hotel, hotelId);
+            result = true;
+        }
+        return result;
+    }
+
+
+
 
 }
