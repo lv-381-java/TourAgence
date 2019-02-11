@@ -6,7 +6,8 @@ public class Client {
     private String clientSurname;
     private String phoneNumber;
 
-    public Client() {}
+    public Client() {
+    }
 
     public Client(String clientName, String clientSurname, String phoneNumber) {
         this.clientName = clientName;

@@ -18,7 +18,8 @@ public class OrderDetails {
         this.endDate = endDate;
     }
 
-    public OrderDetails() {}
+    public OrderDetails() {
+    }
 
     public Long getId() {
         return id;
