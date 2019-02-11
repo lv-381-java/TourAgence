@@ -14,6 +14,11 @@ public class Attribute {
     public static final String AVAILABLE_COUNT = "available_count";
 
 
+    //OrderDetails
+    public static final String BEGIN_DATE = "begin_date";
+    public static final String END_DATE = "end_date";
+    public static final String CLIENT = "client";
+    public static final String HOTEL = "hotel";
 
 
 }

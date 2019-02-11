@@ -11,7 +11,7 @@ public class HotelService {
 
 
     // TODO: find out if City needed. assigned to Arsen
-    public boolean getHotel(HttpServletRequest request) {
+    public boolean createHotel(HttpServletRequest request) {
         boolean result = false;
 
         String hotelName = request.getParameter(Attribute.HOTEL_NAME);
@@ -44,7 +44,7 @@ public class HotelService {
         return result;
     }
 
-    public Hotel getCountry(HttpServletRequest request) {
+    public Hotel getHotel(HttpServletRequest request) {
         HotelDao hotelDao = new HotelDao();
 
         if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
