@@ -94,14 +94,7 @@ public class ClientDao implements ICrudDao<Client> {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
-
         }
 
         return client;

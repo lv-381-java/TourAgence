@@ -23,6 +23,7 @@ public class HotelDao implements ICrudDao<Hotel> {
                 preparedStatement.setString(1, hotel.getHotelName());
                 preparedStatement.setLong(2, hotel.getCity().getCityId());
                 preparedStatement.setInt(3, hotel.getAvailableCount());
+
                 preparedStatement.execute();
 
             } catch (SQLException e) {
@@ -35,24 +36,32 @@ public class HotelDao implements ICrudDao<Hotel> {
     @Override
     public List<Hotel> selectAll() {
         List<Hotel> hotelList = new ArrayList<>();
+        String sql = "SELECT idHotel, hotelName, City_idCity, availableCount FROM HOTEL";
+        Connection connection = DBConnection.getDbConnection();
 
-        String sql = "SELECT * FROM HOTEL";
-        Statement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = DBConnection.getDbConnection().createStatement();
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                Hotel hotel = new Hotel();
-                hotel.setHotelId(resultSet.getLong("idHotel"));
-                hotel.setHotelName(resultSet.getString("hotelName"));
-                CityDao city = new CityDao();
-                hotel.setCity(city.selectById(resultSet.getLong(3)));
-                hotel.setAvailableCount(resultSet.getInt("availableCount"));
-                hotelList.add(hotel);
+        if(connection != null){
+
+            Statement statement = null;
+            ResultSet resultSet = null;
+            try {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()) {
+                    Hotel hotel = new Hotel();
+                    CityDao city = new CityDao();
+
+                    hotel.setHotelId(resultSet.getLong("idHotel"));
+                    hotel.setHotelName(resultSet.getString("hotelName"));
+                    hotel.setCity(city.selectById(resultSet.getLong("City_idCity")));
+                    hotel.setAvailableCount(resultSet.getInt("availableCount"));
+
+                    hotelList.add(hotel);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         }
 
         return hotelList;
@@ -61,24 +70,31 @@ public class HotelDao implements ICrudDao<Hotel> {
     @Override
     public Hotel selectById(Long id) {
         String sql = "SELECT * FROM HOTEL WHERE idHotel=" + "'" + id + "'";
+
+        Connection connection = DBConnection.getDbConnection();
+
         Statement statement = null;
         ResultSet resultSet = null;
         Hotel hotel = null;
 
-        try {
-            statement = DBConnection.getDbConnection().createStatement();
-            resultSet = statement.executeQuery(sql);
+        if(connection != null) {
 
-            while (resultSet.next()) {
-                hotel = new Hotel();
-                hotel.setHotelId(resultSet.getLong("idHotel"));
-                hotel.setHotelName(resultSet.getString("hotelName"));
-                CityDao city = new CityDao();
-                hotel.setCity(city.selectById(resultSet.getLong(3)));
-                hotel.setAvailableCount(resultSet.getInt("availableCount"));
+            try {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()) {
+                    hotel = new Hotel();
+                    hotel.setHotelId(resultSet.getLong("idHotel"));
+                    hotel.setHotelName(resultSet.getString("hotelName"));
+                    CityDao city = new CityDao();
+                    hotel.setCity(city.selectById(resultSet.getLong(3)));
+                    hotel.setAvailableCount(resultSet.getInt("availableCount"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         }
 
         return hotel;
@@ -86,9 +102,10 @@ public class HotelDao implements ICrudDao<Hotel> {
 
     @Override
     public void updateById(Hotel hotel, Long id) {
-        String sqlUpdate = "UPDATE hotel SET hotelName=?,City_idCity=?,availableCount=?" + " WHERE idHotel=" + id + "";
+        String sqlUpdate = "UPDATE hotel SET hotelName=?,City_idCity=?,availableCount=?" + " WHERE idHotel=?";
         PreparedStatement preparedStatement = null;
         Connection connection = DBConnection.getDbConnection();
+
         if (connection != null) {
 
             try {
@@ -98,9 +115,9 @@ public class HotelDao implements ICrudDao<Hotel> {
                 preparedStatement.setString(1, hotel.getHotelName());
                 preparedStatement.setLong(2, hotel.getCity().getCityId());
                 preparedStatement.setInt(3, hotel.getAvailableCount());
+                preparedStatement.setLong(4, id);
 
                 preparedStatement.executeUpdate();
-
 
             } catch (SQLException e) {
                 e.printStackTrace();
