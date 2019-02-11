@@ -3,22 +3,23 @@ package com.ss.touragency.constants;
 public class Attribute {
 
     // Country
-    public static final String COUNTRY_NAME = "country_name";
-    public final static String COUNTRY_ID = "countryId";
+    public static final String COUNTRY_NAME = "countryName";
+    public final static String COUNTRY_ID = "idCountry";
 
 
     //Hotel
-    public static final String HOTEL_NAME = "hotel_name";
-    public static final String HOTEL_ID = "hotel_id";
-    public static final String CITY = "city";
-    public static final String AVAILABLE_COUNT = "available_count";
+    public static final String HOTEL_NAME = "hotelName";
+    public static final String HOTEL_ID = "idHotel";
+    public static final String CITY = "City_idCity";
+    public static final String AVAILABLE_COUNT = "availableCount";
 
 
     //OrderDetails
-    public static final String BEGIN_DATE = "begin_date";
-    public static final String END_DATE = "end_date";
-    public static final String CLIENT = "client";
-    public static final String HOTEL = "hotel";
+    public static final String ORDER_ID = "idOrder";
+    public static final String BEGIN_DATE = "beginDate";
+    public static final String END_DATE = "endDate";
+    public static final String CLIENT = "Client_idClient";
+    public static final String HOTEL = "Hotel_idHotel";
 
 
 }

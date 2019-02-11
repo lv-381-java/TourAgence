@@ -40,4 +40,21 @@ public class OrderDetailsService {
         }
         return status;
     }
+
+    public boolean updateOrderDetails (HttpServletRequest request){
+        boolean result = false;
+        OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (request.getParameter(Attribute.HOTEL) != null && request.getParameter(Attribute.CITY) != null){
+            Long orderId = Long.parseLong(request.getSession().getAttribute(Attribute.ORDER_ID).toString());
+            OrderDetails orderDetails = orderDetailsDao.selectById(orderId);
+//            orderDetails.setHotel(request.getParameter(Attribute.HOTEL));
+//            orderDetails.setCity(request.getParameter(Attribute.CITY));
+            orderDetails.setBeginDate(SimpleDateFormat.parse(request.getParameter(Attribute.AVAILABLE_COUNT)));
+            orderDetailsDao.updateById(orderDetails, orderId);
+            result = true;
+        }
+        return result;
+    }
 }
