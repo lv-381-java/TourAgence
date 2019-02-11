@@ -2,10 +2,10 @@ package com.ss.touragency.dao;
 
 import com.ss.touragency.dbConnection.DBConnection;
 import com.ss.touragency.entity.OrderDetails;
+import com.ss.touragency.entity.Visa;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailsDao implements ICrudDao<OrderDetails> {
@@ -34,7 +34,28 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails> {
 
     @Override
     public List<OrderDetails> selectAll() {
-        return null;
+        List<OrderDetails> orderDetailsList = new ArrayList<>();
+
+        String sql = "SELECT * FROM ORDERDETAILS";
+        Statement statement;
+        ResultSet resultSet;
+
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                OrderDetails orderDetails = new OrderDetails();
+                ClientDao clientDao = new ClientDao();
+                orderDetails.setClient(clientDao.selectById(resultSet.getLong(2)));
+                HotelDao hotelDao = new HotelDao();
+                orderDetails.setHotel(hotelDao.selectById(resultSet.getLong(3)));
+                orderDetailsList.add(orderDetails);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderDetailsList;
     }
 
     @Override
