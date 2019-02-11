@@ -35,44 +35,55 @@ public class VisaDao implements ICrudDao<Visa> {
     }
 
     @Override
-    public List<Visa> selectAll() throws SQLException {
+    public List<Visa> selectAll() {
         List<Visa> visaList = new ArrayList<>();
 
         String sql = "SELECT * FROM VISA";
-        Statement statement = DBConnection.getDbConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        Statement statement = null;
+        ResultSet resultSet = null;
 
-        while (resultSet.next()) {
-            Visa visa = new Visa();
-//            CityDao city = new CityDao();
-//            hotel.setCity(city.selectById(resultSet.getLong(3)));
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
 
-            ClientDao client = new ClientDao();
-            visa.setClient(client.selectById(resultSet.getLong(2)));
-            CountryDao country = new CountryDao();
-            visa.setCountry(country.selectById(resultSet.getLong(3)));
-            visaList.add(visa);
+                Visa visa = new Visa();
+                ClientDao client = new ClientDao();
+                visa.setClient(client.selectById(resultSet.getLong(2)));
+                CountryDao country = new CountryDao();
+                visa.setCountry(country.selectById(resultSet.getLong(3)));
+                visaList.add(visa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
 
         return visaList;
     }
 
     @Override
-    public Visa selectById(Long id) throws SQLException {
+    public Visa selectById(Long id) {
         String sql = "SELECT * FROM VISA WHERE idVisa=" + "'" + id + "'";
-        Statement statement = DBConnection.getDbConnection().createStatement();
-
-        ResultSet resultSet = statement.executeQuery(sql);
-
+        Statement statement = null;
+        ResultSet resultSet = null;
         Visa visa = null;
 
-        while (resultSet.next()) {
-            visa = new Visa();
-            ClientDao client = new ClientDao();
-            visa.setClient(client.selectById(resultSet.getLong(2)));
-            CountryDao country = new CountryDao();
-            visa.setCountry(country.selectById(resultSet.getLong(3)));
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                visa = new Visa();
+                ClientDao client = new ClientDao();
+                visa.setClient(client.selectById(resultSet.getLong(2)));
+                CountryDao country = new CountryDao();
+                visa.setCountry(country.selectById(resultSet.getLong(3)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         return visa;
     }
 
