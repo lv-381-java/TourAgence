@@ -52,7 +52,6 @@ public class CityDao implements ICrudDao<City> {
             City city = new City();
             city.setCityId( resultSet.getLong("idCity"));
             city.setCityName(resultSet.getString("cityName"));
-// ???           city.set
             cityList.add(city);
         }
 
@@ -117,4 +116,5 @@ public class CityDao implements ICrudDao<City> {
 //        }
     }
 }
+
 
