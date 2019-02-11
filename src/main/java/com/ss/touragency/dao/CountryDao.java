@@ -48,12 +48,14 @@ public class CountryDao implements ICrudDao<Country> {
             if (statement != null) {
                 resultSet = statement.executeQuery(sql);
             }
-            while (resultSet.next()) {
-                Country country = new Country();
-                country.setIdCountry(resultSet.getLong("idCountry"));
-                country.setCountryName(resultSet.getString("countryName"));
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    Country country = new Country();
+                    country.setIdCountry(resultSet.getLong("idCountry"));
+                    country.setCountryName(resultSet.getString("countryName"));
 
-                countryList.add(country);
+                    countryList.add(country);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Cant select countries from DB");
@@ -66,8 +68,8 @@ public class CountryDao implements ICrudDao<Country> {
     public Country selectById(Long id){
 
         String sql = "SELECT * FROM COUNTRY WHERE idCountry=" + "'" + id + "'";
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Statement statement;
+        ResultSet resultSet;
         Country country = null;
 
         try {

@@ -1,7 +1,6 @@
 package com.ss.touragency.dao;
 
 import com.ss.touragency.dbConnection.DBConnection;
-import com.ss.touragency.entity.City;
 import com.ss.touragency.entity.Hotel;
 
 import java.sql.*;
