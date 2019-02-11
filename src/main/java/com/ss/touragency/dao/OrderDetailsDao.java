@@ -60,7 +60,26 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails> {
 
     @Override
     public OrderDetails selectById(Long id) {
-        return null;
+        String sql = "SELECT * FROM ORDERDETAILS WHERE idOder=" + "'" + id + "'";
+        Statement statement;
+        ResultSet resultSet;
+        OrderDetails orderDetails = new OrderDetails();
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                orderDetails = new OrderDetails();
+                ClientDao client = new ClientDao();
+                orderDetails.setClient(client.selectById(resultSet.getLong(2)));
+                HotelDao hotelDao = new HotelDao();
+                orderDetails.setHotel(hotelDao.selectById(resultSet.getLong(3)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderDetails;
     }
 
     @Override
