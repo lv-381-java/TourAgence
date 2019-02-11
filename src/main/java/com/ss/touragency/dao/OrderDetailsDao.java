@@ -1,110 +1,82 @@
 package com.ss.touragency.dao;
 
 import com.ss.touragency.dbConnection.DBConnection;
-import com.ss.touragency.entity.Client;
 import com.ss.touragency.entity.OrderDetails;
+import com.ss.touragency.entity.Visa;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailsDao implements ICrudDao<OrderDetails>{
+public class OrderDetailsDao implements ICrudDao<OrderDetails> {
 
     @Override
     public void insert(OrderDetails orderDetails) {
-
-        String insertOrderDetails = "insert into orderdetails(Client_idClient, Hotel_idHotel, beginDate, endDate) values (?,?,?,?)";
+        String insertHotel = "INSERT INTO visa(Client_idClient,Country_idCountry) VALUES(?,?)";
         Connection connection = DBConnection.getDbConnection();
 
-        if(connection != null){
+        if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
             try {
-                preparedStatement = connection.prepareStatement(insertOrderDetails);
+                preparedStatement = connection.prepareStatement(insertHotel);
                 preparedStatement.setLong(1, orderDetails.getClient().getIdClient());
                 preparedStatement.setLong(2, orderDetails.getHotel().getHotelId());
-                preparedStatement.setDate(3, orderDetails.getBeginDate());
-                preparedStatement.setDate(4, orderDetails.getEndDate());
 
-                preparedStatement.executeUpdate();
+                preparedStatement.execute();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
         }
     }
 
     @Override
-    public List<OrderDetails> selectAll(){
-
+    public List<OrderDetails> selectAll() {
         List<OrderDetails> orderDetailsList = new ArrayList<>();
-        String selectOrderDetails = "select Client_idClient, Hotel_idHotel, beginDate, endDate from orderdetails";
-        Connection connection = DBConnection.getDbConnection();
 
-        if(connection != null){
+        String sql = "SELECT * FROM ORDERDETAILS";
+        Statement statement;
+        ResultSet resultSet;
 
-            Statement statement = null;
-            ResultSet resultSet = null;
-            try {
-                statement = connection.createStatement();
-                resultSet = statement.executeQuery(selectOrderDetails);
-
-                while(resultSet.next()){
-                    ClientDao clientDao = new ClientDao();
-                    HotelDao hotelDao = new HotelDao();
-                    OrderDetails orderDetails = new OrderDetails();
-
-                    orderDetails.setClient(clientDao.selectById(resultSet.getLong("Client_idClient")));
-                    orderDetails.setHotel(hotelDao.selectById(resultSet.getLong("Hotel_idHotel")));
-                    orderDetails.setBeginDate(resultSet.getDate("beginDate"));
-                    orderDetails.setEndDate(resultSet.getDate("endDate"));
-
-                    orderDetailsList.add(orderDetails);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                OrderDetails orderDetails = new OrderDetails();
+                ClientDao clientDao = new ClientDao();
+                orderDetails.setClient(clientDao.selectById(resultSet.getLong(2)));
+                HotelDao hotelDao = new HotelDao();
+                orderDetails.setHotel(hotelDao.selectById(resultSet.getLong(3)));
+                orderDetailsList.add(orderDetails);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return orderDetailsList;
     }
 
     @Override
-    public OrderDetails selectById(Long id){
+    public OrderDetails selectById(Long id) {
+        String sql = "SELECT * FROM ORDERDETAILS WHERE idOder=" + "'" + id + "'";
+        Statement statement;
+        ResultSet resultSet;
+        OrderDetails orderDetails = new OrderDetails();
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
 
-        List<OrderDetails> orderDetailsList = new ArrayList<>();
-        Connection connection = DBConnection.getDbConnection();
-        String selectOrderDetailsById = "select Client_idClient, Hotel_idHotel, beginDate, endDate from orderdetails where idOrder=?";
-        OrderDetails orderDetails = null;
-
-        if (connection != null){
-
-            PreparedStatement preparedStatement = null;
-            ResultSet resultSet = null;
-
-            try {
-                preparedStatement = connection.prepareStatement(selectOrderDetailsById);
-                preparedStatement.setLong(1, id);
-
-                resultSet = preparedStatement.executeQuery();
-
-                while(resultSet.next()){
-
-                    ClientDao clientDao = new ClientDao();
-                    HotelDao hotelDao = new HotelDao();
-                    orderDetails = new OrderDetails();
-
-                    orderDetails.setClient(clientDao.selectById(resultSet.getLong("Client_idClient")));
-                    orderDetails.setHotel(hotelDao.selectById(resultSet.getLong("Hotel_idHotel")));
-                    orderDetails.setBeginDate(resultSet.getDate("beginDate"));
-                    orderDetails.setEndDate(resultSet.getDate("endDate"));
-
-                    orderDetailsList.add(orderDetails);
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            while (resultSet.next()) {
+                orderDetails = new OrderDetails();
+                ClientDao client = new ClientDao();
+                orderDetails.setClient(client.selectById(resultSet.getLong(2)));
+                HotelDao hotelDao = new HotelDao();
+                orderDetails.setHotel(hotelDao.selectById(resultSet.getLong(3)));
             }
-
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return orderDetails;
@@ -113,24 +85,6 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails>{
     @Override
     public void updateById(OrderDetails orderDetails, Long id) {
 
-        Connection connection = DBConnection.getDbConnection();
-        String updateOrderDetailsById = "update orderdetails set Client_idClient, Hotel_idHotel, beginDate, endDate where idOrder=?";
-
-        if(connection != null) {
-
-            PreparedStatement preparedStatement = null;
-            ResultSet resultSet = null;
-
-            try {
-                preparedStatement = connection.prepareStatement(updateOrderDetailsById);
-                preparedStatement.setLong(1, id);
-
-                preparedStatement.executeUpdate();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @Override

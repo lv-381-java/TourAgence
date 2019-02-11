@@ -66,8 +66,8 @@ public class VisaDao implements ICrudDao<Visa> {
     public Visa selectById(Long id) {
         Connection connection = DBConnection.getDbConnection();
         String sql = "SELECT * FROM VISA WHERE idVisa=" + "'" + id + "'";
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Statement statement;
+        ResultSet resultSet;
         Visa visa = null;
 
         try {

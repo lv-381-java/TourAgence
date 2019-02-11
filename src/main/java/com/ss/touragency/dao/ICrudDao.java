@@ -30,7 +30,7 @@ public interface ICrudDao<SomeEntity> {
      * @return some entity found by Id
      * @throws SQLException
      */
-    SomeEntity selectById(Long id);
+    SomeEntity selectById(Long id) throws SQLException;
 
     // update
     void updateById(SomeEntity entity, Long id);

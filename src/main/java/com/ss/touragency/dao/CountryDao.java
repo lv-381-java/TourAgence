@@ -17,7 +17,7 @@ public class CountryDao implements ICrudDao<Country> {
 
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
 
             try {
                 preparedStatement = connection.prepareStatement(insertCountry);
@@ -45,13 +45,17 @@ public class CountryDao implements ICrudDao<Country> {
         }
         ResultSet resultSet = null;
         try {
-            resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                Country country = new Country();
-                country.setIdCountry(resultSet.getLong("idCountry"));
-                country.setCountryName(resultSet.getString("countryName"));
+            if (statement != null) {
+                resultSet = statement.executeQuery(sql);
+            }
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    Country country = new Country();
+                    country.setIdCountry(resultSet.getLong("idCountry"));
+                    country.setCountryName(resultSet.getString("countryName"));
 
-                countryList.add(country);
+                    countryList.add(country);
+                }
             }
         } catch (SQLException e) {
             System.err.println("Cant select countries from DB");
@@ -64,8 +68,8 @@ public class CountryDao implements ICrudDao<Country> {
     public Country selectById(Long id){
 
         String sql = "SELECT * FROM COUNTRY WHERE idCountry=" + "'" + id + "'";
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Statement statement;
+        ResultSet resultSet;
         Country country = null;
 
         try {
@@ -91,7 +95,8 @@ public class CountryDao implements ICrudDao<Country> {
     public void updateById(Country country, Long id) {
 
         String sqlUpdate = "UPDATE country SET countryName=?" + " WHERE idCountry=" + id + "";
-        PreparedStatement preparedStatement = null;
+
+        PreparedStatement preparedStatement;
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
 

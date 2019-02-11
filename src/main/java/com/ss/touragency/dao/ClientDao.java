@@ -11,11 +11,12 @@ public class ClientDao implements ICrudDao<Client> {
 
     @Override
     public void insert(Client client) {
-        String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
+
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
+            PreparedStatement preparedStatement;
 
             try {
                 preparedStatement = connection.prepareStatement(insertClient);
@@ -41,8 +42,8 @@ public class ClientDao implements ICrudDao<Client> {
 
         if (connection != null) {
 
-            Statement statement = null;
-            ResultSet resultSet = null;
+            Statement statement;
+            ResultSet resultSet;
             String selectClient = "select clientName, clientSurname, phoneNumber from client";
 
             try {
@@ -69,13 +70,13 @@ public class ClientDao implements ICrudDao<Client> {
     @Override
     public Client selectById(Long id) {
 
-        String selectClientById = "select clientName, clientSurname, phoneNumber from client where idClient=?";
+        String selectClientById = "select clientName, clientSurname, phoneNumber from client where id=?";
         Connection connection = DBConnection.getDbConnection();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         Client client = null;
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
             try {
                 preparedStatement = connection.prepareStatement(selectClientById);
                 preparedStatement.setLong(1, id);
@@ -109,7 +110,7 @@ public class ClientDao implements ICrudDao<Client> {
     @Override
     public void updateById(Client client, Long id) {
 
-        String updateClientById = "update client set clientName=?, clientSurname=?, phoneNumber=? where idClient=?";
+        String updateClientById = "UPDATE client set clientName=?, clientSurname=?, phoneNumber=? where id=?";
         Connection connection = DBConnection.getDbConnection();
 
         if (connection != null) {
@@ -138,7 +139,7 @@ public class ClientDao implements ICrudDao<Client> {
     public void deleteById(Long id) {
 
         Connection connection = DBConnection.getDbConnection();
-        String deleteClientById = "delete from client where idClient=?";
+        String deleteClientById = "delete from client where id=?";
 
         if (connection != null) {
 
