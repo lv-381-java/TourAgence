@@ -47,8 +47,7 @@ public class Visa {
     @Override
     public String toString() {
         return "Visa{" +
-                "id=" + id +
-                ", client=" + client +
+                "client=" + client +
                 ", country=" + country +
                 '}';
     }

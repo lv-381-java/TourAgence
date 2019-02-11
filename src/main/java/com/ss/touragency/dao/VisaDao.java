@@ -48,10 +48,10 @@ public class VisaDao implements ICrudDao<Visa> {
             while (resultSet.next()) {
 
                 Visa visa = new Visa();
-                ClientDao client = new ClientDao();
-                visa.setClient(client.selectById(resultSet.getLong(2)));
-                CountryDao country = new CountryDao();
-                visa.setCountry(country.selectById(resultSet.getLong(3)));
+                ClientDao clientDao = new ClientDao();
+                visa.setClient(clientDao.selectById(resultSet.getLong(2)));
+                CountryDao countryDao = new CountryDao();
+                visa.setCountry(countryDao.selectById(resultSet.getLong(3)));
                 visaList.add(visa);
             }
         } catch (SQLException e) {

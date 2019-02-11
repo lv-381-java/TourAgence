@@ -67,8 +67,8 @@ public class HotelDao implements ICrudDao<Hotel> {
         Hotel hotel = null;
 
         try {
-            resultSet = statement.executeQuery(sql);
             statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
                 hotel = new Hotel();
@@ -81,7 +81,6 @@ public class HotelDao implements ICrudDao<Hotel> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         return hotel;
     }
