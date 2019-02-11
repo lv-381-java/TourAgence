@@ -111,12 +111,12 @@ public class ClientDao implements ICrudDao<Client> {
     public void updateById(Client client, Long id) {
 
         String updateClientById = "UPDATE client set clientName=?, clientSurname=?, phoneNumber=? where idClient=?";
+
         Connection connection = DBConnection.getDbConnection();
 
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
-            ResultSet resultSet = null;
+            PreparedStatement preparedStatement;
 
             try {
                 preparedStatement = connection.prepareStatement(updateClientById);
@@ -143,7 +143,7 @@ public class ClientDao implements ICrudDao<Client> {
 
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement;
 
             try {
                 preparedStatement = connection.prepareStatement(deleteClientById);
@@ -154,7 +154,6 @@ public class ClientDao implements ICrudDao<Client> {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
 
         }
 

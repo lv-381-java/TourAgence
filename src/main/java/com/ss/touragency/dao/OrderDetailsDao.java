@@ -84,7 +84,26 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails> {
 
     @Override
     public void updateById(OrderDetails orderDetails, Long id) {
+        String sqlUpdate = "UPDATE ORDERDETAILS SET Client_idClient=?, Hotel_idHotel=? " + " WHERE idOrder=" + id + "";
+        PreparedStatement preparedStatement;
+        Connection connection = DBConnection.getDbConnection();
+        if (connection != null) {
 
+            try {
+
+                preparedStatement = connection.prepareStatement(sqlUpdate);
+
+                preparedStatement.setLong(1, orderDetails.getClient().getIdClient());
+                preparedStatement.setLong(2, orderDetails.getHotel().getHotelId());
+                preparedStatement.setLong(3, orderDetails.getId());
+
+                preparedStatement.executeUpdate();
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
