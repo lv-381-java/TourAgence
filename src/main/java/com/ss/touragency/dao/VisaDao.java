@@ -64,21 +64,22 @@ public class VisaDao implements ICrudDao<Visa> {
 
     @Override
     public Visa selectById(Long id) {
+        Connection connection = DBConnection.getDbConnection();
         String sql = "SELECT * FROM VISA WHERE idVisa=" + "'" + id + "'";
         Statement statement = null;
         ResultSet resultSet = null;
         Visa visa = null;
 
         try {
-            statement = DBConnection.getDbConnection().createStatement();
+            statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
                 visa = new Visa();
-                ClientDao client = new ClientDao();
-                visa.setClient(client.selectById(resultSet.getLong(2)));
-                CountryDao country = new CountryDao();
-                visa.setCountry(country.selectById(resultSet.getLong(3)));
+                ClientDao clientDao = new ClientDao();
+                visa.setClient(clientDao.selectById(resultSet.getLong("Client_idClient")));
+                CountryDao countryDao = new CountryDao();
+                visa.setCountry(countryDao.selectById(resultSet.getLong("Country_idCountry")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

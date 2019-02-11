@@ -28,14 +28,7 @@ public class CityDao implements ICrudDao<City> {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
-
         }
     }
 
