@@ -22,16 +22,40 @@ public class CountryService {
         return result;
     }
 
-    public boolean updateCountry(HttpServletRequest request){
+    public boolean updateCountry(HttpServletRequest request) {
         boolean result = false;
         CountryDao countryDao = new CountryDao();
 
-        if(request.getParameter(Attribute.COUNTRY_NAME) != null){
+        if (request.getParameter(Attribute.COUNTRY_NAME) != null) {
             Long countryId = Long.parseLong(request.getParameter(Attribute.COUNTRY_ID));
             Country country = countryDao.selectById(countryId);
             country.setCountryName(request.getParameter(Attribute.COUNTRY_NAME));
             countryDao.updateById(country, countryId);
             result = true;
+        }
+        return result;
+    }
+
+    public Country getCountry(HttpServletRequest request) {
+        CountryDao countryDao = new CountryDao();
+
+        if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
+                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.COUNTRY_ID)))) {
+            Long countryId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.COUNTRY_ID));
+
+            return countryDao.selectById(countryId);
+        }
+        return null;
+    }
+
+    private boolean isExistItem(Long id) {
+        boolean result = false;
+        try {
+            CountryDao countryDao = new CountryDao();
+            countryDao.selectById(id);
+            result = true;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
         }
         return result;
     }
