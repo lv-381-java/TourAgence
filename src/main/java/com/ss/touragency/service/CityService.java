@@ -40,10 +40,10 @@ public class CityService {
                     resultSet = preparedStatement.executeQuery();
 
                     while(resultSet.next()){
-                        City city = new City();
-                        city.setCityId(resultSet.getLong("idCity"));
-                        city.setCityName(resultSet.getString("cityName"));
-                        cityList.add(city);
+                            City city = new City();
+                            city.setCityId(resultSet.getLong("idCity"));
+                            city.setCityName(resultSet.getString("cityName"));
+                            cityList.add(city);
                     }
 
                 } catch (SQLException e) {
