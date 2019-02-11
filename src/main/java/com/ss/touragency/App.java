@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class App {
 
-    public static void main( String[] args ) throws SQLException {
+    public static void main(String[] args) throws SQLException {
 
         CountryDao c = new CountryDao();
 //        Country country = new Country("CountryName2");
@@ -60,7 +60,7 @@ public class App {
 //
 //        }
         HotelDao hd = new HotelDao();
-        hd.insert(new Hotel("Tourist",city.selectById(1l),300));
+        hd.insert(new Hotel("Tourist", city.selectById(1l), 300));
         System.out.println(hd.selectAll());
 //        System.out.println(hd.selectAll());
 //        System.out.println(hd.selectById(4L));
