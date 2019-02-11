@@ -6,7 +6,8 @@ public class Visa {
     private Client client;
     private Country country;
 
-    public Visa() {}
+    public Visa() {
+    }
 
     public Visa(Client client, Country country) {
         this.client = client;

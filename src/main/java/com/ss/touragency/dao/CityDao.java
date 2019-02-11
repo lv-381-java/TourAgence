@@ -23,7 +23,7 @@ public class CityDao implements ICrudDao<City> {
                 preparedStatement = connection.prepareStatement(insertCountry);
 
                 preparedStatement.setString(1, city.getCityName());
-                preparedStatement.setLong(2,city.getCountry().getIdCountry());
+                preparedStatement.setLong(2, city.getCountry().getIdCountry());
                 preparedStatement.execute();
 
             } catch (SQLException e) {
@@ -40,7 +40,7 @@ public class CityDao implements ICrudDao<City> {
     }
 
     @Override
-    public List<City> selectAll(){
+    public List<City> selectAll() {
 
         List<City> cityList = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class CityDao implements ICrudDao<City> {
 
             while (resultSet.next()) {
                 City city = new City();
-                city.setCityId( resultSet.getLong("idCity"));
+                city.setCityId(resultSet.getLong("idCity"));
                 city.setCityName(resultSet.getString("cityName"));
                 cityList.add(city);
             }
@@ -64,7 +64,7 @@ public class CityDao implements ICrudDao<City> {
     }
 
     @Override
-    public City selectById(Long id){
+    public City selectById(Long id) {
         String sql = "SELECT * FROM CITY WHERE idCity=" + "'" + id + "'";
         Statement statement = null;
 
@@ -74,7 +74,7 @@ public class CityDao implements ICrudDao<City> {
             statement = DBConnection.getDbConnection().createStatement();
             resultSet = statement.executeQuery(sql);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 city = new City();
                 city.setCityId(resultSet.getLong("idCity"));
                 city.setCityName(resultSet.getString("cityName"));
@@ -83,7 +83,6 @@ public class CityDao implements ICrudDao<City> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
 
         return city;

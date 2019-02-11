@@ -60,7 +60,7 @@ public class HotelDao implements ICrudDao<Hotel> {
     }
 
     @Override
-    public Hotel selectById(Long id){
+    public Hotel selectById(Long id) {
         String sql = "SELECT * FROM HOTEL WHERE idHotel=" + "'" + id + "'";
         Statement statement = null;
         ResultSet resultSet = null;

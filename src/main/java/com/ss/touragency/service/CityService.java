@@ -15,11 +15,11 @@ import java.util.*;
 public class CityService {
 
     //select country.countryName, city.cityName from country left join city on country.idCountry=city.Country_idCountry;
-    public Map<Country, List<City>> selectAllCountrisWithCities(){
+    public Map<Country, List<City>> selectAllCountrisWithCities() {
         Connection connection = DBConnection.getDbConnection();
         Map<Country, List<City>> countryCityMap = new HashMap<>();
 
-        if(connection != null){
+        if (connection != null) {
             CountryDao countryDao = new CountryDao();
             CityDao cityDao = new CityDao();
 
@@ -28,7 +28,7 @@ public class CityService {
 
             List<Country> countryList = countryDao.selectAll();
 
-            for(Country country : countryList){
+            for (Country country : countryList) {
 
                 List<City> cityList = new ArrayList<>();
                 String selectCityByNameCountry = "select city.idCity, city.cityName, city.Country_idCountry from " +
@@ -39,11 +39,11 @@ public class CityService {
                     preparedStatement.setString(1, country.getCountryName());
                     resultSet = preparedStatement.executeQuery();
 
-                    while(resultSet.next()){
-                            City city = new City();
-                            city.setCityId(resultSet.getLong("idCity"));
-                            city.setCityName(resultSet.getString("cityName"));
-                            cityList.add(city);
+                    while (resultSet.next()) {
+                        City city = new City();
+                        city.setCityId(resultSet.getLong("idCity"));
+                        city.setCityName(resultSet.getString("cityName"));
+                        cityList.add(city);
                     }
 
                 } catch (SQLException e) {
