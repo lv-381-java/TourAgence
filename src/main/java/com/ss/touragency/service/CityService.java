@@ -32,7 +32,7 @@ public class CityService {
 
                 List<City> cityList = new ArrayList<>();
                 String selectCityByNameCountry = "select city.idCity, city.cityName, city.Country_idCountry from " +
-                        "country left join city on country.idCountry=city.Country_idCountry where countryName=?";
+                        "country join city on country.idCountry=city.Country_idCountry where countryName=?"; //left join
 
                 try {
                     preparedStatement = connection.prepareStatement(selectCityByNameCountry);
