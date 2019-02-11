@@ -65,8 +65,8 @@ public class VisaDao implements ICrudDao<Visa> {
     @Override
     public Visa selectById(Long id) {
         String sql = "SELECT * FROM VISA WHERE idVisa=" + "'" + id + "'";
-        Statement statement = null;
-        ResultSet resultSet = null;
+        Statement statement;
+        ResultSet resultSet;
         Visa visa = null;
 
         try {
