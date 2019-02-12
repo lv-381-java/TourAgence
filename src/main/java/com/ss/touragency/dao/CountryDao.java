@@ -35,30 +35,24 @@ public class CountryDao implements ICrudDao<Country> {
     @Override
     public List<Country> selectAll() {
         List<Country> countryList = new ArrayList<>();
+        Connection connection = DBConnection.getDbConnection();
 
         String sql = "SELECT * FROM COUNTRY";
         Statement statement = null;
+        ResultSet resultSet = null;
+
         try {
-            statement = DBConnection.getDbConnection().createStatement();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Country country = new Country();
+                country.setIdCountry(resultSet.getLong("idCountry"));
+                country.setCountryName(resultSet.getString("countryName"));
+
+                countryList.add(country);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        ResultSet resultSet = null;
-        try {
-            if (statement != null) {
-                resultSet = statement.executeQuery(sql);
-            }
-            if (resultSet != null) {
-                while (resultSet.next()) {
-                    Country country = new Country();
-                    country.setIdCountry(resultSet.getLong("idCountry"));
-                    country.setCountryName(resultSet.getString("countryName"));
-
-                    countryList.add(country);
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Cant select countries from DB");
         }
 
         return countryList;
