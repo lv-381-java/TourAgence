@@ -1,10 +1,9 @@
 package com.ss.touragency;
 
+
+import com.ss.touragency.dao.CityDao;
 import com.ss.touragency.entity.City;
-
 import com.ss.touragency.entity.Country;
-import com.ss.touragency.service.CityService;
-
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,8 +13,8 @@ public class App {
 
     public static void main(String[] args) throws SQLException {
 
-        CityService cityService = new CityService();
-        Map<Country, List<City>> map = cityService.selectAllCountrisWithCities();
+        CityDao cityDao = new CityDao();
+        Map<Country, List<City>> map = cityDao.selectAllCountrisWithCities();
 
         for (Map.Entry<Country, List<City>> entry : map.entrySet()) {
 
