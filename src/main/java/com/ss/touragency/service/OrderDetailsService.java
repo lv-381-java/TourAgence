@@ -8,6 +8,7 @@ import com.ss.touragency.entity.Hotel;
 import com.ss.touragency.entity.OrderDetails;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.parser.Entity;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,9 +20,6 @@ public class OrderDetailsService {
 
         boolean status = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-//        String client = (String) request.getSession().getAttribute(Attribute.CLIENT);
-//        String hotelName = (String) request.getSession().getAttribute(Attribute.HOTEL);
 
         String beginDate = (String) request.getSession().getAttribute(Attribute.BEGIN_DATE);
         String endDate = (String) request.getSession().getAttribute(Attribute.END_DATE);
@@ -51,6 +49,7 @@ public class OrderDetailsService {
         if (request.getParameter(Attribute.HOTEL) != null && request.getParameter(Attribute.CITY) != null){
             Long orderId = Long.parseLong(request.getSession().getAttribute(Attribute.ORDER_ID).toString());
             OrderDetails orderDetails = orderDetailsDao.selectById(orderId);
+
 //            orderDetails.setHotel(request.getParameter(Attribute.HOTEL));
 //            orderDetails.setCity(request.getParameter(Attribute.CITY));
             orderDetails.setBeginDate(formatter.parse(request.getParameter(Attribute.BEGIN_DATE)));
