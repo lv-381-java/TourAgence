@@ -67,6 +67,17 @@ public class HotelDao implements ICrudDao<Hotel> {
         return hotelList;
     }
 
+//    public Hotel selectByName(String name){
+//
+//        String selectHotelByName = "select idHotel, hotelName, City_idCity, availableCount from hotel where hotelName=?";
+//        Connection connection = DBConnection.getDbConnection();
+//        Hotel hotel = null;
+//
+//        PreparedStatement preparedStatement = null;
+//
+//
+//    }
+
     @Override
     public Hotel selectById(Long id) {
         String sql = "SELECT * FROM HOTEL WHERE idHotel=" + "'" + id + "'";

@@ -1,6 +1,7 @@
 package com.ss.touragency.service;
 
 import com.ss.touragency.constants.Attribute;
+import com.ss.touragency.dao.HotelDao;
 import com.ss.touragency.dao.OrderDetailsDao;
 import com.ss.touragency.entity.Client;
 import com.ss.touragency.entity.Hotel;
@@ -20,7 +21,8 @@ public class OrderDetailsService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 //        String client = (String) request.getSession().getAttribute(Attribute.CLIENT);
-//        String hotel = (String) request.getSession().getAttribute(Attribute.HOTEL);
+//        String hotelName = (String) request.getSession().getAttribute(Attribute.HOTEL);
+
         String beginDate = (String) request.getSession().getAttribute(Attribute.BEGIN_DATE);
         String endDate = (String) request.getSession().getAttribute(Attribute.END_DATE);
 
