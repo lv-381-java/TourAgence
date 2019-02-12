@@ -1,7 +1,5 @@
 package com.ss.touragency.dbConnection;
 
-import com.ss.touragency.util.DbProperties;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,8 +10,8 @@ public class DBConnection {
 
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/mydb"
             + "?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String DB_USER = "onlyVone";
-    private static final String DB_PASSWORD = "kxfat92a";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "admin";
 
     public static Connection getDbConnection() {
 

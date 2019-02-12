@@ -13,6 +13,7 @@ import com.ss.touragency.entity.Client;
 import com.ss.touragency.entity.Country;
 import com.ss.touragency.entity.Hotel;
 import com.ss.touragency.service.CityService;
+import com.ss.touragency.service.HotelService;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -78,9 +79,8 @@ public class App {
         Visa visa = new Visa(clientdao.selectById(3L),c.selectById(2L));
         VisaDao visadao = new VisaDao();
         visadao.insert(visa);
+
 //        System.out.println(visadao.selectAll());
-
-
 
 
 //        System.out.println(clientdao.selectById(3l));

@@ -15,6 +15,7 @@ import java.util.*;
 public class CityService {
 
     //select country.countryName, city.cityName from country left join city on country.idCountry=city.Country_idCountry;
+
     public Map<Country, List<City>> selectAllCountrisWithCities() {
         Connection connection = DBConnection.getDbConnection();
         Map<Country, List<City>> countryCityMap = new HashMap<>();
