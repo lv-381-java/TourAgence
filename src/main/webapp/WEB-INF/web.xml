@@ -1,3 +1,13 @@
-<session-config>
-    <tracking-mode>COOKIE</tracking-mode>
-</session-config>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+    <display-name>Bookstore1</display-name>
+    <servlet>
+        <servlet-name>hhh</servlet-name>
+        <servlet-class>com.ss.touragency.controller.country.CountryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hhh</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>
