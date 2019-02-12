@@ -9,6 +9,7 @@ public class PathToPage {
     public static final String COUNTRY_DELETE = "/deleteCountry";
 
     //City
+    public static final String CREATE_CITY = "/createCity";
     public static final String CITY_INFO = "/cityInfo";
 
 
