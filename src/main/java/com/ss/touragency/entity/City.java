@@ -53,7 +53,6 @@ public class City {
     public String toString() {
         return "City{" +
                 "cityName='" + cityName + '\'' +
-                ", country=" + country +
                 '}';
     }
 }
