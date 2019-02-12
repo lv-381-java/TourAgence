@@ -6,6 +6,11 @@ public class Attribute {
     public static final String COUNTRY_NAME = "countryName";
     public final static String COUNTRY_ID = "idCountry";
 
+    //City
+    public static final String CITY_ID = "idCity";
+    public static final String CITY_NAME = "cityName";
+    public static final String COONTRY = "Country_idCountry";
+
 
     //Hotel
     public static final String HOTEL_NAME = "hotelName";
