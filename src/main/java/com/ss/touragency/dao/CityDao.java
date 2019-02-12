@@ -37,20 +37,28 @@ public class CityDao implements ICrudDao<City> {
 
         List<City> cityList = new ArrayList<>();
 
-        String sql = "SELECT * FROM CITY";
+        String sql = "SELECT idCity, cityName, Country_idCountry FROM CITY";
+        Connection connection = DBConnection.getDbConnection();
         Statement statement = null;
-        try {
-            statement = DBConnection.getDbConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+        if(connection != null){
 
-            while (resultSet.next()) {
-                City city = new City();
-                city.setCityId(resultSet.getLong("idCity"));
-                city.setCityName(resultSet.getString("cityName"));
-                cityList.add(city);
+            try {
+                statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()) {
+                    City city = new City();
+                    city.setCityId(resultSet.getLong("idCity"));
+                    city.setCityName(resultSet.getString("cityName"));
+                    CountryDao countryDao = new CountryDao();
+                    city.setCountry(countryDao.selectById(resultSet.getLong("Country_idCountry")));
+                    cityList.add(city);
+                }
+            } catch (SQLException e) {
+                System.out.println("Some error while select all cities from DB");
+                e.getStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         }
 
         return cityList;
@@ -58,35 +66,41 @@ public class CityDao implements ICrudDao<City> {
 
     @Override
     public City selectById(Long id) {
-        String sql = "SELECT * FROM CITY WHERE idCity=" + "'" + id + "'";
+        String sql = "SELECT idCity, cityName, Country_idCountry FROM CITY WHERE idCity=" + "'" + id + "'";
+        Connection connection = DBConnection.getDbConnection();
         Statement statement = null;
-
         ResultSet resultSet = null;
         City city = null;
-        try {
-            statement = DBConnection.getDbConnection().createStatement();
-            resultSet = statement.executeQuery(sql);
 
-            while (resultSet.next()) {
-                city = new City();
-                city.setCityId(resultSet.getLong("idCity"));
-                city.setCityName(resultSet.getString("cityName"));
-// ??       city.setCountry
+        if(connection != null) {
+
+            try {
+                statement = DBConnection.getDbConnection().createStatement();
+                resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()) {
+                    city = new City();
+                    city.setCityId(resultSet.getLong("idCity"));
+                    city.setCityName(resultSet.getString("cityName"));
+                    CountryDao countryDao = new CountryDao();
+                    city.setCountry(countryDao.selectById(resultSet.getLong("Country_idCountry")));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         }
-
-
         return city;
 
     }
 
     @Override
     public void updateById(City city, Long id) {
-        String sqlUpdate = "UPDATE city SET cityName=?,Country_idCountry=?" + " WHERE idCity=" + id + "";
+
+        String sqlUpdate = "UPDATE city SET cityName=?,Country_idCountry=?" + " WHERE idCity=?";
         PreparedStatement preparedStatement = null;
         Connection connection = DBConnection.getDbConnection();
+
         if (connection != null) {
 
             try {
@@ -95,6 +109,7 @@ public class CityDao implements ICrudDao<City> {
 
                 preparedStatement.setString(1, city.getCityName());
                 preparedStatement.setLong(2, city.getCountry().getIdCountry());
+                preparedStatement.setLong(3, id);
 
                 preparedStatement.executeUpdate();
 

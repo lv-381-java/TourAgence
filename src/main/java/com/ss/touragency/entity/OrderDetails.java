@@ -65,8 +65,7 @@ public class OrderDetails {
     @Override
     public String toString() {
         return "OrderDetails{" +
-                "id=" + id +
-                ", client=" + client +
+                "client=" + client +
                 ", hotel=" + hotel +
                 ", beginDate=" + beginDate +
                 ", endDate=" + endDate +
