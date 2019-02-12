@@ -2,6 +2,9 @@ package com.ss.touragency.constants;
 
 public class Attribute {
 
+    public final static String ERROR = "error";
+
+
     // Country
     public static final String COUNTRY_NAME = "countryName";
     public final static String COUNTRY_ID = "idCountry";
