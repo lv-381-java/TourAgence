@@ -1,5 +1,6 @@
 package com.ss.touragency;
 
+
 import com.ss.touragency.dao.CityDao;
 import com.ss.touragency.entity.City;
 import com.ss.touragency.entity.Country;
@@ -15,15 +16,12 @@ public class App {
         CityDao cityDao = new CityDao();
         Map<Country, List<City>> map = cityDao.selectAllCountrisWithCities();
 
-        for(Map.Entry<Country, List<City>> entry : map.entrySet()){
+        for (Map.Entry<Country, List<City>> entry : map.entrySet()) {
 
             Country cou = entry.getKey();
             List<City> cityList = entry.getValue();
             System.out.println(cou.getCountryName() + " : " + cityList);
 
         }
-
-
-
     }
 }

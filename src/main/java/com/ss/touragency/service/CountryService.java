@@ -14,7 +14,7 @@ public class CountryService {
         String countryName = request.getParameter(Attribute.COUNTRY_NAME);
         if (countryName != null && !countryName.isEmpty()) {
             CountryDao countryDao = new CountryDao();
-            Country country = new Country(-1L, countryName);
+            Country country = new Country(1L, countryName);
             countryDao.insert(country);
             result = true;
         }

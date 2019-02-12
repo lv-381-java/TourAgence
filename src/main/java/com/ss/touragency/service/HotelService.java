@@ -20,7 +20,7 @@ public class HotelService {
 
         if (hotelName != null && !hotelName.isEmpty()) {
             HotelDao hotelDao = new HotelDao();
-            Hotel hotel = new Hotel(-1L, hotelName, city, availableCount);
+            Hotel hotel = new Hotel(1L, hotelName, city, availableCount);
             hotelDao.insert(hotel);
             result = true;
         }

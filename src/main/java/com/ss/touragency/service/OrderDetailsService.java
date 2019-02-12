@@ -35,7 +35,7 @@ public class OrderDetailsService {
             Date begin = (Date) formatter.parse(beginDate);
             Date end = (Date) formatter.parse(endDate);
 
-            OrderDetails orderDetails = new OrderDetails(-1L, client, hotel, begin, end);
+            OrderDetails orderDetails = new OrderDetails(1L, client, hotel, begin, end);
             orderDetailsDao.insert(orderDetails);
             status = true;
 
