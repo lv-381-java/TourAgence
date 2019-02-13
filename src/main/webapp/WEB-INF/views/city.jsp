@@ -1,16 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 12.02.2019
-  Time: 19:23
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset=UTF-8;>
+    <title>Tour Agency</title>
 </head>
-<body>
-$END$
+<body bgcolor="#ff69b4">
+<h1> Choose city </h1>
+<select value="City" name="citySelect" size="1">
+
+    <c:forEach var="cityList" items="${city}">
+        <option>${cityList.getCityName()}</option>
+    </c:forEach>
+</select>
 </body>
 </html>

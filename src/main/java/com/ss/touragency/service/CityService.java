@@ -5,6 +5,7 @@ import com.ss.touragency.dao.CityDao;
 import com.ss.touragency.entity.City;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class CityService {
 
@@ -45,6 +46,14 @@ public class CityService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public List<City> getCityList(HttpServletRequest request){
+
+        CityDao cityDao = new CityDao();
+        List<City> cityList = cityDao.selectAll();
+
+        return cityList;
     }
 
 
