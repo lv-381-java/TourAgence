@@ -4,6 +4,7 @@ import com.ss.touragency.constants.Attribute;
 import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.entity.City;
 import com.ss.touragency.entity.Country;
+import com.ss.touragency.entity.Hotel;
 import com.ss.touragency.util.Context;
 
 import javax.servlet.ServletException;
@@ -21,18 +22,21 @@ public class CityInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Country> countryList = Context.getInstance().getCountryService().getCountryList(req);
-        req.setAttribute("list", countryList);
+        req.setAttribute("country", countryList);
 
         List<City> cityList = Context.getInstance().getCityService().getCityList(req);
         req.setAttribute("city", cityList);
 
+        List<Hotel> hotelList = Context.getInstance().getHotelService().getHotelList(req);
+        req.setAttribute("hotel", hotelList);
+
         req.getRequestDispatcher("WEB-INF/views/city.jsp").forward(req, resp);
 
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
-        if(request.getSession().getAttribute(Attribute.CITY_ID) == null){
+        if (request.getSession().getAttribute(Attribute.CITY_ID) == null) {
 
         }
     }
