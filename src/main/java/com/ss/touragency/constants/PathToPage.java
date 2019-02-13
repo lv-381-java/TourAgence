@@ -13,4 +13,11 @@ public class PathToPage {
     public static final String CITY_INFO = "/cityInfo";
 
 
+    //Hotel
+    public static final String CREATE_HOTEL = "/createHotel";
+    public static final String HOTEL_INFO = "/hotelInfo";
+    public static final String DELETE_HOTEL = "/deleteHotel";
+    public static final String UPDATE_HOTEL ="/updateHotel";
+
+
 }
