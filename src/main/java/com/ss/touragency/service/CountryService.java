@@ -1,10 +1,13 @@
 package com.ss.touragency.service;
 
 import com.ss.touragency.constants.Attribute;
+import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.dao.CountryDao;
 import com.ss.touragency.entity.Country;
+import com.ss.touragency.util.Context;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class CountryService {
 
@@ -59,4 +62,14 @@ public class CountryService {
         }
         return result;
     }
+
+    public List<Country> getCountryList(HttpServletRequest request){
+
+        CountryDao countryDao = new CountryDao();
+        List<Country> countryList = countryDao.selectAll();
+
+        return countryList;
+    }
+
+
 }

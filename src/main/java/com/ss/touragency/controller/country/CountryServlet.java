@@ -3,6 +3,7 @@ package com.ss.touragency.controller.country;
 import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.dao.CountryDao;
 import com.ss.touragency.entity.Country;
+import com.ss.touragency.util.Context;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +19,8 @@ public class CountryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        CountryDao countryDao = new CountryDao();
-        List<Country> countryList = countryDao.selectAll();
+
+        List<Country> countryList = Context.getInstance().getCountryService().getCountryList(req);
         req.setAttribute("list", countryList);
         req.getRequestDispatcher("WEB-INF/views/country.jsp").forward(req, resp);
 
