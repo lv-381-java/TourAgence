@@ -13,8 +13,8 @@
     <title>Welcome</title>
 
     <style type="text/css">
-        <%@include file="/WEB-INF/front/css/materialize.min.css" %>
-        <%@include file="/WEB-INF/front/css/crst.css" %>
+        <%--<%@include file="/WEB-INF/front/css/materialize.min.css" %>--%>
+        <%--<%@include file="/WEB-INF/front/css/crst.css" %>--%>
     </style>
 </head>
 <main>

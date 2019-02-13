@@ -1,0 +1,30 @@
+html{
+    background-color:#2F2F2F;
+}
+
+body{
+    background-color:rgb(245, 245, 245);
+}
+
+
+
+#header{
+    margin-top: 50px;
+    text-align: center;
+    color: aliceblue;
+    height: 398px;
+    background: url("/WEB-INF/views/img/logo.png");
+}
+#header h1{
+    padding-top: 100px;
+    font-size: 100px;
+}
+.footer{
+    margin-top: 40px;
+    height: 83px;
+    background-color: #2d2d2d;
+    color: #9d9d9d;
+}
+#site-content{
+    min-height: 428px;
+}
