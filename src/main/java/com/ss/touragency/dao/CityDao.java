@@ -139,7 +139,7 @@ public class CityDao implements ICrudDao<City> {
     }
 
     //select country.countryName, city.cityName from country left join city on country.idCountry=city.Country_idCountry;
-    public Map<Country, List<City>> selectAllCountrisWithCities() {
+    public Map<Country, List<City>> selectAllCountriesWithCities() {
         Connection connection = DBConnection.getDbConnection();
         Map<Country, List<City>> countryCityMap = new HashMap<>();
 

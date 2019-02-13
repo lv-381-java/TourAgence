@@ -14,11 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(PathToPage.COUNTRY_INFO)
-public class CountryServlet extends HttpServlet {
+public class CountryInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         List<Country> countryList = Context.getInstance().getCountryService().getCountryList(req);
         req.setAttribute("list", countryList);
