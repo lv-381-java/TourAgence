@@ -2,6 +2,7 @@ package com.ss.touragency.entity;
 
 
 import java.util.Date;
+import java.util.Objects;
 
 public class OrderDetails {
 
@@ -70,5 +71,22 @@ public class OrderDetails {
                 ", beginDate=" + beginDate +
                 ", endDate=" + endDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetails that = (OrderDetails) o;
+        return id.equals(that.id) &&
+                client.equals(that.client) &&
+                hotel.equals(that.hotel) &&
+                beginDate.equals(that.beginDate) &&
+                endDate.equals(that.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, client, hotel, beginDate, endDate);
     }
 }

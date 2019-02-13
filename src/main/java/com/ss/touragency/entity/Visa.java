@@ -1,5 +1,7 @@
 package com.ss.touragency.entity;
 
+import java.util.Objects;
+
 public class Visa {
 
     private Long id;
@@ -50,5 +52,20 @@ public class Visa {
                 "client=" + client +
                 ", country=" + country +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Visa visa = (Visa) o;
+        return id.equals(visa.id) &&
+                client.equals(visa.client) &&
+                country.equals(visa.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, client, country);
     }
 }

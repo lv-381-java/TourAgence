@@ -1,5 +1,7 @@
 package com.ss.touragency.entity;
 
+import java.util.Objects;
+
 public class Client {
     private Long idClient;
     private String clientName;
@@ -28,6 +30,22 @@ public class Client {
 
     public void setIdClient(Long idClient) {
         this.idClient = idClient;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return idClient.equals(client.idClient) &&
+                clientName.equals(client.clientName) &&
+                clientSurname.equals(client.clientSurname) &&
+                phoneNumber.equals(client.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idClient, clientName, clientSurname, phoneNumber);
     }
 
     public String getClientName() {

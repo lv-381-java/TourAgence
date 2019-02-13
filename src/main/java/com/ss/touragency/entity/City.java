@@ -1,5 +1,7 @@
 package com.ss.touragency.entity;
 
+import java.util.Objects;
+
 public class City {
 
     private Long cityId;
@@ -23,6 +25,21 @@ public class City {
         this.cityId = cityId;
         this.cityName = cityName;
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return cityId.equals(city.cityId) &&
+                cityName.equals(city.cityName) &&
+                country.equals(city.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cityId, cityName, country);
     }
 
     public Long getCityId() {
