@@ -12,12 +12,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Tour Agency</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,900" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body bgcolor="#ffc0cb">
-<h1>Welcome in our Tour Agency</h1>
-<p>If you want to book hotel you may select the country, the city(in this country) and the hotel!</p>
+<body>
 
-<select value="Country" name="countrySelect" size="1" >
+<h3>Welcome in our Tour Agency</h3>
+<p>If you want to book hotel you may select the country, the city(in selected country) and the hotel!</p>
+
+<select title="Select the country" name="countrySelect" size="1" >
 
     <c:forEach var="countryList" items="${list}">
         <option>${countryList.getCountryName()}</option>
