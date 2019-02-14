@@ -43,4 +43,9 @@
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/login.jsp"/>
     </definition>
 
+    <definition name="registration" extends="base-definition">
+        <put-attribute name="title" value="Registration"/>
+        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/registration.jsp"/>
+    </definition>
+
 </tiles-definitions>
