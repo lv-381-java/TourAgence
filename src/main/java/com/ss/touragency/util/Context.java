@@ -1,10 +1,7 @@
 package com.ss.touragency.util;
 
 import com.ss.touragency.dao.*;
-import com.ss.touragency.service.CityService;
-import com.ss.touragency.service.CountryService;
-import com.ss.touragency.service.HotelService;
-import com.ss.touragency.service.OrderDetailsService;
+import com.ss.touragency.service.*;
 
 public class Context {
 
@@ -21,6 +18,7 @@ public class Context {
     HotelService hotelService;
     OrderDetailsService orderDetailsService;
     CityService cityService;
+    ClientService clientService;
 
     public CountryService getCountryService() {
         return countryService;
@@ -33,6 +31,8 @@ public class Context {
     public OrderDetailsService getOrderDetailsService() {
         return orderDetailsService;
     }
+
+    public ClientService getClientService(){return clientService;}
 
     public CityService getCityService() {
         return cityService;
@@ -54,6 +54,7 @@ public class Context {
         hotelService = new HotelService();
         orderDetailsService = new OrderDetailsService();
         cityService = new CityService();
+        clientService = new ClientService();
     }
 
     public static Context getInstance() {
