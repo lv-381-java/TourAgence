@@ -17,7 +17,7 @@
                 <li><a href="${pageContext.request.contextPath}/city">City</a></li>
                 <li><a href="${pageContext.request.contextPath}/countryInfo">Country</a></li>
                 <li><a href="${pageContext.request.contextPath}/hotelInfo">Hotel</a></li>
-                <li><a href="${pageContext.request.contextPath}/cabinet">Cabinet</a></li>
+                <li><a href="${pageContext.request.contextPath}/user">Cabinet</a></li>
                 <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
             </ul>
 

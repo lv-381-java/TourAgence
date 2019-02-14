@@ -1,28 +1,36 @@
-html{
+html {
     background-color: #c3ce21;
 }
 
-body{
+body {
     background-color: rgb(245, 241, 57);
 }
 
-#header{
+#header {
     margin-top: 10px;
     text-align: center;
-    color: aliceblue;
+    color: #030303;
     height: 398px;
 }
-#header h1{
+
+#header h1 {
     font-size: 60px;
     padding-top: 30px;
 }
-.footer{
+
+.footer {
     margin-top: 40px;
-    height: 83px;
+    height: 60px;
     background-color: #2d2d2d;
     color: #9d9d9d;
+}
+
+#site-content {
+    min-height: 428px;
     padding: 20px;
 }
-#site-content{
-    min-height: 428px;
+
+#sidemenu {
+    font-size: 20px;
+    color: #c3ce21;
 }
