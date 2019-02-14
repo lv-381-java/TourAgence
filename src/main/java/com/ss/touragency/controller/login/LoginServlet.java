@@ -24,12 +24,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if(Context.getInstance().getClientService().validationClient(req)){
-
-            resp.sendRedirect(PathToPage.CITY_INFO);
-
+        try{
+            if(Context.getInstance().getClientService().validationClient(req)){
+                resp.sendRedirect(PathToPage.CITY_INFO);
+            }
+        }catch(NullPointerException e){
+            resp.sendRedirect(PathToPage.REGISTRATION_PATH);
         }
-
 
 
     }
