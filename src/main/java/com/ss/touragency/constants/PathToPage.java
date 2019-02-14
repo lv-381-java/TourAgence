@@ -12,6 +12,8 @@ public class PathToPage {
     public static final String CREATE_CITY = "/createCity";
     public static final String CITY_INFO = "/city";
 
+    //login
+    public static final String LOGIN_PATH = "/login";
 
     //Hotel
     public static final String CREATE_HOTEL = "/createHotel";
