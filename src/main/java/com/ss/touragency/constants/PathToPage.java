@@ -15,11 +15,15 @@ public class PathToPage {
     //login
     public static final String LOGIN_PATH = "/login";
 
+    //registration
+    public static final String REGISTRATION_PATH = "/registration";
+
     //Hotel
     public static final String CREATE_HOTEL = "/createHotel";
     public static final String HOTEL_INFO = "/hotelInfo";
     public static final String DELETE_HOTEL = "/deleteHotel";
     public static final String UPDATE_HOTEL ="/updateHotel";
 
-
+    //home
+    public static final String HOME_PATH = "/";
 }
