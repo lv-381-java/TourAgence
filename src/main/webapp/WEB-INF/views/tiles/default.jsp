@@ -22,7 +22,9 @@
             integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw"
             crossorigin="anonymous"></script>
 
-    <link href="<c:url value='/WEB-INF/views/css/main.css' />" rel="stylesheet">
+    <style>
+        <%@include file='/WEB-INF/views/css/main.css' %>
+    </style>
 </head>
 
 <body>
