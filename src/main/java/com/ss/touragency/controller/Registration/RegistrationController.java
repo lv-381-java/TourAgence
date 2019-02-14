@@ -1,4 +1,4 @@
-package com.ss.touragency.controller.login;
+package com.ss.touragency.controller.Registration;
 
 import com.ss.touragency.constants.PathToJsp;
 import com.ss.touragency.constants.PathToPage;
@@ -11,27 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(PathToPage.LOGIN_PATH)
-public class LoginServlet extends HttpServlet {
+@WebServlet(PathToPage.REGISTRATION_PATH)
+public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher(PathToJsp.LOGIN_JSP).forward(req, resp);
+        req.getRequestDispatcher(PathToJsp.REGISTRATION_JSP).forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        try{
-            if(Context.getInstance().getClientService().validationClient(req)){
-                resp.sendRedirect(PathToPage.CITY_INFO);
-            }
-        }catch(NullPointerException e){
-            resp.sendRedirect(PathToPage.REGISTRATION_PATH);
-        }
-
+        Context.getInstance().getClientService().registrationClient(req);
+        resp.sendRedirect(PathToPage.HOME_PATH);
 
     }
 }
