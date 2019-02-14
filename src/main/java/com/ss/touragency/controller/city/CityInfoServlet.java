@@ -1,6 +1,7 @@
 package com.ss.touragency.controller.city;
 
 import com.ss.touragency.constants.Attribute;
+import com.ss.touragency.constants.PathToJsp;
 import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.entity.City;
 import com.ss.touragency.entity.Country;
@@ -30,7 +31,7 @@ public class CityInfoServlet extends HttpServlet {
         List<Hotel> hotelList = Context.getInstance().getHotelService().getHotelList(req);
         req.setAttribute("hotel", hotelList);
 
-        req.getRequestDispatcher("WEB-INF/views/city.jsp").forward(req, resp);
+        req.getRequestDispatcher(PathToJsp.CITY_JSP).forward(req, resp);
 
     }
 

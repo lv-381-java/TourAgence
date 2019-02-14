@@ -1,7 +1,7 @@
 package com.ss.touragency.controller.country;
 
+import com.ss.touragency.constants.PathToJsp;
 import com.ss.touragency.constants.PathToPage;
-import com.ss.touragency.dao.CountryDao;
 import com.ss.touragency.entity.Country;
 import com.ss.touragency.util.Context;
 
@@ -21,7 +21,7 @@ public class CountryInfoServlet extends HttpServlet {
 
         List<Country> countryList = Context.getInstance().getCountryService().getCountryList(req);
         req.setAttribute("list", countryList);
-        req.getRequestDispatcher("WEB-INF/views/country.jsp").forward(req, resp);
+        req.getRequestDispatcher(PathToJsp.COUNTRY_JSP).forward(req, resp);
 
     }
 
