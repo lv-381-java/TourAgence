@@ -22,4 +22,6 @@ public class PathToPage {
     public static final String UPDATE_HOTEL ="/updateHotel";
 
 
+    //USER
+    public static final String USER_INFO = "/user";
 }
