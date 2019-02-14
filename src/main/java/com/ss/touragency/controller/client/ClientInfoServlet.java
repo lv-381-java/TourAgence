@@ -17,6 +17,7 @@ public class ClientInfoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Client client = Context.getInstance().getClientService().getClient(request);
+        request.setAttribute("client", client);
         request.getRequestDispatcher(PathToJsp.CLIENT_JSP).forward(request, response);
     }
 

@@ -33,9 +33,9 @@
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/hotel.jsp"/>
     </definition>
 
-    <definition name="cabinet" extends="base-definition">
+    <definition name="client" extends="base-definition">
         <put-attribute name="title" value="Cabinet"/>
-        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/cabinet.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/client.jsp"/>
     </definition>
 
     <definition name="login" extends="base-definition">

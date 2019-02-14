@@ -3,14 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="container">
-    <h2>Hotels</h2>
+    <h2 style="color: #0A0B0D"> Hotels: </h2>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>HotelName</th>
-            <th>CityName</th>
+            <th>Hotel</th>
+            <th>City</th>
             <th>Country</th>
-            <th>AvailableCount</th>
+            <th>Available Count</th>
         </tr>
         </thead>
 

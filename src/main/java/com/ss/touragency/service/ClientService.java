@@ -24,7 +24,7 @@ public class ClientService {
     public Client getClient(HttpServletRequest request) {
         ClientDao clientDao = new ClientDao();
 
-        if (request.getSession().getAttribute(Attribute.CLIENT_ID) == null
+        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null
                 && isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))){
 
             Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
