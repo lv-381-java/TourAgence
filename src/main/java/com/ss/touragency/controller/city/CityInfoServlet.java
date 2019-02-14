@@ -33,11 +33,14 @@ public class CityInfoServlet extends HttpServlet {
 
         req.getRequestDispatcher(PathToJsp.CITY_JSP).forward(req, resp);
 
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         if (request.getSession().getAttribute(Attribute.CITY_ID) == null) {
+
+
 
         }
     }
