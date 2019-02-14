@@ -4,7 +4,6 @@
 
 <tiles-definitions>
 
-    <!-- Base Definition -->
     <definition name="base-definition"
                 template="/WEB-INF/views/tiles/default.jsp">
         <put-attribute name="title" value=""/>
@@ -14,40 +13,34 @@
         <put-attribute name="footer" value="/WEB-INF/views/tiles/template/footer.jsp"/>
     </definition>
 
-    // Home
     <definition name="home" extends="base-definition">
         <put-attribute name="title" value="Home"/>
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/home.jsp"/>
     </definition>
 
-    // City
     <definition name="city" extends="base-definition">
         <put-attribute name="title" value="City"/>
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/city.jsp"/>
     </definition>
 
-    // Country
     <definition name="country" extends="base-definition">
         <put-attribute name="title" value="Country"/>
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/country.jsp"/>
     </definition>
 
-    // Hotel
     <definition name="hotel" extends="base-definition">
         <put-attribute name="title" value="Hotel"/>
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/hotel.jsp"/>
     </definition>
 
-    // User Cabinet
-    <definition name="hall" extends="base-definition">
+    <definition name="cabinet" extends="base-definition">
         <put-attribute name="title" value="Cabinet"/>
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/cabinet.jsp"/>
     </definition>
 
-    // Login
     <definition name="login" extends="base-definition">
         <put-attribute name="title" value="Login"/>
-        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/cabinet.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/login.jsp"/>
     </definition>
 
 </tiles-definitions>
