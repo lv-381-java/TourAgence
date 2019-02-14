@@ -17,7 +17,7 @@
 <p>If you want to book hotel you may select the country, the city(in selected country) and the hotel!</p>
 
 
-<select value="Country" name="countrySelect" size="1">
+<select value="Country" name="countrySelect" size="1" >
 
     <c:forEach var="countryList" items="${list}">
         <option>${countryList.getCountryName()}</option>

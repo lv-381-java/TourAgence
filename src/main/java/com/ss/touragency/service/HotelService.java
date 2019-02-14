@@ -6,6 +6,7 @@ import com.ss.touragency.entity.City;
 import com.ss.touragency.entity.Hotel;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public class HotelService {
 
@@ -54,6 +55,12 @@ public class HotelService {
             return hotelDao.selectById(countryId);
         }
         return null;
+    }
+
+    public List<Hotel> getHotelList(HttpServletRequest request){
+        HotelDao hotelDao = new HotelDao();
+        List<Hotel> hotelList = hotelDao.selectAll();
+        return  hotelList;
     }
 
     private boolean isExistItem(Long id) {
