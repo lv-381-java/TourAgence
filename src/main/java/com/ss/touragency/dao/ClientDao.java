@@ -15,7 +15,7 @@ public class ClientDao implements ICrudDao<Client> {
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
 
-            String insertClient = "insert into client(clientName, clientSurname, phoneNumber) values(?,?,?)";
+            String insertClient = "insert into client(clientName, clientSurname, phoneNumber, clientLogin, clientPassword) values(?,?,?,?,?)";
             PreparedStatement preparedStatement;
 
             try {
@@ -24,6 +24,8 @@ public class ClientDao implements ICrudDao<Client> {
                 preparedStatement.setString(1, client.getClientName());
                 preparedStatement.setString(2, client.getClientSurname());
                 preparedStatement.setString(3, client.getPhoneNumber());
+                preparedStatement.setString(4, client.getClientLogin());
+                preparedStatement.setString(5, client.getClientPassword());
 
                 preparedStatement.execute();
 
@@ -56,6 +58,8 @@ public class ClientDao implements ICrudDao<Client> {
                     client.setClientName(resultSet.getString("clientName"));
                     client.setClientSurname(resultSet.getString("clientSurname"));
                     client.setPhoneNumber(resultSet.getString("phoneNumber"));
+                    client.setClientLogin(resultSet.getString("clientLogin"));
+                    client.setClientPassword(resultSet.getString("clientPassword"));
 
                     clientList.add(client);
                 }
@@ -70,7 +74,7 @@ public class ClientDao implements ICrudDao<Client> {
     @Override
     public Client selectById(Long id) {
 
-        String selectClientById = "select clientName, clientSurname, phoneNumber from client where idClient=?";
+        String selectClientById = "select clientName, clientSurname, phoneNumber, clientLogin, clientPassword from client where idClient=?";
         Connection connection = DBConnection.getDbConnection();
         ResultSet resultSet;
         Client client = null;
@@ -89,6 +93,8 @@ public class ClientDao implements ICrudDao<Client> {
                     client.setClientName(resultSet.getString("clientName"));
                     client.setClientSurname(resultSet.getString("clientSurname"));
                     client.setPhoneNumber(resultSet.getString("phoneNumber"));
+                    client.setClientLogin(resultSet.getString("clientLogin"));
+                    client.setClientPassword(resultSet.getString("clientPassword"));
 
                 }
 
@@ -151,4 +157,45 @@ public class ClientDao implements ICrudDao<Client> {
         }
 
     }
+
+    public Client findClientByNameAndPhone(String login, String password)throws NullPointerException{
+
+        Client client = null;
+        Connection connection = DBConnection.getDbConnection();
+        String findClientSQL = "select idClient, clientName, clientSurname, phoneNumber, clientLogin, clientPassword from client where clientLogin='"
+                + login+ "'" + " AND clientPassword='" + password + "'";
+
+        if(connection != null){
+
+            ResultSet resultSet = null;
+            Statement statement = null;
+
+            try {
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(findClientSQL);
+
+                while(resultSet.next()){
+
+                    client = new Client();
+                    client.setIdClient(resultSet.getLong("idClient"));
+                    client.setClientName(resultSet.getString("clientName"));
+                    client.setClientSurname(resultSet.getString("clientSurname"));
+                    client.setPhoneNumber(resultSet.getString("phoneNumber"));
+                    client.setClientLogin(resultSet.getString("clientLogin"));
+                    client.setClientPassword(resultSet.getString("clientPassword"));
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        if (client.equals(null)){
+            throw new NullPointerException("Invalid login or password.");
+        }
+        return client;
+    }
+
 }
