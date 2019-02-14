@@ -7,7 +7,6 @@
 </head>
 <body bgcolor="#ff69b4">
 
-// Test
 <h1> Choose country: </h1>
 <select value="Country" name="countrySelect" size="1">
 
