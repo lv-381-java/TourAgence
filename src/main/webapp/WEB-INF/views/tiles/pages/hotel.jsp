@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="container">
-    <h2>List of Archive</h2>
+    <h2>Hotels</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -11,12 +11,12 @@
             <th>CityName</th>
             <th>Country</th>
             <th>AvailableCount</th>
-
         </tr>
         </thead>
+
         <tbody>
         <c:forEach var="hotelList" items="${hotel}">
-            <td>
+            <tr>
                 <td><c:out value="${hotelList.getHotelName()}" /></td>
                 <td><c:out value="${hotelList.getCity().getCityName()}" /></td>
                 <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}" /></td>
