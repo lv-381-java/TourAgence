@@ -28,6 +28,9 @@
         <input type="text" name="username" placeholder="Username" required="required" />
         <input type="password" name="password" placeholder="Password" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large">
+            <a href=${pageContext.request.contextPath}/registration>Register</a>
+        </button>
     </form>
 </div>
 </body>
