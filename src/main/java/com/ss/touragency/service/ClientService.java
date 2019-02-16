@@ -3,7 +3,6 @@ package com.ss.touragency.service;
 import com.ss.touragency.constants.Attribute;
 import com.ss.touragency.dao.ClientDao;
 import com.ss.touragency.entity.Client;
-import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,7 +23,7 @@ public class ClientService {
     public Client getClient(HttpServletRequest request) {
         ClientDao clientDao = new ClientDao();
 
-        if (request.getSession().getAttribute(Attribute.CLIENT_ID) == null
+        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null
                 && isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))){
 
             Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));

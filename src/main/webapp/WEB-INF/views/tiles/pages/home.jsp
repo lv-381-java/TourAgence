@@ -4,7 +4,7 @@
 
 <div>
     <style>
-        <%@include file='/css/main.css' %>
+        <%@include file='/css/home.css' %>
     </style>
     <img src='<c:url value="/img/agency_background.jpg" />' id="bg"/>
     <div id="bottom-text"> A travel agency is a private retailer or public service that provides travel and tourism related services to the public on behalf of suppliers such as activities, airlines, car rentals, cruise lines, hotels, railways, travel insurance, and package tours. In addition to dealing with ordinary tourists, most travel agencies have a separate department devoted to making travel arrangements for business travelers; some travel agencies specialize in commercial and business travel only. There are also travel agencies that serve as general sales agents for foreign travel companies, allowing them to have offices in countries other than where their headquarters are located.</div>
