@@ -7,11 +7,12 @@ import com.ss.touragency.entity.Country;
 import com.ss.touragency.util.Context;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CountryService {
 
-    public boolean createCountry(HttpServletRequest request) {
+    public boolean createCountry(HttpServletRequest request) throws SQLException {
         boolean result = false;
 
         String countryName = request.getParameter(Attribute.COUNTRY_NAME);

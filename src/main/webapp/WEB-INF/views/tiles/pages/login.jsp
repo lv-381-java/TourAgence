@@ -1,38 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="base" value="${pageContext.request.contextPath}"/>
-<%--<c:import url="/WEB-INF/views/commons/Top.jsp" charEncoding="utf-8" />--%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Welcome</title>
-    <meta charset="UTF-8">
-    <title>Login Form</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<div class="container">
     <style>
         <%@include file='/css/login.css' %>
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
-</head>
-<body>
-
-<div class="login">
-    <h1>Login</h1>
-    <form method="post">
-        <input type="text" name="username" placeholder="Username" required="required" />
-        <input type="password" name="password" placeholder="Password" required="required" />
-        <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
-        <button type="submit" class="btn btn-primary btn-block btn-large">
-            <a href=${pageContext.request.contextPath}/registration>Register</a>
-        </button>
-    </form>
+    <div class="errorMessage">
+        <p>${requestScope.get("error")}</p>
+    </div>
+    <div class="login">
+        <h1>Login</h1>
+        <form method="post">
+            <input type="text" name="login" placeholder="Login" required="required" />
+            <input type="password" name="password" placeholder="Password" required="required" />
+            <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+            <a href="${base}/registration" class="btn btn-primary btn-block btn-large">Sign up</a>
+        </form>
+    </div>
 </div>
-</body>
 
-</html>

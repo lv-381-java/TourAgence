@@ -5,11 +5,12 @@ import com.ss.touragency.dao.CityDao;
 import com.ss.touragency.entity.City;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CityService {
 
-    public boolean createCity(HttpServletRequest request) {
+    public boolean createCity(HttpServletRequest request) throws SQLException {
         boolean result = false;
 
         String cityName = request.getParameter(Attribute.CITY_NAME);

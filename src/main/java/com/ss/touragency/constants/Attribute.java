@@ -4,6 +4,9 @@ public class Attribute {
 
     public final static String ERROR = "error";
 
+    //login
+    public static final String LOGIN = "login";
+    public static final String PASSWORD = "password";
 
     // Country
     public static final String COUNTRY_NAME = "countryName";

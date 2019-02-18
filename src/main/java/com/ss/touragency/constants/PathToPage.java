@@ -15,6 +15,9 @@ public class PathToPage {
     //login
     public static final String LOGIN_PATH = "/login";
 
+    //logout
+    public static final String LOGOUT_PATH= "/logout";
+
     //registration
     public static final String REGISTRATION_PATH = "/registration";
 
@@ -24,10 +27,8 @@ public class PathToPage {
     public static final String DELETE_HOTEL = "/deleteHotel";
     public static final String UPDATE_HOTEL ="/updateHotel";
 
-
     //USER
     public static final String USER_INFO = "/user";
-
 
     //home
     public static final String HOME_PATH = "/";

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(PathToPage.CREATE_CITY)
 public class CityCreateServlet extends HttpServlet {
@@ -21,11 +22,15 @@ public class CityCreateServlet extends HttpServlet {
         //TODO: login check
         if (request.getSession().getAttribute(Attribute.CITY) == null) {
 
-            if (Context.getInstance().getCityService().createCity(request)) {
-                response.sendRedirect(PathToPage.CREATE_CITY);
-            } else {
-                request.setAttribute(Attribute.ERROR, "Something went wrong! Please try again");
-                request.getRequestDispatcher(PathToJsp.CITY_JSP).forward(request, response);
+            try {
+                if (Context.getInstance().getCityService().createCity(request)) {
+                    response.sendRedirect(PathToPage.CREATE_CITY);
+                } else {
+                    request.setAttribute(Attribute.ERROR, "Something went wrong! Please try again");
+                    request.getRequestDispatcher(PathToJsp.CITY_JSP).forward(request, response);
+                }
+            } catch (SQLException e) {
+                System.out.println("Such country is already exists!");
             }
 
         } else {

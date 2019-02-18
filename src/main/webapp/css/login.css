@@ -11,18 +11,21 @@
 .btn-block { width: 100%; display:block; }
 * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 html { width: 100%; height:100%; overflow:hidden; }
-body {
-	width: 100%;
-	height:100%;
-	font-family: 'Open Sans', sans-serif;
-	background: #092756;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
-}
+/*body {*/
+	/*width: 100%;*/
+	/*height:100%;*/
+	/*font-family: 'Open Sans', sans-serif;*/
+	/*background-color: rgb(139, 208, 212);*/
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );*/
+/*}*/
 .login {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -150px 0 0 -150px;
+	/*position: absolute;*/
+	/*top: 50%;*/
+	/*left: 50%;*/
+	/*margin-top: auto;*/
+	margin: 250px auto 0px;
+	/*vertical-align: middle;*/
+	/*margin: -150px 0 0 -150px;*/
 	width:300px;
 	height:300px;
 }
@@ -47,3 +50,10 @@ input {
 	transition: box-shadow .5s ease;
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+
+.errorMessage{
+	margin-top: 200px;
+	text-align: center;
+	color: #8D8E8F;
+	font-size: 19px;
+}

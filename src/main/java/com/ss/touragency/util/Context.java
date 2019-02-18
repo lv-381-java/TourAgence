@@ -39,6 +39,8 @@ public class Context {
         return cityService;
     }
 
+    public ClientDao getClientDao(){return clientDao; }
+
     private Context() {
         initComponents();
     }

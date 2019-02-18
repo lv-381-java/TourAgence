@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet (PathToPage.CREATE_HOTEL)
 public class HotelCreateServlet extends HttpServlet {
@@ -19,11 +20,15 @@ public class HotelCreateServlet extends HttpServlet {
         //TODO: login check
         if (request.getSession().getAttribute(Attribute.HOTEL) == null) {
 
-            if (Context.getInstance().getCityService().createCity(request)) {
-                response.sendRedirect(PathToPage.CREATE_HOTEL);
-            } else {
-                request.setAttribute(Attribute.ERROR, "Something went wrong! Please try again");
-                request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
+            try {
+                if (Context.getInstance().getCityService().createCity(request)) {
+                    response.sendRedirect(PathToPage.CREATE_HOTEL);
+                } else {
+                    request.setAttribute(Attribute.ERROR, "Something went wrong! Please try again");
+                    request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
+                }
+            } catch (SQLException e) {
+                System.out.println("Such city is already exists! ");
             }
 
         } else {

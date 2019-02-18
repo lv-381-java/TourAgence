@@ -5,13 +5,14 @@ import com.ss.touragency.dao.ClientDao;
 import com.ss.touragency.entity.Client;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class ClientService {
 
     public boolean validationClient(HttpServletRequest request) throws NullPointerException {
 
         ClientDao clientDao = new ClientDao();
-        Client client = clientDao.findClientByNameAndPhone(request.getParameter("username"), request.getParameter("password"));
+        Client client = clientDao.findClientByNameAndPhone(request.getParameter(Attribute.LOGIN), request.getParameter(Attribute.PASSWORD));
 
         if (!client.equals(null)) {
             return true;
@@ -20,15 +21,28 @@ public class ClientService {
         return false;
     }
 
+    public String setClientID(HttpServletRequest request) throws NullPointerException {
+
+        ClientDao clientDao = new ClientDao();
+        Client client = clientDao.findClientByNameAndPhone(request.getParameter(Attribute.LOGIN), request.getParameter(Attribute.PASSWORD));
+
+        if (client != null) {
+            return client.getIdClient() + "";
+        }
+        return null;
+    }
+
     public Client getClient(HttpServletRequest request) {
         ClientDao clientDao = new ClientDao();
 
-        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null
-                && isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))){
+        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null) {
+            if (isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))) {
 
-            Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
-            clientDao.selectById(id);
+                Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
+                return clientDao.selectById(id);
+            }
         }
+
         return null;
     }
 
@@ -44,7 +58,7 @@ public class ClientService {
         return result;
     }
 
-    public void registrationClient(HttpServletRequest request){
+    public void registrationClient(HttpServletRequest request) throws SQLException {
 
         Client client = new Client();
         client.setClientName(request.getParameter("name"));
@@ -56,4 +70,5 @@ public class ClientService {
         ClientDao clientDao = new ClientDao();
         clientDao.insert(client);
     }
+
 }
