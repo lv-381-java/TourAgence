@@ -80,7 +80,7 @@ public class HotelDao implements ICrudDao<Hotel> {
 
     @Override
     public Hotel selectById(Long id) {
-        String sql = "SELECT * FROM HOTEL WHERE idHotel=" + "'" + id + "'";
+        String sql = "SELECT idHotel, hotelName, City_idCity, availableCount FROM HOTEL WHERE idHotel=" + "'" + id + "'";
 
         Connection connection = DBConnection.getDbConnection();
 
@@ -109,6 +109,35 @@ public class HotelDao implements ICrudDao<Hotel> {
         }
 
         return hotel;
+    }
+
+    public List<Hotel> selectByCityId(Long cityId) {
+        String sql = "SELECT idHotel, hotelName, City_idCity, availableCount FROM HOTEL WHERE City_idCity=" + "'" + cityId + "'";
+        Connection connection = DBConnection.getDbConnection();
+        Statement statement;
+        ResultSet resultSet;
+        List<Hotel> hotelList = new ArrayList<>();
+
+        if(connection != null) {
+            try {
+                statement = DBConnection.getDbConnection().createStatement();
+                resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()) {
+                    Hotel hotel = new Hotel();
+                    hotel.setHotelId(resultSet.getLong("idHotel"));
+                    hotel.setHotelName(resultSet.getString("hotelName"));
+                    CityDao city = new CityDao();
+                    hotel.setCity(city.selectById(resultSet.getLong("City_idCity")));
+                    hotel.setAvailableCount(resultSet.getInt("availableCount"));
+                    hotelList.add(hotel);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return hotelList;
     }
 
     @Override
