@@ -39,12 +39,12 @@ public class LoginServlet extends HttpServlet {
         }
         if(result){
 
-            req.setAttribute(Attribute.LOGIN, req.getParameter(Attribute.LOGIN));
+//            req.setAttribute(Attribute.LOGIN, req.getParameter(Attribute.LOGIN));
             req.getSession().setAttribute(Attribute.LOGIN, req.getParameter(Attribute.LOGIN));
+            req.getSession().setAttribute(Attribute.CLIENT_ID, Context.getInstance().getClientService().setClientID(req));
             req.getSession().setAttribute("session", "true");
 
             resp.sendRedirect(PathToPage.HOME_PATH);
-
         }
     }
 }
