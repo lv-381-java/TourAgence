@@ -165,6 +165,15 @@ body{
 .ticker{
     position:relative;
 }
+
+.errorMessage{
+    margin-top: 200px;
+    text-align: center;
+    color: maroon;
+    font-size: 19px;
+    font-weight: bold;
+}
+
 .Login form input[type="text"],.Login form input[type="password"]{
     font-size: 15px;
     outline: none;

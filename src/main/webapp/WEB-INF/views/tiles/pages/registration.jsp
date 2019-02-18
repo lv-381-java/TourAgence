@@ -20,6 +20,9 @@
 </head>
 <body>
 <!--start-login-form-->
+<div class="errorMessage">
+    <p>${requestScope.get("error")}</p>
+</div>
 <div class="main">
     <div  class="wrap">
         <div class="Regisration">

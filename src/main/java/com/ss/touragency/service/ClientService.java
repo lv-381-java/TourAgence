@@ -3,16 +3,16 @@ package com.ss.touragency.service;
 import com.ss.touragency.constants.Attribute;
 import com.ss.touragency.dao.ClientDao;
 import com.ss.touragency.entity.Client;
-import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 public class ClientService {
 
     public boolean validationClient(HttpServletRequest request) throws NullPointerException {
 
         ClientDao clientDao = new ClientDao();
-        Client client = clientDao.findClientByNameAndPhone(request.getParameter("username"), request.getParameter("password"));
+        Client client = clientDao.findClientByNameAndPhone(request.getParameter(Attribute.LOGIN), request.getParameter(Attribute.PASSWORD));
 
         if (!client.equals(null)) {
             return true;
@@ -45,7 +45,7 @@ public class ClientService {
         return result;
     }
 
-    public void registrationClient(HttpServletRequest request){
+    public void registrationClient(HttpServletRequest request) throws SQLException {
 
         Client client = new Client();
         client.setClientName(request.getParameter("name"));
@@ -56,5 +56,6 @@ public class ClientService {
 
         ClientDao clientDao = new ClientDao();
         clientDao.insert(client);
+
     }
 }
