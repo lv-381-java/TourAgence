@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet({PathToPage.HOME_PATH,PathToPage.LOGIN_PATH})
@@ -26,14 +27,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        try{
-//            if(Context.getInstance().getClientService().validationClient(req)){
-//                resp.sendRedirect(PathToPage.HOME_PATH);
-//            }
-//        }catch(NullPointerException e){
-//            resp.sendRedirect(PathToPage.REGISTRATION_PATH);
-//        }
-
         boolean result = false;
 
         if((req.getParameter(Attribute.LOGIN) != null) && (req.getParameter(Attribute.PASSWORD) != null)){
@@ -47,7 +40,8 @@ public class LoginServlet extends HttpServlet {
         if(result){
 
             req.setAttribute(Attribute.LOGIN, req.getParameter(Attribute.LOGIN));
-            req.getSession(true).setAttribute(Attribute.PASSWORD, req.getParameter(Attribute.PASSWORD));
+            req.getSession().setAttribute(Attribute.LOGIN, req.getParameter(Attribute.LOGIN));
+            req.getSession().setAttribute("session", "true");
 
             resp.sendRedirect(PathToPage.HOME_PATH);
 

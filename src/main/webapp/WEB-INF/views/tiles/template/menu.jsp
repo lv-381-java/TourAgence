@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -17,8 +18,14 @@
                 <li><a href="${pageContext.request.contextPath}/city">City</a></li>
                 <li><a href="${pageContext.request.contextPath}/countryInfo">Country</a></li>
                 <li><a href="${pageContext.request.contextPath}/hotelInfo">Hotel</a></li>
-                <li><a href="${pageContext.request.contextPath}/user">Cabinet</a></li>
-                <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+
+                <c:if test="${!session.equals('true')}">
+                    <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                </c:if>
+                <c:if test="${session.equals('true')}">
+                    <li><a href="${pageContext.request.contextPath}/user">Cabinet</a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                </c:if>
             </ul>
 
         </div><!-- /.navbar-collapse -->
