@@ -21,15 +21,28 @@ public class ClientService {
         return false;
     }
 
+    public String setClientID(HttpServletRequest request) throws NullPointerException {
+
+        ClientDao clientDao = new ClientDao();
+        Client client = clientDao.findClientByNameAndPhone(request.getParameter(Attribute.LOGIN), request.getParameter(Attribute.PASSWORD));
+
+        if (client != null) {
+            return client.getIdClient() + "";
+        }
+        return null;
+    }
+
     public Client getClient(HttpServletRequest request) {
         ClientDao clientDao = new ClientDao();
 
-        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null
-                && isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))){
+        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null) {
+            if (isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))) {
 
-            Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
-            clientDao.selectById(id);
+                Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
+                return clientDao.selectById(id);
+            }
         }
+
         return null;
     }
 
@@ -56,6 +69,6 @@ public class ClientService {
 
         ClientDao clientDao = new ClientDao();
         clientDao.insert(client);
-
     }
+
 }
