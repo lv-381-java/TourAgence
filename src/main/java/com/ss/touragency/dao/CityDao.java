@@ -13,7 +13,7 @@ import java.util.Map;
 public class CityDao implements ICrudDao<City> {
 
     @Override
-    public void insert(City city) {
+    public void insert(City city) throws SQLException {
         String insertCountry = "INSERT INTO city(cityName,Country_idCountry) VALUES(?,?)";
         Connection connection = DBConnection.getDbConnection();
 
@@ -21,16 +21,12 @@ public class CityDao implements ICrudDao<City> {
 
             PreparedStatement preparedStatement = null;
 
-            try {
-                preparedStatement = connection.prepareStatement(insertCountry);
+            preparedStatement = connection.prepareStatement(insertCountry);
 
-                preparedStatement.setString(1, city.getCityName());
-                preparedStatement.setLong(2, city.getCountry().getIdCountry());
-                preparedStatement.execute();
+            preparedStatement.setString(1, city.getCityName());
+            preparedStatement.setLong(2, city.getCountry().getIdCountry());
+            preparedStatement.execute();
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -42,7 +38,7 @@ public class CityDao implements ICrudDao<City> {
         String sql = "SELECT idCity, cityName, Country_idCountry FROM CITY";
         Connection connection = DBConnection.getDbConnection();
         Statement statement = null;
-        if(connection != null){
+        if (connection != null) {
 
             try {
                 statement = connection.createStatement();
@@ -74,7 +70,7 @@ public class CityDao implements ICrudDao<City> {
         ResultSet resultSet = null;
         City city = null;
 
-        if(connection != null) {
+        if (connection != null) {
 
             try {
                 statement = DBConnection.getDbConnection().createStatement();

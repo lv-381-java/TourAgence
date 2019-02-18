@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VisaDao implements ICrudDao<Visa> {
     @Override
-    public void insert(Visa visa) {
+    public void insert(Visa visa) throws SQLException {
         String insertHotel = "INSERT INTO visa(Client_idClient,Country_idCountry) VALUES(?,?)";
         Connection connection = DBConnection.getDbConnection();
 
@@ -18,18 +18,12 @@ public class VisaDao implements ICrudDao<Visa> {
 
             PreparedStatement preparedStatement = null;
 
-            try {
-                preparedStatement = connection.prepareStatement(insertHotel);
+            preparedStatement = connection.prepareStatement(insertHotel);
 
+            preparedStatement.setLong(1, visa.getClient().getIdClient());
+            preparedStatement.setLong(2, visa.getCountry().getIdCountry());
 
-                preparedStatement.setLong(1, visa.getClient().getIdClient());
-                preparedStatement.setLong(2, visa.getCountry().getIdCountry());
-
-                preparedStatement.execute();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            preparedStatement.execute();
 
         }
     }

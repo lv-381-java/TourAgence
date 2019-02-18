@@ -10,7 +10,7 @@ import java.util.List;
 public class ClientDao implements ICrudDao<Client> {
 
     @Override
-    public void insert(Client client) {
+    public void insert(Client client) throws SQLException {
 
         Connection connection = DBConnection.getDbConnection();
         if (connection != null) {
@@ -18,20 +18,16 @@ public class ClientDao implements ICrudDao<Client> {
             String insertClient = "insert into client(clientName, clientSurname, phoneNumber, clientLogin, clientPassword) values(?,?,?,?,?)";
             PreparedStatement preparedStatement;
 
-            try {
-                preparedStatement = connection.prepareStatement(insertClient);
+            preparedStatement = connection.prepareStatement(insertClient);
 
-                preparedStatement.setString(1, client.getClientName());
-                preparedStatement.setString(2, client.getClientSurname());
-                preparedStatement.setString(3, client.getPhoneNumber());
-                preparedStatement.setString(4, client.getClientLogin());
-                preparedStatement.setString(5, client.getClientPassword());
+            preparedStatement.setString(1, client.getClientName());
+            preparedStatement.setString(2, client.getClientSurname());
+            preparedStatement.setString(3, client.getPhoneNumber());
+            preparedStatement.setString(4, client.getClientLogin());
+            preparedStatement.setString(5, client.getClientPassword());
 
-                preparedStatement.execute();
+            preparedStatement.execute();
 
-            } catch (SQLException e) {
-                System.out.println("Some error while inserting client");
-            }
         }
 
     }
@@ -158,14 +154,14 @@ public class ClientDao implements ICrudDao<Client> {
 
     }
 
-    public Client findClientByNameAndPhone(String login, String password)throws NullPointerException{
+    public Client findClientByNameAndPhone(String login, String password) throws NullPointerException {
 
         Client client = null;
         Connection connection = DBConnection.getDbConnection();
         String findClientSQL = "select idClient, clientName, clientSurname, phoneNumber, clientLogin, clientPassword from client where clientLogin='"
-                + login+ "'" + " AND clientPassword='" + password + "'";
+                + login + "'" + " AND clientPassword='" + password + "'";
 
-        if(connection != null){
+        if (connection != null) {
 
             ResultSet resultSet = null;
             Statement statement = null;
@@ -174,7 +170,7 @@ public class ClientDao implements ICrudDao<Client> {
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(findClientSQL);
 
-                while(resultSet.next()){
+                while (resultSet.next()) {
 
                     client = new Client();
                     client.setIdClient(resultSet.getLong("idClient"));
@@ -192,7 +188,7 @@ public class ClientDao implements ICrudDao<Client> {
 
         }
 
-        if (client.equals(null)){
+        if (client.equals(null)) {
             throw new NullPointerException("Invalid login or password.");
         }
         return client;

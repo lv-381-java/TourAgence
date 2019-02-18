@@ -10,7 +10,7 @@ import java.util.List;
 public class CountryDao implements ICrudDao<Country> {
 
     @Override
-    public void insert(Country country) {
+    public void insert(Country country) throws SQLException {
 
         String insertCountry = "INSERT INTO country(countryName) VALUES(?)";
         Connection connection = DBConnection.getDbConnection();
@@ -19,15 +19,11 @@ public class CountryDao implements ICrudDao<Country> {
 
             PreparedStatement preparedStatement;
 
-            try {
-                preparedStatement = connection.prepareStatement(insertCountry);
+            preparedStatement = connection.prepareStatement(insertCountry);
 
-                preparedStatement.setString(1, country.getCountryName());
-                preparedStatement.execute();
+            preparedStatement.setString(1, country.getCountryName());
+            preparedStatement.execute();
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
         }
     }
@@ -59,7 +55,7 @@ public class CountryDao implements ICrudDao<Country> {
     }
 
     @Override
-    public Country selectById(Long id){
+    public Country selectById(Long id) {
 
         String sql = "SELECT * FROM COUNTRY WHERE idCountry=" + "'" + id + "'";
         Statement statement;

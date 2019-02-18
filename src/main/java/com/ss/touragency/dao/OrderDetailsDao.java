@@ -11,23 +11,18 @@ import java.util.List;
 public class OrderDetailsDao implements ICrudDao<OrderDetails> {
 
     @Override
-    public void insert(OrderDetails orderDetails) {
+    public void insert(OrderDetails orderDetails) throws SQLException {
         String insertHotel = "INSERT INTO visa(Client_idClient,Country_idCountry) VALUES(?,?)";
         Connection connection = DBConnection.getDbConnection();
 
         if (connection != null) {
 
             PreparedStatement preparedStatement = null;
-            try {
-                preparedStatement = connection.prepareStatement(insertHotel);
-                preparedStatement.setLong(1, orderDetails.getClient().getIdClient());
-                preparedStatement.setLong(2, orderDetails.getHotel().getHotelId());
+            preparedStatement = connection.prepareStatement(insertHotel);
+            preparedStatement.setLong(1, orderDetails.getClient().getIdClient());
+            preparedStatement.setLong(2, orderDetails.getHotel().getHotelId());
 
-                preparedStatement.execute();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            preparedStatement.execute();
 
         }
     }
@@ -39,7 +34,7 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails> {
         Connection connection = DBConnection.getDbConnection();
         String selectAllOrderDetails = "select Client_idClient, Hotel_idHotel, beginDate, endDate from orderdetails";
 
-        if(connection != null){
+        if (connection != null) {
             Statement statement = null;
             ResultSet resultSet = null;
 
@@ -79,7 +74,7 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails> {
         OrderDetails orderDetails = new OrderDetails();
         Connection connection = DBConnection.getDbConnection();
 
-        if(connection != null){
+        if (connection != null) {
 
             try {
                 statement = connection.createStatement();

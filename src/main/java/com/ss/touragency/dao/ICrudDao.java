@@ -11,7 +11,7 @@ public interface ICrudDao<SomeEntity> {
      * @param entity Object from package entity
      */
     //create
-    void insert(SomeEntity entity);
+    void insert(SomeEntity entity) throws SQLException;
 
 
     /**
