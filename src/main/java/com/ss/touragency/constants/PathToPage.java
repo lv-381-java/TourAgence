@@ -32,4 +32,7 @@ public class PathToPage {
 
     //home
     public static final String HOME_PATH = "/";
+
+    //Visa
+    public static final String VISA_PATH = "/visa";
 }
