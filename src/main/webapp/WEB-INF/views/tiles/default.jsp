@@ -23,7 +23,7 @@
             crossorigin="anonymous"></script>
 
     <style>
-        <%@include file='/WEB-INF/views/css/main.css' %>
+        <%@include file='/css/main.css' %>
     </style>
 </head>
 
@@ -35,7 +35,6 @@
 <header id="header">
     <tiles:insertAttribute name="header"/>
 </header>
-
 
 <section id="site-content">
     <tiles:insertAttribute name="body"/>

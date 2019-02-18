@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <style>
-        <%@include file='/WEB-INF/views/css/login.css' %>
+        <%@include file='/css/login.css' %>
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 

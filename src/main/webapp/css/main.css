@@ -1,0 +1,62 @@
+html {
+    background-color: rgb(206, 23, 31);
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    background-color: rgb(139, 208, 212);
+    /*padding-bottom: 6rem;*/
+}
+
+.navbar-header{
+    color: #4a77d4;
+}
+
+.navbar-collapse{
+    color: #4a77d4;
+}
+
+#header {
+    margin-top: 10px;
+    text-align: center;
+    color: #030303;
+    /*background: url("/img/agency_background.jpg");*/
+}
+
+#header h1 {
+    font-size: 60px;
+    padding-top: 30px;
+}
+
+#footer h3{
+    text-align: center;
+    font-size: 20px;
+}
+
+.footer {
+    width: 100%;
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /*padding: 1rem;*/
+    background-color: rgb(139, 208, 212);
+    color: #cfd7d3;
+    text-align: center;
+    /*overflow: hidden;*/
+    font-size: 20px;
+
+}
+
+#site-content {
+    margin-top: 50px;
+    min-height: 428px;
+    /*padding-left: 20px;*/
+    /*padding-right: 20px;*/
+}
+
+#sidemenu {
+    font-size: 20px;
+    color: #c3ce21;
+}
