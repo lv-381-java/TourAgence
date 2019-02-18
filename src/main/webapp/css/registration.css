@@ -18,76 +18,11 @@ a{text-decoration:none;}
 .vertical-top{	vertical-align:top;}/* vertical align top */
 nav.vertical ul li{	display:block;}/* vertical menu */
 nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
-img{max-width:100%;}
-/*end reset*/
-body{
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    font-family: 'Raleway', sans-serif;
-}
+
 .main {
     text-align: center;
     margin-top:2% ;
     margin-bottom:3%;
-}
-/*--start-wrap--*/
-.content {
-    width:80%;
-    margin:0 auto;
-}
-/*--strat-login-form--*/
-.Login {
-    background: #E2E2E2;
-    border: 1px solid #828282;
-    width: 43%;
-    margin: 8% auto 0%;
-    border-radius:7px;
-    -webkit-border-radius:7px;
-    -moz-border-radius:7px;
-    -o-border-radius:7px;
-    box-shadow: -1px 3px 19px 0px rgba(29, 27, 27, 0.61);
-    -webkit-box-shadow: -1px 3px 19px 0px rgba(29, 27, 27, 0.61);
-    -o-box-shadow: -1px 3px 19px 0px rgba(29, 27, 27, 0.61);
-    -moz-box-shadow: -1px 3px 19px 0px rgba(29, 27, 27, 0.61);
-    text-align: center;
-
-}
-.Login form {
-    padding:3% 18%;
-}
-.Login-head {
-    padding: 1.5em 0em;
-    text-align: center;
-}
-.login-head h1{
-    font-family: 'Pacifico', cursive;
-    color: #222;
-    font-size: 2.5em;
-    font-weight: 600;
-    margin-bottom:1em;
-    font-style: italic;
-    text-align: center;
-    letter-spacing: 2px;
-}
-.Login-head h3{
-    color: #498900;
-    font-size: 1.95em;
-    font-weight: 700;
-    font-family: 'Raleway', sans-serif;
-    border-bottom: 1.8px ridge #B8B8B9;
-    margin:0 3em;
-    padding-bottom:0.8em;
-
-}
-.Login h4 {
-    float: left;
-    font-size: 16px;
-    font-weight:600;
-    color: #7E7B7B;
-    margin: 20px 0px;
-    font-family: 'Raleway', sans-serif;
 }
 
 .Regisration {
@@ -167,7 +102,7 @@ body{
 }
 
 .errorMessage{
-    margin-top: 200px;
+    margin-top: 150px;
     text-align: center;
     color: maroon;
     font-size: 19px;
