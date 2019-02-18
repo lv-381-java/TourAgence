@@ -30,11 +30,36 @@ public class CityService {
 
         if (request.getSession().getAttribute(Attribute.CITY_ID) != null &&
                 isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID)))) {
-            Long cityId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.CITY_ID));
+            Long cityId = Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID));
 
             return cityDao.selectById(cityId);
         }
         return null;
+    }
+
+    public List<City> getCityList(HttpServletRequest request) {
+
+        CityDao cityDao = new CityDao();
+        List<City> cityList = cityDao.selectAll();
+
+        return cityList;
+    }
+
+    public List<City> getCityByCountry(Long countryId) {
+        CityDao cityDao = new CityDao();
+//        if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
+//                isExistItem(Long.parseLong((String) request.getSession().getAttribute("country")))) {
+
+//            Long countryId = Long.parseLong((String) request.getSession().getAttribute("country"));
+            return cityDao.selectByCountryId(countryId);
+//        }
+//        return null;
+    }
+
+    public City getCityByName(String name){
+        CityDao cityDao = new CityDao();
+
+       return cityDao.selectCityByName(name);
     }
 
     private boolean isExistItem(Long id) {
@@ -47,14 +72,6 @@ public class CityService {
             e.printStackTrace();
         }
         return result;
-    }
-
-    public List<City> getCityList(HttpServletRequest request){
-
-        CityDao cityDao = new CityDao();
-        List<City> cityList = cityDao.selectAll();
-
-        return cityList;
     }
 
 

@@ -49,11 +49,11 @@ public class HotelService {
     public Hotel getHotel(HttpServletRequest request) {
         HotelDao hotelDao = new HotelDao();
 
-        if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
-                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.COUNTRY_ID)))) {
-            Long countryId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.COUNTRY_ID));
+        if (request.getSession().getAttribute(Attribute.CITY_ID) != null &&
+                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID)))) {
+            Long cityId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.CITY_ID));
 
-            return hotelDao.selectById(countryId);
+            return hotelDao.selectById(cityId);
         }
         return null;
     }
@@ -63,6 +63,13 @@ public class HotelService {
         List<Hotel> hotelList = hotelDao.selectAll();
         return  hotelList;
     }
+
+    public List<Hotel> getHotelsByCity(Long cityId){
+        HotelDao hotelDao = new HotelDao();
+        return hotelDao.selectByCityId(cityId);
+    }
+
+
 
     private boolean isExistItem(Long id) {
         boolean result = false;

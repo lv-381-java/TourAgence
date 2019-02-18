@@ -81,6 +81,29 @@ public class CountryDao implements ICrudDao<Country> {
 
     }
 
+    public Country selectByName(String name){
+
+        String sql = "SELECT * FROM COUNTRY WHERE countryName=" + "'" + name + "'";
+        Statement statement;
+        ResultSet resultSet;
+        Country country = null;
+
+        try {
+            statement = DBConnection.getDbConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                country = new Country();
+                country.setCountryName(resultSet.getString("countryName"));
+                country.setIdCountry(resultSet.getLong("idCountry"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return country;
+    }
+
     @Override
     public void updateById(Country country, Long id) {
 

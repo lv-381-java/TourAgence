@@ -1,19 +1,18 @@
 html {
-    background-color: rgb(206, 23, 31);
+    background-color: #ffffff;
     height: 100%;
 }
 
 body {
     min-height: 100%;
     background-color: rgb(139, 208, 212);
-    /*padding-bottom: 6rem;*/
 }
 
-.navbar-header{
+#bs-example-navbar-collapse-1{
     color: #4a77d4;
 }
 
-.navbar-collapse{
+#navbar-nav{
     color: #4a77d4;
 }
 
@@ -21,7 +20,6 @@ body {
     margin-top: 10px;
     text-align: center;
     color: #030303;
-    /*background: url("/img/agency_background.jpg");*/
 }
 
 #header h1 {
@@ -40,23 +38,19 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    /*padding: 1rem;*/
     background-color: rgb(139, 208, 212);
-    color: #cfd7d3;
+    color: #e6eeea;
     text-align: center;
-    /*overflow: hidden;*/
     font-size: 20px;
-
 }
 
 #site-content {
     margin-top: 50px;
     min-height: 428px;
-    /*padding-left: 20px;*/
-    /*padding-right: 20px;*/
 }
 
 #sidemenu {
     font-size: 20px;
     color: #c3ce21;
+    background-color: #4a77d4;
 }
