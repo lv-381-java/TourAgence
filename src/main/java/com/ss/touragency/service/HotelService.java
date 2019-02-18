@@ -6,13 +6,14 @@ import com.ss.touragency.entity.City;
 import com.ss.touragency.entity.Hotel;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.List;
 
 public class HotelService {
 
 
     // TODO: find out if City needed. assigned to Arsen
-    public boolean createHotel(HttpServletRequest request) {
+    public boolean createHotel(HttpServletRequest request) throws SQLException {
         boolean result = false;
 
         String hotelName = request.getParameter(Attribute.HOTEL_NAME);

@@ -10,13 +10,14 @@ import com.ss.touragency.entity.OrderDetails;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.parser.Entity;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class OrderDetailsService {
 
     // TODO: finish. assigned to Arsen
-    public boolean createOrder(HttpServletRequest request) throws ParseException {
+    public boolean createOrder(HttpServletRequest request) throws ParseException, SQLException {
 
         boolean status = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
