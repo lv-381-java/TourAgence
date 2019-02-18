@@ -39,7 +39,7 @@ public class CountryService {
         return result;
     }
 
-    public Country getCountry(HttpServletRequest request) {
+    public Country getCountryById(HttpServletRequest request) {
         CountryDao countryDao = new CountryDao();
 
         if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
@@ -49,6 +49,17 @@ public class CountryService {
             return countryDao.selectById(countryId);
         }
         return null;
+    }
+
+    public Country getCountryByName(String countryName){
+        CountryDao countryDao = new CountryDao();
+
+//        if (request.getAttribute("country") != null ){
+//            String countryName = String.valueOf(request.getAttribute("country"));
+
+            return countryDao.selectByName(countryName);
+//        }
+//        return null;
     }
 
     private boolean isExistItem(Long id) {
@@ -66,9 +77,8 @@ public class CountryService {
     public List<Country> getCountryList(HttpServletRequest request){
 
         CountryDao countryDao = new CountryDao();
-        List<Country> countryList = countryDao.selectAll();
 
-        return countryList;
+        return countryDao.selectAll();
     }
 
 

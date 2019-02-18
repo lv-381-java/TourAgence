@@ -42,7 +42,7 @@ public class CityDao implements ICrudDao<City> {
         String sql = "SELECT idCity, cityName, Country_idCountry FROM CITY";
         Connection connection = DBConnection.getDbConnection();
         Statement statement = null;
-        if(connection != null){
+        if (connection != null) {
 
             try {
                 statement = connection.createStatement();
@@ -57,7 +57,6 @@ public class CityDao implements ICrudDao<City> {
                     cityList.add(city);
                 }
             } catch (SQLException e) {
-                System.out.println("Some error while select all cities from DB");
                 e.getStackTrace();
             }
 
@@ -74,7 +73,7 @@ public class CityDao implements ICrudDao<City> {
         ResultSet resultSet = null;
         City city = null;
 
-        if(connection != null) {
+        if (connection != null) {
 
             try {
                 statement = DBConnection.getDbConnection().createStatement();
@@ -95,6 +94,62 @@ public class CityDao implements ICrudDao<City> {
         return city;
 
     }
+
+    public List<City> selectByCountryId(Long countryId) {
+        String sql = "SELECT idCity, cityName, Country_idCountry FROM CITY WHERE Country_idCountry=" + "'" + countryId + "'";
+        Connection connection = DBConnection.getDbConnection();
+        Statement statement;
+        ResultSet resultSet;
+        List<City> cityList = new ArrayList<>();
+
+        if (connection != null) {
+            try {
+                statement = DBConnection.getDbConnection().createStatement();
+                resultSet = statement.executeQuery(sql);
+
+                while (resultSet.next()) {
+                    City city = new City();
+                    city.setCityId(resultSet.getLong("idCity"));
+                    city.setCityName(resultSet.getString("cityName"));
+                    CountryDao countryDao = new CountryDao();
+                    city.setCountry(countryDao.selectById(resultSet.getLong("Country_idCountry")));
+                    cityList.add(city);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return cityList;
+
+    }
+
+    public City selectCityByName(String name) {
+        String sql = "SELECT idCity, cityName, Country_idCountry FROM CITY WHERE cityName=" + "'" + name + "'";
+        Connection connection = DBConnection.getDbConnection();
+        Statement statement;
+        ResultSet resultSet;
+        City city = null;
+
+        if (connection != null) {
+            try {
+                statement = DBConnection.getDbConnection().createStatement();
+                resultSet = statement.executeQuery(sql);
+                while (resultSet.next()) {
+                    city = new City();
+                    city.setCityId(resultSet.getLong("idCity"));
+                    city.setCityName(resultSet.getString("cityName"));
+                    CountryDao countryDao = new CountryDao();
+                    city.setCountry(countryDao.selectById(resultSet.getLong("Country_idCountry")));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return city;
+    }
+
 
     @Override
     public void updateById(City city, Long id) {

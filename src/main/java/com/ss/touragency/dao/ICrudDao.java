@@ -32,6 +32,15 @@ public interface ICrudDao<SomeEntity> {
      */
     SomeEntity selectById(Long id) throws SQLException;
 
+//    /**
+//     * Search entity by name from database
+//     *
+//     * @param name name of entity in database
+//     * @return some entity found by Id
+//     * @throws SQLException
+//     */
+//    SomeEntity selectByName(String name) throws SQLException;
+
     /**
      *
      * Update entity by Id
