@@ -5,7 +5,9 @@
 <div class="container">
     <h2>Welcome to Private Cabinet</h2>
 
-    <div>You login as <c:out value="${client.getClientName()}" /> <c:out value="${client.getClientSurname()}" /> </div>
+    <div class="infoSignInUser">You login as <c:out value="${client.getClientName()}" /> <c:out value="${client.getClientSurname()}" /> </div>
+    <h4>Available countries:</h4>
+    <a href="${base}/visa"class="btn btn-primary">Add new Visa</a>
     <%--<table class="table table-striped">--%>
         <%--<thead>--%>
         <%--<tr>--%>
