@@ -27,9 +27,13 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if((req.getParameter("name")!= null) && (req.getParameter("surname") != null) &&
-                (req.getParameter("phone") != null) && (req.getParameter("login") != null)
-                && (req.getParameter("password") != null)){
+        if((req.getParameter("name")!= null && !req.getParameter("name").isEmpty())
+                && (req.getParameter("surname") != null && !req.getParameter("surname").isEmpty())
+                && (req.getParameter("phone") != null && !req.getParameter("phone").isEmpty())
+                && (req.getParameter("login") != null && !req.getParameter("login").isEmpty())
+                && (req.getParameter("password") != null && !req.getParameter("password").isEmpty())
+                && (req.getParameter("password1") != null && !req.getParameter("password1").isEmpty())
+                && (req.getParameter("password").equals(req.getParameter("password1")))){
 
             try {
                 Context.getInstance().getClientService().registrationClient(req);
@@ -41,6 +45,7 @@ public class RegistrationController extends HttpServlet {
         }
 
         else{
+            req.setAttribute(Attribute.ERROR, "You dont enter the correct value. Try again!");
             req.getRequestDispatcher(PathToJsp.REGISTRATION_JSP).forward(req, resp);
         }
 

@@ -25,15 +25,15 @@
                     <h2><span></span>Register</h2>
                 </div>
                 <form method="post">
-                    <input name="name" type="text" placeholder="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'First Name';}" >
-                    <input name="surname" type="text" placeholder="Surname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Last Name';}" >
-                    <input name="phone" type="text" placeholder="Your phone number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}" >
-                    <input name="login" type="text" placeholder="Login" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" >
-                    <input name="password" type="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" >
-                    <input type="password" placeholder="Confirm your password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = ' Confirm Password';}" >
+                    <input name="name" style="margin-bottom: 10px; margin-right: 5px;" type="text" placeholder="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+                    <input name="surname" style="margin-bottom: 10px;" type="text" placeholder="Surname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+                    <input name="phone" style="margin-bottom: 10px; margin-right: 5px;" type="text" placeholder="Your phone number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+                    <input name="login" style="margin-bottom: 10px;" type="text" placeholder="Login" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+                    <input name="password" style="margin-right: 5px;" type="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
+                    <input name="password1" type="password" placeholder="Confirm your password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" >
                     <div class="Remember-me">
                         <div class="submit">
-                            <input type="submit" onclick="myFunction()" value="Sign Me Up >" >
+                            <input style="margin-top: 20px; color: #ffffff; font-size: 13px;" type="submit" class="btn btn-primary" value="Sign Me Up" >
                         </div>
                         <div class="clear"> </div>
                     </div>
