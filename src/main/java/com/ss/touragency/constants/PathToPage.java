@@ -29,6 +29,7 @@ public class PathToPage {
 
     //USER
     public static final String USER_INFO = "/user";
+    public final static String ORDER_DELETE = "/orderDelete";
 
     //home
     public static final String HOME_PATH = "/";
