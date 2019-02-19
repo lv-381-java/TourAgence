@@ -86,6 +86,7 @@ public class ClientDao implements ICrudDao<Client> {
                 while (resultSet.next()) {
 
                     client = new Client();
+                    client.setIdClient(id);
                     client.setClientName(resultSet.getString("clientName"));
                     client.setClientSurname(resultSet.getString("clientSurname"));
                     client.setPhoneNumber(resultSet.getString("phoneNumber"));

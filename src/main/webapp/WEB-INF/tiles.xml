@@ -48,4 +48,14 @@
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/registration.jsp"/>
     </definition>
 
+    <definition name="visa" extends="base-definition">
+        <put-attribute name="title" value="Visa"/>
+        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/visa.jsp"/>
+    </definition>
+
+    <definition name="deleteVisa" extends="base-definition">
+        <put-attribute name="title" value="Delete visa"/>
+        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/deleteVisa.jsp"/>
+    </definition>
+
 </tiles-definitions>

@@ -9,4 +9,6 @@ public class PathToJsp {
     public static final String CLIENT_JSP = "WEB-INF/views/pagesDef/client.jsp";
     public static final String LOGIN_JSP = "WEB-INF/views/pagesDef/login.jsp";
     public static final String REGISTRATION_JSP = "WEB-INF/views/pagesDef/registration.jsp";
+    public static final String VISA_JSP = "WEB-INF/views/pagesDef/visa.jsp";
+    public static final String DELETEVISA_JSP = "WEB-INF/views/pagesDef/deleteVisa.jsp";
 }
