@@ -4,6 +4,7 @@ import com.ss.touragency.constants.Attribute;
 import com.ss.touragency.constants.PathToJsp;
 import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.util.Context;
+import org.w3c.dom.Attr;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +41,9 @@ public class VisaController extends HttpServlet {
                 resp.sendRedirect(PathToPage.USER_INFO);
             } catch (SQLException e) {
                 req.setAttribute(Attribute.ERROR, "Some error while create visa...Maybe you haven't money?But you can try again.");
+                req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
+            } catch(NullPointerException e){
+                req.setAttribute(Attribute.ERROR, "Select the country!");
                 req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
             }
         }
