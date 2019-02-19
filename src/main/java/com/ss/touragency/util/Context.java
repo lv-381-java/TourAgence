@@ -19,7 +19,7 @@ public class Context {
     OrderDetailsService orderDetailsService;
     CityService cityService;
     ClientService clientService;
-
+    VisaService visaService;
 
     public CountryService getCountryService() {
         return countryService;
@@ -38,6 +38,12 @@ public class Context {
     public CityService getCityService() {
         return cityService;
     }
+
+    public VisaService getVisaService() {return visaService; }
+
+    public VisaDao getVisaDao(){return visaDao; }
+
+    public CountryDao getCountryDao(){return countryDao;}
 
     public ClientDao getClientDao(){return clientDao; }
 
@@ -58,6 +64,8 @@ public class Context {
         orderDetailsService = new OrderDetailsService();
         cityService = new CityService();
         clientService = new ClientService();
+        visaService = new VisaService();
+
     }
 
     public static Context getInstance() {

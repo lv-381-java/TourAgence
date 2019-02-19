@@ -1,8 +1,11 @@
 package com.ss.touragency.dao;
 
 import com.ss.touragency.dbConnection.DBConnection;
+import com.ss.touragency.entity.Client;
+import com.ss.touragency.entity.Country;
 import com.ss.touragency.entity.Hotel;
 import com.ss.touragency.entity.Visa;
+import com.ss.touragency.util.Context;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class VisaDao implements ICrudDao<Visa> {
             preparedStatement.setLong(1, visa.getClient().getIdClient());
             preparedStatement.setLong(2, visa.getCountry().getIdCountry());
 
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
 
         }
     }
@@ -111,4 +114,62 @@ public class VisaDao implements ICrudDao<Visa> {
     public void deleteById(Long id) {
 
     }
+
+    public List<Country> selectCountryByIdUser(Long id) throws SQLException, NullPointerException {
+
+        List<Country> countryList = new ArrayList<>();
+        Connection connection = DBConnection.getDbConnection();
+        String sql = "select country.idCountry, country.countryName from client left join visa on client.idClient=visa.Client_idClient join country on " +
+                "visa.Country_idCountry=country.idCountry where client.idClient=" + id + "";
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while(resultSet.next()){
+            Country country = new Country();
+            country.setIdCountry(resultSet.getLong("idCountry"));
+            country.setCountryName(resultSet.getString("countryName"));
+            countryList.add(country);
+        }
+
+        if(countryList == null){
+            throw new NullPointerException("No visa for such user");
+        }
+        return countryList;
+    }
+
+    public List<Country> selectWitoutCertainCountry(List<Country> countryWithout){
+
+        List<Country> countryAvailable = new ArrayList<>();
+
+        countryAvailable.removeAll(countryWithout);
+
+        return countryAvailable;
+
+    }
+
+    public void createVisa(String countryName, Long id) throws SQLException {
+
+        Client client = Context.getInstance().getClientDao().selectById(id);
+        System.out.println(client);
+        Country country = Context.getInstance().getCountryDao().selectByName(countryName);
+        System.out.println(country);
+        Visa visa = new Visa(client,country);
+        System.out.println(visa);
+        insert(visa);
+    }
+
+    public void deleteVisaByClientIdAndCountryId(Long idClient, Long idCountry) throws SQLException {
+
+        Connection connection = DBConnection.getDbConnection();
+        String sql = "delete from visa where visa.Client_idClient=? and visa.Country_idCountry=?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setLong(1, idClient);
+        preparedStatement.setLong(2, idCountry);
+
+        preparedStatement.executeUpdate();
+
+    }
+
 }
