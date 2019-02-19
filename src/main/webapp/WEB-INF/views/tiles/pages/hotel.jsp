@@ -87,6 +87,15 @@
                         items += '<option value="' + data.city[i] + '">' + data.city[i] + '</option>';
                     }
                     $("#citySelect").html(items);
+                    let items1 = "";
+                    for (let i = 0; i < data.hotel.length; i++) {
+                        items += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
+                            '<td>' + data.hotel[i]['availableCount'] + '</td></tr>';
+
+                    }
+                    $("#hotelTable").html(items1);
 
                 },
                 error: function () {
@@ -104,21 +113,24 @@
                 type: "POST",
                 success: function (data) {
                     console.log(data.hotel[0]);
-                    // let d = ;
-                    console.log(data.hotel[0]['hotelName']);
                     let items = "";
                     for (let i = 0; i < data.hotel.length; i++) {
-                        items += '<td>' + data.hotel[i]['hotelName'] + '</td>';
-                        $.each(response, (i, data) => {
-                            $('<tr>').append(
-                                $('<td>').text(data.hotel[i]['hotelName']),
-                                $('<td>').text(data.hotel[i]['city']['cityName']),
-                                $('<td>').text(data.hotel[i]['country']['countryName']),
-                                $('<td>').text(data.hotel[i]['availableCount'])
-                            ).appendTo('#hotelTable');
-                        });
+                        items += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
+                            '<td>' + data.hotel[i]['availableCount'] + '</td></tr>';
+
                     }
-                    // $("#hotelBody").html(items);
+                    $("#hotelTable").html(items);
+                    // $.each(data.hotel, (i, data) => {
+                    //     $('<tr>').append(
+                    //         $('<td>').text(data.hotel[i]['hotelName']),
+                    //         $('<td>').text(data.hotel[i]['city']['cityName']),
+                    //         $('<td>').text(data.hotel[i]['city']['country']['countryName']),
+                    //         $('<td>').text(data.hotel[i]['availableCount'])
+                    //     ).appendTo('#hotelTable');
+                    // });
+
 
                 },
                 error: function () {
@@ -178,9 +190,9 @@
         </tr>
         </thead>
 
-        <tbody>
+        <tbody id="hotelBody">
         <c:forEach var="hotelList" items="${hotel}">
-            <tr id="hotelBody">
+            <tr>
                 <td><c:out value="${hotelList.getHotelName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>

@@ -33,42 +33,6 @@ public class HotelInfoServlet extends HttpServlet {
         request.setAttribute("city", cityList);
 
         request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
-
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        try {
-//            int country = Integer.parseInt(request.getParameter("country"));
-//            switch (country) {
-//                case 1:
-//                    out.print(
-//                            "<option value='1'>Product Name 1 For Category 2</option>" +
-//                                    "<option value='2'>Product Name 2 For Category 2</option>" +
-//                                    "<option value='3'>Product Name 3 For Category 2</option>"
-//                    );
-//                    break;
-//                case 2:
-//                    out.print(
-//                            "<option value='1'>Product Name 1 For Category 3</option>" +
-//                                    "<option value='2'>Product Name 2 For Category 3</option>" +
-//                                    "<option value='3'>Product Name 3 For Category 3</option>"
-//                    );
-//                    break;
-//                default:
-//                    out.print(
-//                            "<option value='1'>Product Name 1 For Category 1</option>" +
-//                                    "<option value='2'>Product Name 2 For Category 1</option>" +
-//                                    "<option value='3'>Product Name 3 For Category 1</option>"
-//                    );
-//                    break;
-//            }
-//        } catch (Exception ex) {
-//            out.print("Error getting product name..." + ex.toString());
-//        } finally {
-//            out.close();
-//        }
-
-//        !!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
     @Override
@@ -91,19 +55,14 @@ public class HotelInfoServlet extends HttpServlet {
             request.setAttribute("hotel", hotelList);
 
             List<String> cityNameList = new ArrayList<>();
-//            List<Hotel> hotelList = new ArrayList<>();
             for (City city : cityList) {
-                Long cityId = city.getCityId();
                 String cityNames = city.getCityName();
-//                List<Hotel> hotels = Context.getInstance().getHotelService().getHotelsByCity(cityId);
-//                hotelList.addAll(hotels);
                 cityNameList.add(cityNames);
             }
 
             json.put("country", countryList);
             json.put("city", cityNameList);
             json.put("hotel", hotelList);
-//            out.write(json.toString());
             out.print(json);
             out.flush();
         } else if (!countryName.equals("All") && cityName.equals("All")) {
@@ -165,6 +124,5 @@ public class HotelInfoServlet extends HttpServlet {
         if (!response.isCommitted()) {
             request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
         }
-
     }
 }
