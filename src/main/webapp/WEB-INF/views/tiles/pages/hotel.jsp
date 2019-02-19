@@ -52,8 +52,6 @@
 
         $(document).on("#countrySelect", "change", (function () {
                 let countryName = $(this).text();
-                console.log("SELECTED !!!!!!!!!!!!!");
-
                 getCities(countryName);
 
                 $.ajax({
@@ -78,12 +76,10 @@
             $.ajax({
                 url: "/hotelInfo",
                 dataType: "json",
-                // data: JSON.stringify({country: [JSON.stringify(countryName)], city: ["All"]}),
-                data: {country : countryName, city : "All", hotel : Object},
+                data: {country: countryName, city: "All", hotel: Object},
                 type: "POST",
                 // contentType: 'application/json',
                 success: function (data) {
-                    //alert("getCountry(): " + data);
                     console.log(data.city);
                     let items = "";
                     items += '<option value="All"> All</option>';
@@ -104,20 +100,28 @@
             let country = document.getElementById("countrySelect").value;
             $.ajax({
                 url: "hotelInfo",
-                data: {country: country, city: city, hotel : Object},
+                data: {country: country, city: city, hotel: Object},
                 type: "POST",
                 success: function (data) {
-                    console.log("getCities success");
-                    // let country = document.getElementById("countrySelect").value;
+                    console.log(data.hotel[0]);
+                    // let d = ;
+                    console.log(data.hotel[0]['hotelName']);
                     let items = "";
                     for (let i = 0; i < data.hotel.length; i++) {
-                        items += '<td>' + data.hotel[i] + '</td>';
+                        items += '<td>' + data.hotel[i]['hotelName'] + '</td>';
+                        $.each(response, (i, data) => {
+                            $('<tr>').append(
+                                $('<td>').text(data.hotel[i]['hotelName']),
+                                $('<td>').text(data.hotel[i]['city']['cityName']),
+                                $('<td>').text(data.hotel[i]['country']['countryName']),
+                                $('<td>').text(data.hotel[i]['availableCount'])
+                            ).appendTo('#hotelTable');
+                        });
                     }
-                    $("#hotelBody").html(items);
-                    console.log(country)
+                    // $("#hotelBody").html(items);
+
                 },
                 error: function () {
-                    console.log("An error occurred in getCities(): ");
                 }
             });
         }
@@ -131,7 +135,8 @@
             <div class="form-group">
                 <label class="control-lavel col-sm-12">Country</label>
 
-                <select id="countrySelect" class="form-control" name="country" title="Country" onchange="getCountry(this)">
+                <select id="countrySelect" class="form-control" name="country" title="Country"
+                        onchange="getCountry(this)">
                     <option value="All">All</option>
                     <c:forEach var="countryList" items="${country}">
                         <option id="countryOption" value="${countryList.getCountryName()}">
@@ -143,7 +148,8 @@
 
             <div class="form-group">
                 <label class="contol-label col-sm-12">City</label>
-                <select id="citySelect" class="form-control" name="city" title="City" style="visibility: visible" onchange="getCities(this)">
+                <select id="citySelect" class="form-control" name="city" title="City" style="visibility: visible"
+                        onchange="getCities(this)">
                     <option value="All">All</option>
                     <c:forEach var="cityList" items="${city}">
                         <option id="cityOptions" value="${cityList.getCityName()}">
@@ -153,8 +159,7 @@
                 </select>
             </div>
 
-
-            <button type="submit" class="btn btn-primary">Ok</button>
+            <%--<button type="submit" class="btn btn-primary">Ok</button>--%>
             <a href="/hotelInfo" class="btn btn-primary">Reset</a>
         </form>
     </div>

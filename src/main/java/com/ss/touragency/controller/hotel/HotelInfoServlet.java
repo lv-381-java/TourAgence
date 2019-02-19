@@ -90,8 +90,18 @@ public class HotelInfoServlet extends HttpServlet {
             List<Hotel> hotelList = Context.getInstance().getHotelService().getHotelList();
             request.setAttribute("hotel", hotelList);
 
+            List<String> cityNameList = new ArrayList<>();
+//            List<Hotel> hotelList = new ArrayList<>();
+            for (City city : cityList) {
+                Long cityId = city.getCityId();
+                String cityNames = city.getCityName();
+//                List<Hotel> hotels = Context.getInstance().getHotelService().getHotelsByCity(cityId);
+//                hotelList.addAll(hotels);
+                cityNameList.add(cityNames);
+            }
+
             json.put("country", countryList);
-            json.put("city", cityList);
+            json.put("city", cityNameList);
             json.put("hotel", hotelList);
 //            out.write(json.toString());
             out.print(json);
@@ -120,9 +130,11 @@ public class HotelInfoServlet extends HttpServlet {
             json.put("country", countryList);
             json.put("city", cityNameList);
             json.put("hotel", hotelList);
+
             System.out.println(json);
             out.print(json);
             out.flush();
+
         } else if (!countryName.equals("All") && !cityName.equals("All")) {
             List<Country> countryList = new ArrayList<>();
             Country country = Context.getInstance().getCountryService().getCountryByName(countryName);
@@ -141,18 +153,15 @@ public class HotelInfoServlet extends HttpServlet {
                 hotelList.addAll(hotels);
             }
             request.setAttribute("hotel", hotelList);
-            // Packing response to Ajax in JsonObject
-//            response.setContentType("application/json");
-//            response.setCharacterEncoding("utf-8");
-//            PrintWriter out = response.getWriter();
-//            JSONObject json = new JSONObject();
+
             json.put("country", countryList);
             json.put("city", cityList);
             json.put("hotel", hotelList);
 
+            out.print(json);
             out.flush();
-
         }
+
         if (!response.isCommitted()) {
             request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
         }
