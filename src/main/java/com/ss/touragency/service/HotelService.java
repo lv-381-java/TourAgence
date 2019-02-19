@@ -11,8 +11,6 @@ import java.util.List;
 
 public class HotelService {
 
-
-    // TODO: find out if City needed. assigned to Arsen
     public boolean createHotel(HttpServletRequest request) throws SQLException {
         boolean result = false;
 
@@ -30,11 +28,11 @@ public class HotelService {
         return result;
     }
 
-    public boolean updateHotel(HttpServletRequest request){
+    public boolean updateHotel(HttpServletRequest request) {
         boolean result = false;
         HotelDao hotelDao = new HotelDao();
 
-        if (request.getParameter(Attribute.HOTEL_NAME) != null){
+        if (request.getParameter(Attribute.HOTEL_NAME) != null) {
             Long hotelId = Long.parseLong(request.getSession().getAttribute(Attribute.HOTEL_ID).toString());
             Hotel hotel = hotelDao.selectById(hotelId);
             hotel.setHotelName(request.getParameter(Attribute.HOTEL_NAME));
@@ -46,29 +44,28 @@ public class HotelService {
         return result;
     }
 
-    public Hotel getHotel(HttpServletRequest request) {
-        HotelDao hotelDao = new HotelDao();
+//    public Hotel getHotel(HttpServletRequest request) {
+//        HotelDao hotelDao = new HotelDao();
+//
+//        if (request.getSession().getAttribute(Attribute.CITY_ID) != null &&
+//                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID)))) {
+//            Long cityId = Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID));
+//
+//            return hotelDao.selectById(cityId);
+//        }
+//        return null;
+//    }
 
-        if (request.getSession().getAttribute(Attribute.CITY_ID) != null &&
-                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID)))) {
-            Long cityId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.CITY_ID));
-
-            return hotelDao.selectById(cityId);
-        }
-        return null;
-    }
-
-    public List<Hotel> getHotelList(HttpServletRequest request){
+    public List<Hotel> getHotelList() {
         HotelDao hotelDao = new HotelDao();
         List<Hotel> hotelList = hotelDao.selectAll();
-        return  hotelList;
+        return hotelList;
     }
 
-    public List<Hotel> getHotelsByCity(Long cityId){
+    public List<Hotel> getHotelsByCity(Long cityId) {
         HotelDao hotelDao = new HotelDao();
         return hotelDao.selectByCityId(cityId);
     }
-
 
 
     private boolean isExistItem(Long id) {

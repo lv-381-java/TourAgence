@@ -1,10 +1,8 @@
 package com.ss.touragency.service;
 
 import com.ss.touragency.constants.Attribute;
-import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.dao.CountryDao;
 import com.ss.touragency.entity.Country;
-import com.ss.touragency.util.Context;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
@@ -45,22 +43,16 @@ public class CountryService {
 
         if (request.getSession().getAttribute(Attribute.COUNTRY_ID) != null &&
                 isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.COUNTRY_ID)))) {
-            Long countryId = Long.parseLong( (String) request.getSession().getAttribute(Attribute.COUNTRY_ID));
+            Long countryId = Long.parseLong((String) request.getSession().getAttribute(Attribute.COUNTRY_ID));
 
             return countryDao.selectById(countryId);
         }
         return null;
     }
 
-    public Country getCountryByName(String countryName){
+    public Country getCountryByName(String countryName) {
         CountryDao countryDao = new CountryDao();
-
-//        if (request.getAttribute("country") != null ){
-//            String countryName = String.valueOf(request.getAttribute("country"));
-
-            return countryDao.selectByName(countryName);
-//        }
-//        return null;
+        return countryDao.selectByName(countryName);
     }
 
     private boolean isExistItem(Long id) {
@@ -75,12 +67,8 @@ public class CountryService {
         return result;
     }
 
-    public List<Country> getCountryList(HttpServletRequest request){
-
+    public List<Country> getCountryList() {
         CountryDao countryDao = new CountryDao();
-
         return countryDao.selectAll();
     }
-
-
 }

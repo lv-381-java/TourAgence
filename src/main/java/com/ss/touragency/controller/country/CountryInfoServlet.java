@@ -19,7 +19,7 @@ public class CountryInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Country> countryList = Context.getInstance().getCountryService().getCountryList(req);
+        List<Country> countryList = Context.getInstance().getCountryService().getCountryList();
         req.setAttribute("list", countryList);
         req.getRequestDispatcher(PathToJsp.COUNTRY_JSP).forward(req, resp);
 
