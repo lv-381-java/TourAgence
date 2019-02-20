@@ -53,11 +53,6 @@
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/visa.jsp"/>
     </definition>
 
-    <definition name="deleteVisa" extends="base-definition">
-        <put-attribute name="title" value="Delete visa"/>
-        <put-attribute name="body" value="/WEB-INF/views/tiles/pages/deleteVisa.jsp"/>
-    </definition>
-
     <definition name="orderDetails" extends="base-definition">
         <put-attribute name="title" value="Hotel"/>
         <put-attribute name="body" value="/WEB-INF/views/tiles/pages/orderDetails.jsp"/>

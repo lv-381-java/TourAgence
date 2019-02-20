@@ -15,7 +15,14 @@ public class OrderDetailsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request);
+        request.setCharacterEncoding("utf-8");
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
+
+        response.setContentType("application/json");
+
+        System.out.println(beginDate + endDate);
+
         request.getRequestDispatcher(PathToJsp.ORDER_DETAILS).forward(request, response);
     }
 

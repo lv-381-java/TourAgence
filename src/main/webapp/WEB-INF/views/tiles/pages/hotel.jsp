@@ -67,7 +67,7 @@
                 success: function (data) {
                     console.log(data.city);
                     let items = "";
-                    items += '<option value="All"> All</option>';
+                    items += '<option value="All">All</option>';
                     for (let i = 0; i < data.city.length; i++) {
                         items += '<option value="' + data.city[i] + '">' + data.city[i] + '</option>';
                     }
@@ -79,7 +79,7 @@
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
                             '<td>' + data.hotel[i]['availableCount'] + '</td>' +
-                            '<td><a href="/bookHotel" class="btn btn-primary">Book</a></td></tr>';
+                            '<td id="bookBtn"><a href="/orderDetails" class="btn btn-primary">Book</a></td></tr>';
                     }
                     $("#hotelBody").html(hotels);
 
@@ -105,7 +105,7 @@
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
                             '<td>' + data.hotel[i]['availableCount'] + '</td>' +
-                            '<td><a href="/bookHotel" class="btn btn-primary">Book</a></td></tr>';
+                            '<td id="bookBtn"><a href="/orderDetails" class="btn btn-primary">Book</a></td></tr>';
 
                     }
                     $("#hotelBody").html(items);
@@ -113,6 +113,25 @@
                 error: function () {
                 }
             });
+        }
+
+        function openOrderDetails() {
+            let hotelName = $('#bookBtn').title;
+            // let city = $('#hotelBody').hotel
+
+            $.ajax({
+                url: "/orderDetails",
+                data: {hotelName : hotelName},
+                dataType: "json",
+                type: "post",
+                success: (function (data) {
+                    console.log(data);
+                }),
+                error: (function (data) {
+                    console.log("error in openOrderDetails()");
+                })
+            })
+
         }
     </script>
 </head>
@@ -171,7 +190,7 @@
                 <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
                 <td><c:out value="${hotelList.getAvailableCount()}"/></td>
-                <td><a href="/bookHotel" class="btn btn-primary">Book</a></td>
+                <td id="bookBtn" title=<c:out value="${hotelList.getHotelName()}"/>><a href="/orderDetails" class="btn btn-primary" onclick="openOrderDetails()">Book</a></td>
             </tr>
         </c:forEach>
         </tbody>

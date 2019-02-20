@@ -8,17 +8,17 @@ public class PathToPage {
     public static final String COUNTRY_INFO = "/countryInfo";
     public static final String COUNTRY_DELETE = "/deleteCountry";
 
-    //City
+    //Lity
     public static final String CREATE_CITY = "/createCity";
     public static final String CITY_INFO = "/city";
 
-    //login
+    //Login
     public static final String LOGIN_PATH = "/login";
 
-    //logout
+    //Logout
     public static final String LOGOUT_PATH= "/logout";
 
-    //registration
+    //Registration
     public static final String REGISTRATION_PATH = "/registration";
 
     //Hotel
@@ -28,11 +28,11 @@ public class PathToPage {
     public static final String DELETE_HOTEL = "/deleteHotel";
     public static final String UPDATE_HOTEL ="/updateHotel";
 
-    //USER
+    //User
     public static final String USER_INFO = "/user";
     public final static String ORDER_DELETE = "/orderDelete";
 
-    //home
+    //Home
     public static final String HOME_PATH = "/";
 
     //Visa

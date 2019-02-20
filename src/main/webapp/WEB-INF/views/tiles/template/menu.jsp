@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -15,10 +14,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="navbar-nav">
-                <%--<li><a href="${pageContext.request.contextPath}/city">City</a></li>--%>
-                <%--<li><a href="${pageContext.request.contextPath}/countryInfo">Country</a></li>--%>
                 <li><a href="${pageContext.request.contextPath}/hotelInfo">Hotel</a></li>
-
                 <c:if test="${!session.equals('true')}">
                     <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
                 </c:if>
@@ -28,6 +24,6 @@
                 </c:if>
             </ul>
 
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
