@@ -79,8 +79,7 @@
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
                             '<td>' + data.hotel[i]['availableCount'] + '</td>' +
-                            '<td> <button class="btn btn-primary">Book</button></td></tr>';
-
+                            '<td><a href="/bookHotel" class="btn btn-primary">Book</a></td></tr>';
                     }
                     $("#hotelBody").html(hotels);
 
@@ -106,7 +105,7 @@
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
                             '<td>' + data.hotel[i]['availableCount'] + '</td>' +
-                            '<td> <button class="btn btn-primary">Book</button></td></tr>';
+                            '<td><a href="/bookHotel" class="btn btn-primary">Book</a></td></tr>';
 
                     }
                     $("#hotelBody").html(items);
@@ -172,10 +171,7 @@
                 <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
                 <td><c:out value="${hotelList.getAvailableCount()}"/></td>
-                <td>
-                    <button class="btn btn-primary">Book</button>
-                </td>
-
+                <td><a href="/bookHotel" class="btn btn-primary">Book</a></td>
             </tr>
         </c:forEach>
         </tbody>

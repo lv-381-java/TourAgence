@@ -21,10 +21,10 @@
 
             $(function () {
                 beginDate.datetimepicker({
-                    format: 'L',
+                    format: 'YYYY-MM-DD',
                 });
                 endDate.datetimepicker({
-                    format : 'L',
+                    format : 'YYYY-MM-DD',
                     useCurrent: false
                 });
                 beginDate.on("dp.change", function (e) {
