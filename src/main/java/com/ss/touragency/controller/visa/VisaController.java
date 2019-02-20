@@ -38,6 +38,8 @@ public class VisaController extends HttpServlet {
 
             if (country.equals("All")) {
                 req.setAttribute(Attribute.ERROR, "Select the country!");
+//                req.setAttribute("countries", Context.getInstance().getVisaService().selectWithout(id));
+//                req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
                 resp.sendRedirect(PathToPage.VISA_PATH);
             } else {
                 try {

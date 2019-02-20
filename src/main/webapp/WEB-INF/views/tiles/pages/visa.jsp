@@ -5,9 +5,13 @@
 
 <div class="container">
 
+    <div class="errorMessage" style="text-align: center; color: #8D8E8F; font-size: 19px;">
+        <p>${requestScope.get("error")}</p>
+    </div>
+
     <h3>On this page you can open a visa</h3>
 
-    <h4>Visas you can choose</h4>
+    <h4 >Visas you can choose</h4>
     <form method="post" action="visa">
 
         <select id="visaCountry" class="form-control" name="countries">
