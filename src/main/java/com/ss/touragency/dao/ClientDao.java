@@ -163,13 +163,9 @@ public class ClientDao implements ICrudDao<Client> {
                 + login + "'" + " AND clientPassword='" + password + "'";
 
         if (connection != null) {
-
-            ResultSet resultSet = null;
-            Statement statement = null;
-
             try {
-                statement = connection.createStatement();
-                resultSet = statement.executeQuery(findClientSQL);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(findClientSQL);
 
                 while (resultSet.next()) {
 
@@ -188,8 +184,7 @@ public class ClientDao implements ICrudDao<Client> {
             }
 
         }
-
-        if (client.equals(null)) {
+        if (client == null) {
             throw new NullPointerException("Invalid login or password.");
         }
         return client;

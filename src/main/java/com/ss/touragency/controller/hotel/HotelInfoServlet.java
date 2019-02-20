@@ -42,11 +42,10 @@ public class HotelInfoServlet extends HttpServlet {
         String cityName = request.getParameter("city");
 
         response.setContentType("application/json");
-//        response.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
 
-        if (countryName.equals("All")) {
+        if (countryName.equals("All") && cityName.equals("All")) {
             List<Country> countryList = Context.getInstance().getCountryService().getCountryList();
             request.setAttribute("country", countryList);
             List<City> cityList = Context.getInstance().getCityService().getCityList();
@@ -95,9 +94,7 @@ public class HotelInfoServlet extends HttpServlet {
             out.flush();
 
         } else if (countryName.equals("All") && !cityName.equals("All")) {
-            List<String> countryList = new ArrayList<>();
-            Country country = Context.getInstance().getCountryService().getCountryByName(countryName);
-            countryList.add(country.getCountryName());
+            List<Country> countryList = Context.getInstance().getCountryService().getCountryList();
 
             City city = Context.getInstance().getCityService().getCityByName(cityName);
             Long cityId = city.getCityId();
@@ -106,13 +103,7 @@ public class HotelInfoServlet extends HttpServlet {
 
             List<String> cityNameList = new ArrayList<>();
             List<Hotel> hotelList = Context.getInstance().getHotelService().getHotelsByCity(cityId);
-//            for (City cityEntity : cityList) {
-//                Long cityId = cityEntity.getCityId();
-//                String cityNames = city.getCityName();
-//                List<Hotel> hotels = Context.getInstance().getHotelService().getHotelsByCity(cityId);
-//                hotelList.addAll(hotels);
-                cityNameList.add(cityName);
-//            }
+            cityNameList.add(cityName);
 
             request.setAttribute("country", countryList);
             request.setAttribute("city", cityNameList);
@@ -121,9 +112,9 @@ public class HotelInfoServlet extends HttpServlet {
             json.put("country", countryList);
             json.put("city", cityNameList);
             json.put("hotel", hotelList);
-            System.out.println(hotelLis);
 
-
+            out.print(json);
+            out.flush();
 
         } else if (!countryName.equals("All") && !cityName.equals("All")) {
             List<Country> countryList = new ArrayList<>();

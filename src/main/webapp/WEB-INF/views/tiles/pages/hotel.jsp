@@ -108,7 +108,7 @@
             let city = obj.options[obj.selectedIndex].value;
             let country = document.getElementById("countrySelect").value;
             $.ajax({
-                url: "hotelInfo",
+                url: "/hotelInfo",
                 data: {country: country, city: city, hotel: Object},
                 type: "POST",
                 success: function (data) {
