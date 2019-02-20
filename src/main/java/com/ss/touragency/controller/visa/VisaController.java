@@ -36,18 +36,28 @@ public class VisaController extends HttpServlet {
             Long id = Long.parseLong((String) req.getSession().getAttribute(Attribute.CLIENT_ID));
             String country = req.getParameter("countries");
 
-            try {
-                Context.getInstance().getVisaService().createVisaForClient(country, id);
-                resp.sendRedirect(PathToPage.USER_INFO);
-            } catch (SQLException e) {
-                req.setAttribute(Attribute.ERROR, "Some error while create visa...Maybe you haven't money?But you can try again.");
-                req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
-            } catch(NullPointerException e){
+            if (country.equals("All")) {
                 req.setAttribute(Attribute.ERROR, "Select the country!");
-                req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
+                resp.sendRedirect(PathToPage.VISA_PATH);
+            } else {
+                try {
+                    Context.getInstance().getVisaService().createVisaForClient(country, id);
+                    if (!resp.isCommitted()) {
+                        resp.sendRedirect(PathToPage.USER_INFO);
+                    }
+                } catch (SQLException e) {
+                    req.setAttribute(Attribute.ERROR, "Some error while create visa...Maybe you haven't money?But you can try again.");
+                    if(!resp.isCommitted()) {
+                        req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
+                    }
+                } catch (NullPointerException e) {
+                    req.setAttribute(Attribute.ERROR, "Select the country!");
+                    if(!resp.isCommitted()) {
+                        req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
+                    }
+                }
             }
         }
-
 
 
     }
