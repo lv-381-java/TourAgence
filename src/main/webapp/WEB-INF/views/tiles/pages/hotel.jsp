@@ -3,20 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
+
 <head>
-    <%--<script> function change(obj) {--%>
-    <%--let selected = obj.options[obj.selectedIndex].value;--%>
-    <%--let city = document.getElementById("city");--%>
-
-    <%--if (selected != null) {--%>
-    <%--city.style.visibility = "visible";--%>
-    <%--}--%>
-    <%--else {--%>
-    <%--city.style.display = "none";--%>
-    <%--}--%>
-    <%--}--%>
-    <%--</script>--%>
-
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript">
 
@@ -48,8 +36,6 @@
             }));
         });
 
-        // $country = $("#countrySelect");
-
         $(document).on("#countrySelect", "change", (function () {
                 let countryName = $(this).text();
                 getCities(countryName);
@@ -78,7 +64,6 @@
                 dataType: "json",
                 data: {country: countryName, city: "All", hotel: Object},
                 type: "POST",
-                // contentType: 'application/json',
                 success: function (data) {
                     console.log(data.city);
                     let items = "";
@@ -93,9 +78,11 @@
                         hotels += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
-                            '<td>' + data.hotel[i]['availableCount'] + '</td></tr>';
+                            '<td>' + data.hotel[i]['availableCount'] + '</td>' +
+                            '<td> <button class="btn btn-primary">Book</button></td></tr>';
+
                     }
-                    $("#hotelTable").html(hotels);
+                    $("#hotelBody").html(hotels);
 
                 },
                 error: function () {
@@ -118,19 +105,11 @@
                         items += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
-                            '<td>' + data.hotel[i]['availableCount'] + '</td></tr>';
+                            '<td>' + data.hotel[i]['availableCount'] + '</td>' +
+                            '<td> <button class="btn btn-primary">Book</button></td></tr>';
 
                     }
-                    $("#hotelTable").html(items);
-
-                    // $.each(data.hotel, (i, data) => {
-                    //     $('<tr>').append(
-                    //         $('<td>').text(data.hotel[i]['hotelName']),
-                    //         $('<td>').text(data.hotel[i]['city']['cityName']),
-                    //         $('<td>').text(data.hotel[i]['city']['country']['countryName']),
-                    //         $('<td>').text(data.hotel[i]['availableCount'])
-                    //     ).appendTo('#hotelTable');
-                    // });
+                    $("#hotelBody").html(items);
                 },
                 error: function () {
                 }
@@ -139,8 +118,7 @@
     </script>
 </head>
 
-
-<div class="row">
+<div class="row" id="selectors">
     <div class="col-md-2 col-xs-12">
         <form action="hotelInfo" method="post">
             <div class="form-group">
@@ -169,8 +147,6 @@
                     </c:forEach>
                 </select>
             </div>
-
-            <%--<button type="submit" class="btn btn-primary">Ok</button>--%>
             <a href="/hotelInfo" class="btn btn-primary">Reset</a>
         </form>
     </div>
@@ -196,6 +172,10 @@
                 <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
                 <td><c:out value="${hotelList.getAvailableCount()}"/></td>
+                <td>
+                    <button class="btn btn-primary">Book</button>
+                </td>
+
             </tr>
         </c:forEach>
         </tbody>
