@@ -4,7 +4,6 @@ import com.ss.touragency.constants.Attribute;
 import com.ss.touragency.constants.PathToJsp;
 import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.util.Context;
-import org.w3c.dom.Attr;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,9 +37,8 @@ public class VisaController extends HttpServlet {
 
             if (country.equals("All")) {
                 req.setAttribute(Attribute.ERROR, "Select the country!");
-//                req.setAttribute("countries", Context.getInstance().getVisaService().selectWithout(id));
-//                req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
-                resp.sendRedirect(PathToPage.VISA_PATH);
+                req.setAttribute("countries", Context.getInstance().getVisaService().selectWithout(id));
+                req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
             } else {
                 try {
                     Context.getInstance().getVisaService().createVisaForClient(country, id);
@@ -48,7 +46,8 @@ public class VisaController extends HttpServlet {
                         resp.sendRedirect(PathToPage.USER_INFO);
                     }
                 } catch (SQLException e) {
-                    req.setAttribute(Attribute.ERROR, "Some error while create visa...Maybe you haven't money?But you can try again.");
+                    req.setAttribute(Attribute.ERROR, "Some error while create visa...Maybe you haven't " +
+                            "money?But you can try again.");
                     if(!resp.isCommitted()) {
                         req.getRequestDispatcher(PathToJsp.VISA_JSP).forward(req, resp);
                     }
