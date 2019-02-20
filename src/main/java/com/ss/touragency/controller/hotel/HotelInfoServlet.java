@@ -94,6 +94,37 @@ public class HotelInfoServlet extends HttpServlet {
             out.print(json);
             out.flush();
 
+        } else if (countryName.equals("All") && !cityName.equals("All")) {
+            List<String> countryList = new ArrayList<>();
+            Country country = Context.getInstance().getCountryService().getCountryByName(countryName);
+            countryList.add(country.getCountryName());
+
+            City city = Context.getInstance().getCityService().getCityByName(cityName);
+            Long cityId = city.getCityId();
+            List<City> cityList = new ArrayList<>();
+            cityList.add(city);
+
+            List<String> cityNameList = new ArrayList<>();
+            List<Hotel> hotelList = Context.getInstance().getHotelService().getHotelsByCity(cityId);
+//            for (City cityEntity : cityList) {
+//                Long cityId = cityEntity.getCityId();
+//                String cityNames = city.getCityName();
+//                List<Hotel> hotels = Context.getInstance().getHotelService().getHotelsByCity(cityId);
+//                hotelList.addAll(hotels);
+                cityNameList.add(cityName);
+//            }
+
+            request.setAttribute("country", countryList);
+            request.setAttribute("city", cityNameList);
+            request.setAttribute("hotel", hotelList);
+
+            json.put("country", countryList);
+            json.put("city", cityNameList);
+            json.put("hotel", hotelList);
+            System.out.println(hotelLis);
+
+
+
         } else if (!countryName.equals("All") && !cityName.equals("All")) {
             List<Country> countryList = new ArrayList<>();
             Country country = Context.getInstance().getCountryService().getCountryByName(countryName);

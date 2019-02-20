@@ -11,17 +11,17 @@ import java.util.List;
 
 public class HotelService {
 
-    public boolean createHotel(HttpServletRequest request) throws SQLException {
+    public boolean createHotel(Hotel hotel) throws SQLException {
         boolean result = false;
 
-        String hotelName = request.getParameter(Attribute.HOTEL_NAME);
-        int availableCount = Integer.parseInt((String) request.getParameter(Attribute.AVAILABLE_COUNT));
+        String hotelName = hotel.getHotelName();
+        int availableCount = hotel.getAvailableCount();
         City city = new City();
 
         if (hotelName != null && !hotelName.isEmpty()) {
             HotelDao hotelDao = new HotelDao();
-            Hotel hotel = new Hotel(1L, hotelName, city, availableCount);
-            hotelDao.insert(hotel);
+            Hotel hotell = new Hotel(1L, hotelName, city, availableCount);
+            hotelDao.insert(hotell);
             result = true;
         }
 
@@ -66,6 +66,8 @@ public class HotelService {
         HotelDao hotelDao = new HotelDao();
         return hotelDao.selectByCityId(cityId);
     }
+
+
 
 
     private boolean isExistItem(Long id) {

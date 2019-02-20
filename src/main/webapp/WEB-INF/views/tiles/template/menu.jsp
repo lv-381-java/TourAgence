@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="navbar-nav">
                 <%--<li><a href="${pageContext.request.contextPath}/city">City</a></li>--%>
-                <li><a href="${pageContext.request.contextPath}/countryInfo">Country</a></li>
+                <%--<li><a href="${pageContext.request.contextPath}/countryInfo">Country</a></li>--%>
                 <li><a href="${pageContext.request.contextPath}/hotelInfo">Hotel</a></li>
 
                 <c:if test="${!session.equals('true')}">

@@ -87,15 +87,15 @@
                         items += '<option value="' + data.city[i] + '">' + data.city[i] + '</option>';
                     }
                     $("#citySelect").html(items);
-                    let items1 = "";
+
+                    let hotels = "";
                     for (let i = 0; i < data.hotel.length; i++) {
-                        items += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
+                        hotels += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
                             '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
                             '<td>' + data.hotel[i]['availableCount'] + '</td></tr>';
-
                     }
-                    $("#hotelTable").html(items1);
+                    $("#hotelTable").html(hotels);
 
                 },
                 error: function () {
@@ -122,6 +122,7 @@
 
                     }
                     $("#hotelTable").html(items);
+
                     // $.each(data.hotel, (i, data) => {
                     //     $('<tr>').append(
                     //         $('<td>').text(data.hotel[i]['hotelName']),
@@ -130,8 +131,6 @@
                     //         $('<td>').text(data.hotel[i]['availableCount'])
                     //     ).appendTo('#hotelTable');
                     // });
-
-
                 },
                 error: function () {
                 }
