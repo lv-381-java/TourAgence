@@ -2,136 +2,133 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <%--<script> function change(obj) {--%>
-    <%--let selected = obj.options[obj.selectedIndex].value;--%>
-    <%--let city = document.getElementById("city");--%>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
 
-    <%--if (selected != null) {--%>
-    <%--city.style.visibility = "visible";--%>
-    <%--city.reload();--%>
-    <%--}--%>
-    <%--else {--%>
-    <%--city.style.display = "none";--%>
-    <%--}--%>
-    <%--}--%>
-    <%--</script>--%>
-
-    <%--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js">--%>
-    <%--$("#countrySelect").change(function() {--%>
-    <%--$("select option:selected").first().each(function() {--%>
-    <%--// Get and convert the data for sending--%>
-    <%--// Example: This variable contains the selected option-text--%>
-    <%--var outdata = $(this).text();--%>
-    <%--// Send the data as an ajax POST request--%>
-    <%--$.ajax({--%>
-    <%--url: "hotelInfo",--%>
-    <%--type: 'POST',--%>
-    <%--dataType: 'json',--%>
-    <%--data: JSON.stringify(outdata),--%>
-    <%--contentType: 'application/json',--%>
-    <%--mimeType: 'application/json',--%>
-    <%--success: function(data) {--%>
-    <%--// Remove old select options from the DOM--%>
-    <%--$('#citySelect')--%>
-    <%--.find('option')--%>
-    <%--.remove()--%>
-    <%--.end();--%>
-    <%--// Parse data and append new select options--%>
-    <%--//(omitted here; e.g. $('#byCollege').append($("<option>").attr(...))--%>
-    <%--},--%>
-    <%--error: function(data, status, er) {--%>
-    <%--alert("error: " + data + " status: " + status + " er:" + er);--%>
-    <%--}--%>
-    <%--});--%>
-    <%--});--%>
-    <%--});--%>
-    <%--</script>--%>
-
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js">
-        // $country = $("#countrySelect");
-
+        $country = $("#countrySelect");
         $(document).ready(function () {
-            $(document).on("change", "#countrySelect", (function () {
-                    let countryName = $(this).text();
-                    console.log("SELECTED !!!!!!!!!!!!!")
-                    getCities(countryName);
+            $(document).on("#countrySelect", "change", (function () {
+                $("select option:selected").first().each(function () {
 
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url: "/hotelInfo",
-                    //     data: {city: $country.attr("selectedIndex")},
-                    //     success: function (data) {
-                    //         console.log("ajax success");
-                    //         alert(data);
-                    //         $("#countrySelect").html(data)
-                    //     },
-                    //     error: function () {
-                    //         console.log("ajax error");
-                    //         alert('error in ajax !!!');
-                    //     }
-                    // });
-                })
-            )
+                    let country = $(this).text();
+                    $.ajax({
+                        url: "/hotelInfo",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: JSON.stringify({country: [JSON.stringify(country)], city: ["All"]}),
+                        contentType: 'application/json',
+                        mimeType: 'application/json',
+                        success: function (data) {
+                            $country
+                                .find('option')
+                                .remove()
+                                .end();
+                            $country.append($("<option>").attr(data))
+                        },
+                        error: function (data, status, er) {
+                            alert("error: " + data + " status: " + status + " er:" + er);
+                        }
+                    });
+                });
+            }));
         });
 
-        function getCountry() {
+        $(document).on("#countrySelect", "change", (function () {
+                let countryName = $(this).text();
+                getCities(countryName);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/hotelInfo",
+                    data: {country: countryName, city: "All"},
+                    success: function (data) {
+                        console.log("ajax success: on select country");
+                        alert("data: " + data + "status: " + status);
+                        $country.text(data)
+                    },
+                    error: function () {
+                        console.log("ajax error: on select country");
+                        alert("error: " + data + " status: " + status + " er:" + er);
+                    }
+                });
+            })
+        );
+
+        function getCountry(obj) {
+            let countryName = obj.options[obj.selectedIndex].value;
             $.ajax({
                 url: "/hotelInfo",
-                data: {countryName: countryName},
                 dataType: "json",
+                data: {country: countryName, city: "All", hotel: Object},
                 type: "POST",
-                error: function () {
-                    alert("An error ocurred.");
-                },
                 success: function (data) {
+                    console.log(data.city);
                     let items = "";
-                    $.each(data, function (i, item) {
-                        items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
-                    });
-                    $("#countrySelect").html(items);
-                }
+                    items += '<option value="All"> All</option>';
+                    for (let i = 0; i < data.city.length; i++) {
+                        items += '<option value="' + data.city[i] + '">' + data.city[i] + '</option>';
+                    }
+                    $("#citySelect").html(items);
 
+                    let hotels = "";
+                    for (let i = 0; i < data.hotel.length; i++) {
+                        hotels += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
+                            '<td>' + data.hotel[i]['availableCount'] + '</td>' +
+                            '<td> <button class="btn btn-primary">Book</button></td></tr>';
+
+                    }
+                    $("#hotelBody").html(hotels);
+
+                },
+                error: function () {
+                    alert("An error occurred in getCountry(): ");
+                }
             });
         }
 
-
-        function getCities(countryName) {
+        function getCities(obj) {
+            let city = obj.options[obj.selectedIndex].value;
+            let country = document.getElementById("countrySelect").value;
             $.ajax({
                 url: "/hotelInfo",
-                data: {countryName: countryName},
-                dataType: "json",
+                data: {country: country, city: city, hotel: Object},
                 type: "POST",
-                error: function () {
-                    alert("An error ocurred.");
-                },
                 success: function (data) {
+                    console.log(data.hotel[0]);
                     let items = "";
-                    $.each(data, function (i, item) {
-                        items += "<option value=\"" + item.Value + "\">" + item.Text + "</option>";
-                    });
-                    $("#citySelect").html(items);
-                }
+                    for (let i = 0; i < data.hotel.length; i++) {
+                        items += '<tr><td>' + data.hotel[i]['hotelName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['cityName'] + '</td>' +
+                            '<td>' + data.hotel[i]['city']['country']['countryName'] + '</td>' +
+                            '<td>' + data.hotel[i]['availableCount'] + '</td>' +
+                            '<td> <button class="btn btn-primary">Book</button></td></tr>';
 
+                    }
+                    $("#hotelBody").html(items);
+                },
+                error: function () {
+                }
             });
         }
     </script>
 </head>
 
-<div class="row">
+<div class="row" id="selectors">
     <div class="col-md-2 col-xs-12">
-        <%--<form method="post" action="hotelInfo">--%>
-
+        <form action="hotelInfo" method="post">
             <div class="form-group">
                 <label class="control-lavel col-sm-12">Country</label>
 
                 <select id="countrySelect" class="form-control" name="country" title="Country"
-                        onchange="getCountry()"> <%--onchange="change(this)"--%>
+                        onchange="getCountry(this)">
                     <option value="All">All</option>
                     <c:forEach var="countryList" items="${country}">
-                        <option value="${countryList.getCountryName()}">
+                        <option id="countryOption" value="${countryList.getCountryName()}">
                                 ${countryList.getCountryName()}
                         </option>
                     </c:forEach>
@@ -140,18 +137,16 @@
 
             <div class="form-group">
                 <label class="contol-label col-sm-12">City</label>
-                <select id="citySelect" class="form-control" name="city" title="City" style="visibility: visible">
+                <select id="citySelect" class="form-control" name="city" title="City" style="visibility: visible"
+                        onchange="getCities(this)">
                     <option value="All">All</option>
                     <c:forEach var="cityList" items="${city}">
-                        <option value="${cityList.getCityName()}">
+                        <option id="cityOptions" value="${cityList.getCityName()}">
                                 ${cityList.getCityName()}
                         </option>
                     </c:forEach>
                 </select>
             </div>
-
-
-            <button type="submit" class="btn btn-primary">Ok</button>
             <a href="/hotelInfo" class="btn btn-primary">Reset</a>
         </form>
     </div>
@@ -160,7 +155,7 @@
 
 <div class="container">
     <h1 style="color: #0A0B0D">List of Hotels: </h1>
-    <table class="table">
+    <table class="table" id="hotelTable">
         <thead>
         <tr>
             <th>Hotel</th>
@@ -170,13 +165,17 @@
         </tr>
         </thead>
 
-        <tbody>
+        <tbody id="hotelBody">
         <c:forEach var="hotelList" items="${hotel}">
             <tr>
                 <td><c:out value="${hotelList.getHotelName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
                 <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
                 <td><c:out value="${hotelList.getAvailableCount()}"/></td>
+                <td>
+                    <button class="btn btn-primary">Book</button>
+                </td>
+
             </tr>
         </c:forEach>
         </tbody>

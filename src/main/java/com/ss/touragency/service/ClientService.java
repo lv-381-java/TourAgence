@@ -14,7 +14,7 @@ public class ClientService {
         ClientDao clientDao = new ClientDao();
         Client client = clientDao.findClientByNameAndPhone(request.getParameter(Attribute.LOGIN), request.getParameter(Attribute.PASSWORD));
 
-        if (!client.equals(null)) {
+        if (client != null) {
             return true;
         }
 

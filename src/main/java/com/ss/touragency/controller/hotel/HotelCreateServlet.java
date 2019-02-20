@@ -17,9 +17,7 @@ import java.sql.SQLException;
 public class HotelCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        //TODO: login check
         if (request.getSession().getAttribute(Attribute.HOTEL) == null) {
-
             try {
                 if (Context.getInstance().getCityService().createCity(request)) {
                     response.sendRedirect(PathToPage.CREATE_HOTEL);
@@ -38,7 +36,6 @@ public class HotelCreateServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO: login check
         if (request.getSession().getAttribute(Attribute.HOTEL_ID) == null ){
             request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
         }

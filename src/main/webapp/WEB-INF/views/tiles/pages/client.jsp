@@ -50,5 +50,37 @@
     <%--</tr>--%>
     <%--</tbody>--%>
     <%--</table>--%>
+    <table>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Orders from user</th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <%--<th>Id Order</th>--%>
+            <%--<th>Client</th>--%>
+            <th>Hotel</th>
+            <th>Begin Date</th>
+            <th>End Date</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <c:forEach var="ordersList" items="${orderdetails}">
+            <tr>
+                    <%--<td><c:out value="${ordersList.getId()}" /></td>--%>
+                <%--<td><c:out value="${ordersList.getClient().getClientName()}" /></td>--%>
+                <td><c:out value="${ordersList.getHotel().getHotelName()}" /></td>
+                <td><c:out value="${ordersList.getBeginDate()}" /></td>
+                <td><c:out value="${ordersList.getEndDate()}" /></td>
+                    <%--<td><a href="/hall?id=<c:out value='${orderDetailsList.getId()}'/>&action=edit"><span class="glyphicon glyphicon-pencil"></span></a></td>--%>
+                <td><a href="${pageContext.request.contextPath}/orderDelete?idOrder=<c:out value='${ordersList.getId()}'/>"><span class="glyphicon glyphicon-remove"></span></a></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 

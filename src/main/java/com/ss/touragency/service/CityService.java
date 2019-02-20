@@ -37,12 +37,9 @@ public class CityService {
         return null;
     }
 
-    public List<City> getCityList(HttpServletRequest request) {
-
+    public List<City> getCityList() {
         CityDao cityDao = new CityDao();
-        List<City> cityList = cityDao.selectAll();
-
-        return cityList;
+        return cityDao.selectAll();
     }
 
     public List<City> getCityByCountry(Long countryId) {

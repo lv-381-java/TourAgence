@@ -15,9 +15,7 @@ public class HotelDao implements ICrudDao<Hotel> {
 
         if (connection != null) {
 
-            PreparedStatement preparedStatement = null;
-
-            preparedStatement = connection.prepareStatement(insertHotel);
+            PreparedStatement preparedStatement = connection.prepareStatement(insertHotel);
 
             preparedStatement.setString(1, hotel.getHotelName());
             preparedStatement.setLong(2, hotel.getCity().getCityId());
@@ -37,11 +35,9 @@ public class HotelDao implements ICrudDao<Hotel> {
 
         if (connection != null) {
 
-            Statement statement = null;
-            ResultSet resultSet = null;
             try {
-                statement = connection.createStatement();
-                resultSet = statement.executeQuery(sql);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
 
                 while (resultSet.next()) {
                     Hotel hotel = new Hotel();

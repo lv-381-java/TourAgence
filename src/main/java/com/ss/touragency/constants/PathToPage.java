@@ -24,11 +24,13 @@ public class PathToPage {
     //Hotel
     public static final String CREATE_HOTEL = "/createHotel";
     public static final String HOTEL_INFO = "/hotelInfo";
+    public static final String HOTEL_BOOK = "/bookHotel";
     public static final String DELETE_HOTEL = "/deleteHotel";
     public static final String UPDATE_HOTEL ="/updateHotel";
 
     //USER
     public static final String USER_INFO = "/user";
+    public final static String ORDER_DELETE = "/orderDelete";
 
     //home
     public static final String HOME_PATH = "/";
@@ -36,4 +38,7 @@ public class PathToPage {
     //Visa
     public static final String VISA_PATH = "/visa";
     public static final String VISADELETE_PATH = "/deleteVisa";
+
+    //Order
+    public static final String ORDER_DETAILS = "orderDetails";
 }
