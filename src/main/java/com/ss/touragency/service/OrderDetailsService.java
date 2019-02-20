@@ -10,6 +10,7 @@ import com.ss.touragency.entity.OrderDetails;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.parser.Entity;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 public class OrderDetailsService {
 
     // TODO: finish. assigned to Arsen
-    public boolean createOrder(HttpServletRequest request) throws ParseException {
+    public boolean createOrder(HttpServletRequest request) throws ParseException, SQLException {
 
         boolean status = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -41,34 +42,34 @@ public class OrderDetailsService {
         }
         return status;
     }
-    public OrderDetails getOrder(HttpServletRequest request) {
+
+    public OrderDetails getOrder(HttpServletRequest request) throws SQLException {
         OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
 
         if (request.getSession().getAttribute(Attribute.ORDER_ID) != null
-                && isExistOrder(Long.parseLong((String) request.getSession().getAttribute(Attribute.ORDER_ID)))){
+                && isExistOrder(Long.parseLong((String) request.getSession().getAttribute(Attribute.ORDER_ID)))) {
 
             Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.ORDER_ID));
             orderDetailsDao.selectById(id);
         }
         return null;
     }
-    public List<OrderDetails> getOrderDetailsList(HttpServletRequest request){
+
+    public List<OrderDetails> getOrderDetailsList(HttpServletRequest request) throws SQLException {
         OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
         List<OrderDetails> orderDetailsList = orderDetailsDao.selectAll();
-        return  orderDetailsList;
+        return orderDetailsList;
     }
 
 
-    public List<OrderDetails> getOrderFromAllOrders(HttpServletRequest request){
+    public List<OrderDetails> getOrderFromAllOrders(Long id) throws SQLException {
         OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
-
-        Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
         List<OrderDetails> order = orderDetailsDao.selectOrderFromAllOrders(id);
-        return  order;
+        return order;
     }
 
 
-    private boolean isExistOrder(Long id) {
+    private boolean isExistOrder(Long id) throws SQLException {
         boolean result = false;
         try {
             OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
@@ -79,7 +80,8 @@ public class OrderDetailsService {
         }
         return result;
     }
-    public boolean deleteOrder(HttpServletRequest request) {
+
+    public boolean deleteOrder(HttpServletRequest request) throws SQLException {
         boolean result = false;
         OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
         if (request.getParameter(Attribute.ORDER_ID) != null && isExistOrder(Long.parseLong(request.getParameter(Attribute.ORDER_ID)))) {
@@ -88,15 +90,14 @@ public class OrderDetailsService {
             result = true;
         }
         return result;
-
     }
 
-    public boolean updateOrderDetails (HttpServletRequest request) throws ParseException {
+    public boolean updateOrderDetails(HttpServletRequest request) throws ParseException, SQLException {
         boolean result = false;
         OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        if (request.getParameter(Attribute.HOTEL) != null && request.getParameter(Attribute.CITY) != null){
+        if (request.getParameter(Attribute.HOTEL) != null && request.getParameter(Attribute.CITY) != null) {
             Long orderId = Long.parseLong(request.getSession().getAttribute(Attribute.ORDER_ID).toString());
             OrderDetails orderDetails = orderDetailsDao.selectById(orderId);
 

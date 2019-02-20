@@ -27,7 +27,12 @@ public class ClientInfoServlet extends HttpServlet {
             Client client = Context.getInstance().getClientService().getClient(request);
             request.setAttribute("client", client);
 
-            List<OrderDetails> ordersList = Context.getInstance().getOrderDetailsService().getOrderFromAllOrders(request);
+            List<OrderDetails> ordersList = null;
+            try {
+                ordersList = Context.getInstance().getOrderDetailsService().getOrderFromAllOrders(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             request.setAttribute("orderdetails", ordersList);
 
             try {
@@ -38,10 +43,6 @@ public class ClientInfoServlet extends HttpServlet {
 
             request.getRequestDispatcher(PathToJsp.CLIENT_JSP).forward(request, response);
         }
-
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
     }
 }
