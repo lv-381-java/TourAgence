@@ -38,4 +38,7 @@ public class PathToPage {
     //Visa
     public static final String VISA_PATH = "/visa";
     public static final String VISADELETE_PATH = "/deleteVisa";
+
+    //Order
+    public static final String ORDER_DETAILS = "orderDetails";
 }

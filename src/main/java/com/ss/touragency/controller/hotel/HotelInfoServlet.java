@@ -98,8 +98,6 @@ public class HotelInfoServlet extends HttpServlet {
 
             City city = Context.getInstance().getCityService().getCityByName(cityName);
             Long cityId = city.getCityId();
-            List<City> cityList = new ArrayList<>();
-            cityList.add(city);
 
             List<String> cityNameList = new ArrayList<>();
             List<Hotel> hotelList = Context.getInstance().getHotelService().getHotelsByCity(cityId);

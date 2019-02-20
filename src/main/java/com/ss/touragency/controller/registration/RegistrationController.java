@@ -1,10 +1,9 @@
-package com.ss.touragency.controller.Registration;
+package com.ss.touragency.controller.registration;
 
 import com.ss.touragency.constants.Attribute;
 import com.ss.touragency.constants.PathToJsp;
 import com.ss.touragency.constants.PathToPage;
 import com.ss.touragency.util.Context;
-import org.springframework.cglib.transform.AbstractTransformTask;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
