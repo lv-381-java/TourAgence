@@ -5,7 +5,8 @@ html {
 
 body {
     min-height: 100%;
-    background-color: rgb(139, 208, 212);
+    background-color: antiquewhite;
+    /*background-color: rgb(139, 208, 212);*/
 }
 
 #bs-example-navbar-collapse-1{
@@ -38,8 +39,9 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgb(139, 208, 212);
-    color: #e6eeea;
+    /*background-color: rgb(139, 208, 212);*/
+    background-color: antiquewhite;
+    color: #732bde;
     text-align: center;
     font-size: 20px;
 }
