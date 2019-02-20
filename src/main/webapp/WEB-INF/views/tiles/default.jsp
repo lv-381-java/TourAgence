@@ -21,7 +21,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
             integrity="sha384-vhJnz1OVIdLktyixHY4Uk3OHEwdQqPppqYR8+5mjsauETgLOcEynD9oPHhhz18Nw"
             crossorigin="anonymous"></script>
-
     <style>
         <%@include file='/css/main.css' %>
     </style>
