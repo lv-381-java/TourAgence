@@ -1,38 +1,30 @@
 package com.ss.touragency.service;
 
 import com.ss.touragency.constants.Attribute;
-import com.ss.touragency.dao.HotelDao;
 import com.ss.touragency.dao.OrderDetailsDao;
 import com.ss.touragency.entity.Client;
 import com.ss.touragency.entity.Hotel;
 import com.ss.touragency.entity.OrderDetails;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.parser.Entity;
-import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class OrderDetailsService {
-
-    // TODO: finish. assigned to Arsen
-    public boolean createOrder(HttpServletRequest request) throws ParseException {
+    public boolean createOrder(Client client, Hotel hotel, String beginDate, String endDate) throws ParseException, SQLException {
 
         boolean status = false;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        String beginDate = (String) request.getSession().getAttribute(Attribute.BEGIN_DATE);
-        String endDate = (String) request.getSession().getAttribute(Attribute.END_DATE);
-
-        Hotel hotel = new Hotel();
-        Client client = new Client();
-
-        if (client != null && hotel != null && beginDate != null && endDate != null) {
-
+        if (beginDate != null && endDate != null) {
             OrderDetailsDao orderDetailsDao = new OrderDetailsDao();
-            Date begin = (Date) formatter.parse(beginDate);
-            Date end = (Date) formatter.parse(endDate);
+//            Date begin = (Date) formatter.parse(beginDate);
+            java.sql.Date begin = new java.sql.Date((formatter.parse(beginDate)).getTime());
+
+//            Date end = (Date) formatter.parse(endDate);
+            java.sql.Date end = new java.sql.Date((formatter.parse(endDate)).getTime());
 
             OrderDetails orderDetails = new OrderDetails(1L, client, hotel, begin, end);
             orderDetailsDao.insert(orderDetails);
@@ -102,8 +94,8 @@ public class OrderDetailsService {
 
 //            orderDetails.setHotel(request.getParameter(Attribute.HOTEL));
 //            orderDetails.setCity(request.getParameter(Attribute.CITY));
-            orderDetails.setBeginDate(formatter.parse(request.getParameter(Attribute.BEGIN_DATE)));
-            orderDetails.setEndDate(formatter.parse(request.getParameter(Attribute.END_DATE)));
+//            orderDetails.setBeginDate(formatter.parse(request.getParameter(Attribute.BEGIN_DATE)));
+//            orderDetails.setEndDate(formatter.parse(request.getParameter(Attribute.END_DATE)));
             orderDetailsDao.updateById(orderDetails, orderId);
             result = true;
         }

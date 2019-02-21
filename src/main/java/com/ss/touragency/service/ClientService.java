@@ -32,18 +32,9 @@ public class ClientService {
         return null;
     }
 
-    public Client getClient(HttpServletRequest request) {
+    public Client getClient(Long id) {
         ClientDao clientDao = new ClientDao();
-
-        if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null) {
-            if (isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID)))) {
-
-                Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
-                return clientDao.selectById(id);
-            }
-        }
-
-        return null;
+        return clientDao.selectById(id);
     }
 
     private boolean isExistItem(Long id) {

@@ -18,8 +18,6 @@ import java.sql.SQLException;
 public class CityCreateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        //TODO: login check
         if (request.getSession().getAttribute(Attribute.CITY) == null) {
 
             try {
@@ -40,7 +38,6 @@ public class CityCreateServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //TODO: login check
         if (request.getSession().getAttribute(Attribute.CITY_ID) == null ){
             request.getRequestDispatcher(PathToJsp.CITY_JSP).forward(request, response);
         }

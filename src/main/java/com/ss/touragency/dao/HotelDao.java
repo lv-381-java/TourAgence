@@ -59,32 +59,40 @@ public class HotelDao implements ICrudDao<Hotel> {
         return hotelList;
     }
 
-//    public Hotel selectByName(String name){
-//
-//        String selectHotelByName = "select idHotel, hotelName, City_idCity, availableCount from hotel where hotelName=?";
-//        Connection connection = DBConnection.getDbConnection();
-//        Hotel hotel = null;
-//
-//        PreparedStatement preparedStatement = null;
-//
-//
-//    }
+    public Hotel selectByName(String name) throws SQLException {
+
+        String sql = "select idHotel, hotelName, City_idCity, availableCount from hotel where hotelName=" + "'" + name + "'";
+        Connection connection = DBConnection.getDbConnection();
+
+        Hotel hotel = null;
+
+        if (connection != null) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                hotel = new Hotel();
+                hotel.setHotelId(resultSet.getLong("idHotel"));
+                hotel.setHotelName(resultSet.getString("hotelName"));
+                CityDao city = new CityDao();
+                hotel.setCity(city.selectById(resultSet.getLong(3)));
+                hotel.setAvailableCount(resultSet.getInt("availableCount"));
+            }
+        }
+        return hotel;
+    }
 
     @Override
-    public Hotel selectById(Long id) {
+    public Hotel selectById(Long id) throws SQLException {
         String sql = "SELECT idHotel, hotelName, City_idCity, availableCount FROM HOTEL WHERE idHotel=" + "'" + id + "'";
 
         Connection connection = DBConnection.getDbConnection();
 
-        Statement statement = null;
-        ResultSet resultSet = null;
         Hotel hotel = null;
 
         if (connection != null) {
-
-            try {
-                statement = connection.createStatement();
-                resultSet = statement.executeQuery(sql);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
 
                 while (resultSet.next()) {
                     hotel = new Hotel();
@@ -94,9 +102,6 @@ public class HotelDao implements ICrudDao<Hotel> {
                     hotel.setCity(city.selectById(resultSet.getLong(3)));
                     hotel.setAvailableCount(resultSet.getInt("availableCount"));
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
 
         }
 
@@ -110,7 +115,7 @@ public class HotelDao implements ICrudDao<Hotel> {
         ResultSet resultSet;
         List<Hotel> hotelList = new ArrayList<>();
 
-        if(connection != null) {
+        if (connection != null) {
             try {
                 statement = DBConnection.getDbConnection().createStatement();
                 resultSet = statement.executeQuery(sql);

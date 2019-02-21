@@ -35,23 +35,28 @@
                 endDate.on("dp.change", function (e) {
                     beginDate.data("DateTimePicker").maxDate(e.date);
 
-                    let begin = beginDate.find("input").val();
-                    let end = endDate.find("input").val()
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        url: "/orderDetails",
-                        data: {beginDate: begin, endDate: end},
-                        success : function(data){
-                            console.log(data);
-                        },
-                        error : function (data) {
-                            console.log("error in ajax POST");
-                        }
-                    });
                 });
             });
+
+            $('#submitBtn').click(function () {
+                let begin = beginDate.find("input").val();
+                let end = endDate.find("input").val()
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/orderDetails",
+                    data: {beginDate: begin, endDate: end},
+                    success : function(data){
+                        console.log(data);
+                    },
+                    error : function (data) {
+                        console.log(data);
+                    }
+                });
+            })
         });
+
+
 
 
     </script>
@@ -60,6 +65,8 @@
 
 <body>
 <h1>Hotel detail information</h1>
+
+
 <h3 align="center">When you want to visit this hotel?</h3>
 
 <div class="container">
@@ -85,6 +92,12 @@
     </div>
 </div>
 
+<form method="post" action="orderDetails">
+    <div class="container">
+        <button id="submitBtn" type="submit" class="btn btn-primary" value="btn btn-primary" >Submit</button>
+
+    </div>
+</form>
 
 </body>
 </html>

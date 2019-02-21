@@ -116,21 +116,11 @@
         }
 
         function openOrderDetails() {
-            let hotelName = $('#bookBtn').title;
-            // let city = $('#hotelBody').hotel
+            let hotelName = $('#bookBtn').attr("title");
 
-            $.ajax({
-                url: "/orderDetails",
-                data: {hotelName : hotelName},
-                dataType: "json",
-                type: "post",
-                success: (function (data) {
-                    console.log(data);
-                }),
-                error: (function (data) {
-                    console.log("error in openOrderDetails()");
-                })
-            })
+            document.getElementById("hiddenHotelData").value = hotelName;
+
+            console.log(hotelName);
 
         }
     </script>
@@ -170,31 +160,38 @@
     </div>
 </div>
 
-
-<div class="container">
-    <h1 style="color: #0A0B0D">List of Hotels: </h1>
-    <table class="table" id="hotelTable">
-        <thead>
-        <tr>
-            <th>Hotel</th>
-            <th>City</th>
-            <th>Country</th>
-            <th>Available Count</th>
-        </tr>
-        </thead>
-
-        <tbody id="hotelBody">
-        <c:forEach var="hotelList" items="${hotel}">
+<form action="orderDetails" method="post">
+    <div class="container">
+        <h1 style="color: #0A0B0D">List of Hotels: </h1>
+        <table class="table" id="hotelTable">
+            <thead>
             <tr>
-                <td><c:out value="${hotelList.getHotelName()}"/></td>
-                <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
-                <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
-                <td><c:out value="${hotelList.getAvailableCount()}"/></td>
-                <td id="bookBtn" title=<c:out value="${hotelList.getHotelName()}"/>><a href="/orderDetails" class="btn btn-primary" onclick="openOrderDetails()">Book</a></td>
+                <th>Hotel</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Available Count</th>
             </tr>
-        </c:forEach>
-        </tbody>
+            </thead>
 
-    </table>
-</div>
+            <tbody id="hotelBody">
+            <c:forEach var="hotelList" items="${hotel}">
+                <tr>
+                    <td id="hotelName"><c:out value="${hotelList.getHotelName()}"/></td>
+                    <td><c:out value="${hotelList.getCity().getCityName()}"/></td>
+                    <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
+                    <td><c:out value="${hotelList.getAvailableCount()}"/></td>
+                    <%--<td><a href="/orderDetails" class="btn btn-primary">Book</a></td>--%>
+                    <td id="bookBtn" title="${hotelList.getHotelName()}" onclick="openOrderDetails()">
+                        <input type="hidden" id="hiddenHotelData" name="data-hotelName" value="">
+                        <button type="submit" class="btn btn-primary" value="btn btn-primary">Book</button>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+
+        </table>
+    </div>
+
+</form>
+
 

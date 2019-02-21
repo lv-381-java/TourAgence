@@ -11,5 +11,5 @@ public class PathToJsp {
     public static final String REGISTRATION_JSP = "WEB-INF/views/pagesDef/registration.jsp";
     public static final String VISA_JSP = "WEB-INF/views/pagesDef/visa.jsp";
     public static final String DELETEVISA_JSP = "WEB-INF/views/pagesDef/deleteVisa.jsp";
-    public static final String ORDER_DETAILS = "/WEB-INF/views/pagesDef/orderDetails.jsp";
+    public static final String ORDER_JSP = "/WEB-INF/views/pagesDef/orderDetails.jsp";
 }

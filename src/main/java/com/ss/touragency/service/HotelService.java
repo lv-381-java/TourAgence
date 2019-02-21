@@ -28,7 +28,7 @@ public class HotelService {
         return result;
     }
 
-    public boolean updateHotel(HttpServletRequest request) {
+    public boolean updateHotel(HttpServletRequest request) throws SQLException {
         boolean result = false;
         HotelDao hotelDao = new HotelDao();
 
@@ -44,17 +44,11 @@ public class HotelService {
         return result;
     }
 
-//    public Hotel getHotel(HttpServletRequest request) {
-//        HotelDao hotelDao = new HotelDao();
-//
-//        if (request.getSession().getAttribute(Attribute.CITY_ID) != null &&
-//                isExistItem(Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID)))) {
-//            Long cityId = Long.parseLong((String) request.getSession().getAttribute(Attribute.CITY_ID));
-//
-//            return hotelDao.selectById(cityId);
-//        }
-//        return null;
-//    }
+    public Hotel getHotelByName(String name) throws SQLException {
+        HotelDao hotelDao = new HotelDao();
+
+        return hotelDao.selectByName(name);
+    }
 
     public List<Hotel> getHotelList() {
         HotelDao hotelDao = new HotelDao();
@@ -68,9 +62,7 @@ public class HotelService {
     }
 
 
-
-
-    private boolean isExistItem(Long id) {
+    private boolean isExistItem(Long id) throws SQLException {
         boolean result = false;
         try {
             HotelDao hotelDao = new HotelDao();

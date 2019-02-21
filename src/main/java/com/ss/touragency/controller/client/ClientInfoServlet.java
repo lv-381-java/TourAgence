@@ -24,7 +24,7 @@ public class ClientInfoServlet extends HttpServlet {
         if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null) {
             Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
 
-            Client client = Context.getInstance().getClientService().getClient(request);
+            Client client = Context.getInstance().getClientService().getClient(id);
             request.setAttribute("client", client);
 
             List<OrderDetails> ordersList = Context.getInstance().getOrderDetailsService().getOrderFromAllOrders(request);
