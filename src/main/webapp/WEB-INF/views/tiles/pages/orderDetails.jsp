@@ -94,7 +94,7 @@
 
 <form method="post" action="orderDetails">
     <div class="container">
-        <button id="submitBtn" type="submit" class="btn btn-primary" value="btn btn-primary" >Submit</button>
+        <button id="submitBtn" class="btn btn-primary" value="btn btn-primary" >Submit</button>
 
     </div>
 </form>

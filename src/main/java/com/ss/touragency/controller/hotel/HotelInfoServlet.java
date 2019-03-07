@@ -39,9 +39,9 @@ public class HotelInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 
-        if(request.getParameter("data-hotelName") != null){
-            System.out.println(request.getAttribute("data-hotelName"));
-        }
+//        if(request.getParameter("data-hotelName") != null){
+//            System.out.println(request.getAttribute("data-hotelName"));
+//        }
         String countryName = request.getParameter("country");
         String cityName = request.getParameter("city");
 
@@ -50,6 +50,7 @@ public class HotelInfoServlet extends HttpServlet {
         JSONObject json = new JSONObject();
 
         if (countryName != null && cityName != null){
+
             if (countryName.equals("All") && cityName.equals("All")) {
                 List<Country> countryList = Context.getInstance().getCountryService().getCountryList();
                 request.setAttribute("country", countryList);

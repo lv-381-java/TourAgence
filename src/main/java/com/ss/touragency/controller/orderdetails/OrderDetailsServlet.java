@@ -43,41 +43,32 @@ public class OrderDetailsServlet extends HttpServlet {
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
 
-        if (beginDate != null && endDate != null){
+        if (beginDate != null && endDate != null) {
             request.getSession().setAttribute(Attribute.BEGIN_DATE, beginDate);
             request.getSession().setAttribute(Attribute.END_DATE, endDate);
         }
-
-
         if (request.getParameter("data-hotelName") != null || request.getSession().getAttribute(Attribute.HOTEL_NAME) != null) {
             System.out.println(request.getParameter("data-hotelName"));
-            if (request.getParameter("data-hotelName") != null){
+            if (request.getParameter("data-hotelName") != null) {
                 String hotelName = request.getParameter("data-hotelName");
                 request.getSession().setAttribute(Attribute.HOTEL_NAME, hotelName);
-
             }
-
             if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null) {
                 Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
                 String hotelNamee = String.valueOf(request.getSession().getAttribute(Attribute.HOTEL_NAME));
-//                request.getSession().setAttribute(Attribute.BEGIN_DATE, request.getParameter("beginDate"));
-//                request.getSession().setAttribute(Attribute.END_DATE, request.getParameter("endDate"));
-               try {
+                try {
                     hotel = Context.getInstance().getHotelService().getHotelByName(hotelNamee);
                 } catch (SQLException e) {
                     request.setAttribute(Attribute.ERROR, "Oops...Error creating order details. Please try again");
                 }
                 client = Context.getInstance().getClientService().getClient(id);
             }
-//            request.setCharacterEncoding("utf-8");
             String beginDateS = String.valueOf(request.getSession().getAttribute(Attribute.BEGIN_DATE));
             String endDateS = String.valueOf(request.getSession().getAttribute(Attribute.END_DATE));
-//            String endDate = request.getParameter("endDate");
-//            response.setContentType("application/json");
 
             try {
                 Context.getInstance().getOrderDetailsService().createOrder(client, hotel, beginDateS, endDateS);
-            } catch (ParseException | SQLException e) {
+            } catch (ParseException | SQLException e ) {
                 request.setAttribute(Attribute.ERROR, "Oops...Error creating order details. Please try again");
             }
 

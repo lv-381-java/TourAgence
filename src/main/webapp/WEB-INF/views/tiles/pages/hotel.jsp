@@ -115,10 +115,12 @@
             });
         }
 
-        function openOrderDetails() {
+        function openOrderDetails(obj) {
             let hotelName = $('#bookBtn').attr("title");
+            // let name = obj.option[obj.title].value;
+            let name1 = obj.title;
 
-            document.getElementById("hiddenHotelData").value = hotelName;
+            document.getElementById("hiddenHotelData").value = name1;
 
             console.log(hotelName);
 
@@ -181,9 +183,9 @@
                     <td><c:out value="${hotelList.getCity().getCountry().getCountryName()}"/></td>
                     <td><c:out value="${hotelList.getAvailableCount()}"/></td>
                     <%--<td><a href="/orderDetails" class="btn btn-primary">Book</a></td>--%>
-                    <td id="bookBtn" title="${hotelList.getHotelName()}" onclick="openOrderDetails()">
+                    <td title="${hotelList.getHotelName()}" onclick="openOrderDetails(this)">
                         <input type="hidden" id="hiddenHotelData" name="data-hotelName" value="">
-                        <button type="submit" class="btn btn-primary" value="btn btn-primary">Book</button>
+                        <button type="submit" class="btn btn-primary bookbtn" value="btn btn-primary">Book</button>
                     </td>
                 </tr>
             </c:forEach>
